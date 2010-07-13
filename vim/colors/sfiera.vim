@@ -3,7 +3,7 @@ hi clear
 if exists("syntax_on")
   syntax reset
 endif
-let g:colors_name = "clp"
+let g:colors_name = "sfiera"
 hi NonText      ctermfg=lightMagenta
 hi comment      ctermfg=darkgreen
 hi constant     ctermfg=darkcyan

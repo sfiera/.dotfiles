@@ -1,5 +1,5 @@
 syntax enable
-colorscheme clp
+colorscheme sfiera
 
 set ruler
 set showcmd
