@@ -76,5 +76,4 @@ nmap ~ :e <C-R>=MoveFile(-1)<CR><CR>
 
 command Trim :%s/ \+$//
 
-source ~/.vimrc.folding
 source ~/.vimrc.profiles
