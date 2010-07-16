@@ -4,6 +4,9 @@
 export EDITOR=vim
 export VISUAL=vim
 
+# UTF-8 for everything, all the time.
+export LC_ALL="en_US.UTF-8"
+
 # Add common path locations
 export PATH=~/bin:$PATH:/usr/games
 unset MANPATH
