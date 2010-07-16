@@ -3,6 +3,10 @@
 MACHINE=${MACHINE-%m}
 PS_COLOR=${PS_COLOR-yellow}
 
+autoload colors zsh/terminfo
+if [[ "$terminfo[colors]" -ge 8 ]] colors
+
+
 git_branch() {
     local GITREF
     GITREF=$(git symbolic-ref HEAD 2>/dev/null) || return
@@ -18,8 +22,8 @@ git_dirty() {
 }
 
 function tint {
-    local COLOR="%B%F{$1}"
-    local RESET="%b%f"
+    local COLOR="%{$terminfo[bold]$fg[$1]%}"
+    local RESET="%{$terminfo[sgr0]%}"
     shift
     echo "$COLOR$*$RESET"
 }
