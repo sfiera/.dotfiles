@@ -1,6 +1,4 @@
 #!/bin/zsh
 
-alias   ls="/bin/ls -F"
-alias   vi="vim"
-alias suvi="sudo vim"
-alias   si="sort | uniq"
+alias ls="/bin/ls -F"
+alias si="sort | uniq"
