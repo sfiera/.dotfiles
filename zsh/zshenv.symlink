@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+export ZSH=~/.dotfiles
+
 # Set up editors
 export EDITOR=vim
 export VISUAL=vim
@@ -8,15 +10,9 @@ export VISUAL=vim
 export LC_ALL="en_US.UTF-8"
 
 # Add common path locations
-PATH=/opt/local/sbin:$PATH
-PATH=/opt/local/bin:$PATH
-PATH=~/bin:$PATH
-export PATH
-
+export PATH=~/bin:$ZSH/bin:/opt/local/bin:/opt/local/sbin:$PATH
 export MANPATH=""
-
-DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
-export DYLD_FALLBACK_LIBRARY_PATH
+export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
 
 if [[ -f ~/.zshenv.local ]]; then
     source ~/.zshenv.local

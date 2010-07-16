@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-export ZSH=~/.dotfiles
-
 for config_file ($ZSH/**/*.zsh) source $config_file
 
 if [[ -f ~/.zshrc.local ]]; then
