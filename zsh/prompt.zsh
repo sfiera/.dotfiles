@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-MACHINE=%m
+MACHINE=${MACHINE-%m}
 PS_COLOR=${PS_COLOR-yellow}
 
 git_branch() {
