@@ -12,7 +12,6 @@ PATH=/opt/local/sbin:$PATH
 PATH=/opt/local/bin:$PATH
 PATH=~/bin:$PATH
 export PATH
-echo $PATH
 
 export MANPATH=""
 
