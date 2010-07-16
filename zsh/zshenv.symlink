@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+# Set up editors
+export EDITOR=vim
+export VISUAL=vim
+
+# Add common path locations
+export PATH=~/bin:$PATH:/usr/games
+unset MANPATH
+export MANPATH
