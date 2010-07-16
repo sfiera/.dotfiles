@@ -8,6 +8,17 @@ export VISUAL=vim
 export LC_ALL="en_US.UTF-8"
 
 # Add common path locations
-export PATH=~/bin:$PATH:/usr/games
-unset MANPATH
-export MANPATH
+PATH=/opt/local/sbin:$PATH
+PATH=/opt/local/bin:$PATH
+PATH=~/bin:$PATH
+export PATH
+echo $PATH
+
+export MANPATH=""
+
+DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
+export DYLD_FALLBACK_LIBRARY_PATH
+
+if [[ -f ~/.zshenv.local ]]; then
+    source ~/.zshenv.local
+fi
