@@ -1,0 +1,17 @@
+# GDB configuration.
+
+set demangle-style gnu-v3
+set print demangle on
+set print object on
+set print pretty on
+set print static-members off
+set print vtbl on
+
+# For GDB 7: http://sourceware.org/gdb/wiki/STLSupport
+#
+# python
+# import sys
+# sys.path.insert(0, '/Users/sfiera/Projects/.../python')
+# from libstdcxx.v6.printers import register_libstdcxx_printers
+# register_libstdcxx_printers(None)
+# end
