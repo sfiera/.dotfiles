@@ -10,7 +10,9 @@ export VISUAL=vim
 export LC_ALL="en_US.UTF-8"
 
 # Add common path locations
-export PATH=~/bin:$ZSH/bin:/opt/local/bin:/opt/local/sbin:$PATH
+typeset -U path
+path=(~/bin $ZSH/bin /opt/local/bin /opt/local/sbin $path)
+export PATH
 export MANPATH=""
 export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
 
