@@ -10,11 +10,16 @@ export VISUAL=vim
 export LC_ALL="en_US.UTF-8"
 
 # Add common path locations
-typeset -U path
+declare -U path
 path=(~/bin $ZSH/bin /opt/local/bin /opt/local/sbin $path)
 export PATH
+
 export MANPATH=""
-export DYLD_FALLBACK_LIBRARY_PATH=/opt/local/lib
+
+export -T DYLD_FALLBACK_LIBRARY_PATH dyld_fallback_library_path
+declare -U dyld_fallback_library_path
+dyld_fallback_library_path=(/opt/local/lib $dyld_fallback_library_path)
+export DYLD_FALLBACK_LIBRARY_PATH
 
 if [[ -f ~/.zshenv.local ]]; then
     source ~/.zshenv.local
