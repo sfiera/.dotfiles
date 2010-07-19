@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 for config_file (~/.dotfiles/**/*.symlink); do
+    source="${config_file#$HOME/}"
     destination="$HOME/.${${config_file##*/}%.*}"
-    ln -s "$config_file" "$destination"
+    ln -s "$source" "$destination"
 done
