@@ -1,7 +1,10 @@
 #!/bin/zsh
 
-for config_file (~/.dotfiles/**/*.symlink); do
-    source="${config_file#$HOME/}"
-    destination="$HOME/.${${config_file##*/}%.*}"
-    ln -s "$source" "$destination"
-done
+function @ {
+    echo "$@"
+    $@
+}
+
+setopt ERR_EXIT
+export ZSH=$(dirname $0)
+for config_file ($ZSH/**/*.install) source $config_file

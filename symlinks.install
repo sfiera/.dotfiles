@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+for config_file (~/.dotfiles/**/*.symlink); do
+    source="${config_file#$HOME/}"
+    destination="$HOME/.${${config_file##*/}%.*}"
+    if [[ -e "$destination" ]]; then
+        echo "~/.${${config_file##*/}%.*} exists; not overwriting."
+    else
+        @ ln -s "$source" "$destination"
+    fi
+done

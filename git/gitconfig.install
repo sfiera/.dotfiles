@@ -1,0 +1,11 @@
+#!/bin/zsh
+
+@ git config --global user.name         "Chris Pickel"
+@ git config --global user.email        "sfiera@gmail.com"
+
+@ git config --global core.whitespace   "trailing-space,space-before-tab"
+@ git config --global color.ui          "auto"
+
+@ git config --global alias.man         "help"
+@ git config --global alias.st          "status"
+@ git config --global alias.diffstat    "diff --stat"
