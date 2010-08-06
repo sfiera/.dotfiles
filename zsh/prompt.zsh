@@ -6,14 +6,13 @@ PS_COLOR=${PS_COLOR-yellow}
 autoload colors zsh/terminfo
 if [[ "$terminfo[colors]" -ge 8 ]] colors
 
-
-git_branch() {
+function git_branch {
     local GITREF
     GITREF=$(git symbolic-ref HEAD 2>/dev/null) || return
     echo ${GITREF#refs/heads/}
 }
 
-git_dirty() {
+function git_dirty {
     local GITSTATUS
     GITSTATUS=$(git status 2>/dev/null | tail -n1)
     if [[ $GITSTATUS == "nothing to commit (working directory clean)" ]]; then
@@ -50,6 +49,6 @@ function set_prompt {
     PS1="$PS1$NEWLINE$(tint $PS_COLOR %#) "
 }
 
-precmd() {
+function precmd {
     set_prompt
 }
