@@ -46,3 +46,4 @@ hi Folded       ctermbg=cyan        ctermfg=black
 hi FoldColumn   ctermbg=gray        ctermfg=black
 hi cIf0         ctermfg=gray
 
+hi Ignore       ctermfg=darkgray
