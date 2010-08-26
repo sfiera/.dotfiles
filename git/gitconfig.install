@@ -3,6 +3,7 @@
 @ git config --global user.name         "Chris Pickel"
 @ git config --global user.email        "sfiera@gmail.com"
 
+@ git config --global core.excludesfile "~/.dotfiles/git/exclude"
 @ git config --global core.whitespace   "trailing-space,space-before-tab"
 @ git config --global color.ui          "auto"
 
