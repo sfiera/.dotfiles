@@ -20,8 +20,6 @@ set textwidth=99
 set encoding=utf-8
 set termencoding=utf-8
 
-autocmd BufNewFile,BufRead .*Portfile setf tcl
-
 " Stems the given file name, removing the extension as well as any of the
 " possible suffices "_unit", "_unittest", or "-inl"
 function StemFile(fname)
