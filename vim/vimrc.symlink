@@ -16,6 +16,8 @@ set autoindent
 set cindent
 set cinoptions=g2,:2,=2,l1,h2
 set textwidth=99
+set modeline
+set modelines=5
 
 set encoding=utf-8
 set termencoding=utf-8
