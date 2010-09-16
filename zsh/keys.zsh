@@ -4,12 +4,13 @@
 # but it never hurts to be sure.
 bindkey -v
 
-# Bindings in edit mode.
-bindkey -M main '^[[3~' delete-char
-bindkey -M main '^[[A' up-line-or-history
-bindkey -M main '^[[B' down-line-or-history
-bindkey -M main '^[[C' forward-char
-bindkey -M main '^[[D' backward-char
+# Bindings in insert mode.
+bindkey -M viins -rp '^['
+bindkey -M viins '^[[3~' delete-char
+bindkey -M viins '^[[A' up-line-or-history
+bindkey -M viins '^[[B' down-line-or-history
+bindkey -M viins '^[[C' forward-char
+bindkey -M viins '^[[D' backward-char
 
 # Bindings in command mode.
 bindkey -M vicmd 'u' undo
