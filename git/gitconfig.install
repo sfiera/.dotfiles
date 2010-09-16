@@ -10,3 +10,4 @@
 @ git config --global alias.man         "help"
 @ git config --global alias.st          "status"
 @ git config --global alias.diffstat    "diff --stat"
+@ git config --global alias.trim        "clean -Xfd"
