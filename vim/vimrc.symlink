@@ -22,36 +22,17 @@ set modelines=5
 set encoding=utf-8
 set termencoding=utf-8
 
-" Stems the given file name, removing the extension as well as any of the
-" possible suffices "_unit", "_unittest", or "-inl"
-function StemFile(fname)
-  let pattern = '\(\([_-]\(unit\)\?test\)\?\(-inl\)\?\)$'
-  return substitute(fnamemodify(a:fname, ":r"), pattern, "", "")
-endfunction
-
-" This function takes the stem of the current file, then globs for other files
-" with the given stem and chooses the next one in sequence (if diff is +1) or
-" the previous (if diff is -1).
-function MoveFile(diff)
-  let fname = expand("%")
-  let stem = StemFile(fname)
-  let glob = split(glob(stem . "*"), "\n")
-  let glob = filter(copy(glob), 'StemFile(v:val) == stem')
-  let current = 0
-  for g in glob
-    if g == fname
-      return glob[(current + a:diff) % len(glob)]
-    else
-      let current = current + 1
-    endif
-  endfor
-endfunction
-
 " Correct some "incorrect" mappings
 map Y y$
 map S ch
 
-nmap ` :e <C-R>=MoveFile(+1)<CR><CR>
-nmap ~ :e <C-R>=MoveFile(-1)<CR><CR>
+" Alternate quickly through tabs.
+nmap ` :tabnext<CR>
+nmap ~ :tabprevious<CR>
+
+command Q :qall
+command W :wall
+command Wq :wqall
+command WQ :wqall
 
 command Trim :%s/ \+$//
