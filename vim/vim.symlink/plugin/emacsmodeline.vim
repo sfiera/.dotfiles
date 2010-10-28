@@ -1,3 +1,5 @@
+" -*- mode: vim; tab-width: 4; indent-tabs-mode: nil; fill-column: 99 -*-
+"
 " emacsmodeline.vim
 " Brief: Parse emacs mode line and setlocal in vim
 " Version: 0.1
