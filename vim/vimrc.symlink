@@ -39,3 +39,5 @@ command Wq :wqall
 command WQ :wqall
 
 command Trim :%s/ \+$//
+
+let g:alternateRelativeFiles = 1
