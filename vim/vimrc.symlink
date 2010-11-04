@@ -25,6 +25,8 @@ set modelines=5
 set encoding=utf-8
 set termencoding=utf-8
 
+nnoremap ; :
+
 " Correct some "incorrect" mappings
 map Y y$
 map S ch
