@@ -36,9 +36,9 @@ map S ch
 nmap ` :tabnext<CR>
 nmap ~ :tabprevious<CR>
 
-onoremap <silent>af :<C-u>normal! ggVG<CR>
+onoremap <silent>af :<C-u>normal! ggVG$<CR>
 omap <silent>if af
-vnoremap <silent>af ggoG
+vnoremap <silent>af ggoG$
 vmap <silent>if af
 
 command Q :qall
