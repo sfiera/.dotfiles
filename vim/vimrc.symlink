@@ -4,10 +4,11 @@ call pathogen#helptags()
 syntax enable
 colorscheme sfiera
 
-set ruler
-set showcmd
-set backspace=2
 set nocompatible
+set backspace=2
+set virtualedit=onemore
+set showcmd
+set ruler
 
 filetype plugin indent on
 set tabstop=4
@@ -34,6 +35,11 @@ map S ch
 " Alternate quickly through tabs.
 nmap ` :tabnext<CR>
 nmap ~ :tabprevious<CR>
+
+onoremap <silent>af :<C-u>normal! ggVG<CR>
+omap <silent>if af
+vnoremap <silent>af ggoG
+vmap <silent>if af
 
 command Q :qall
 command W :wall
