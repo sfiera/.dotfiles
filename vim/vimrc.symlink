@@ -49,3 +49,4 @@ command WQ :wqall
 command Trim :%s/ \+$//
 
 let g:alternateRelativeFiles = 1
+let g:SuperTabLeadingSpaceCompletion = 0
