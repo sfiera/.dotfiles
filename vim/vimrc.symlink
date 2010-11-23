@@ -1,3 +1,4 @@
+filetype off  " Ensure that pathogen is around when we turn it back on.
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
