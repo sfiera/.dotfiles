@@ -52,3 +52,4 @@ command Trim :%s/ \+$//
 
 let g:alternateRelativeFiles = 1
 let g:SuperTabLeadingSpaceCompletion = 0
+let g:alternateSearchPath = "reg:/src/include/g,reg:/include/src/g,reg:/inc/src/g,reg:/src/inc/g"
