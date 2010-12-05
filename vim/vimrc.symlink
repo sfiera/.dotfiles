@@ -1,3 +1,4 @@
+filetype on   " Ensure that the following line doesn't cause an error.
 filetype off  " Ensure that pathogen is around when we turn it back on.
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
