@@ -28,6 +28,9 @@ set modelines=5
 set encoding=utf-8
 set termencoding=utf-8
 
+set wildmenu
+set wildmode=list:longest,full
+
 nnoremap ; :
 
 " Correct some "incorrect" mappings
