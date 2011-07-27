@@ -5,22 +5,22 @@ alias si="sort | uniq"
 
 alias d="dirs -v"
 
-c() {
-    cd "$@" && d
+cd() {
+    builtin cd "$@" && d
 }
 
-p() {
+pd() {
     pushd "$@" >/dev/null && d
 }
 
-o() {
+od() {
     popd "$@" >/dev/null && d
 }
 
-r() {
+rd() {
     case "$#" in
-        0) p "+1" ;;
-        1) p "+$1" ;;
+        0) pd "+1" ;;
+        1) pd "+$1" ;;
         *) echo "usage: $0 N" >&2 ;;
     esac
 }
