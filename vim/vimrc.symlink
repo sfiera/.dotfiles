@@ -8,7 +8,6 @@ colorscheme sfiera
 
 set nocompatible
 set backspace=2
-set virtualedit=onemore
 set showcmd
 set ruler
 
