@@ -36,8 +36,8 @@ nnoremap ; :
 " Correct some "incorrect" mappings
 map Y y$
 map S ch
-map cw dwi
-map cW dWi
+"map cw dwi
+"map cW dWi
 
 " Alternate quickly through tabs.
 nmap ` :tabnext<CR>
