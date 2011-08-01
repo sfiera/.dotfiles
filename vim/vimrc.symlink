@@ -37,6 +37,7 @@ map Y y$
 map S ch
 "map cw dwi
 "map cW dWi
+map U <C-R>
 
 " Alternate quickly through tabs.
 nmap ` :tabnext<CR>
