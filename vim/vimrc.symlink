@@ -30,7 +30,7 @@ set termencoding=utf-8
 set wildmenu
 set wildmode=list:longest,full
 
-nnoremap ; :
+noremap ; :
 
 " Correct some "incorrect" mappings
 map Y y$
