@@ -33,11 +33,12 @@ set wildmode=list:longest,full
 noremap ; :
 
 " Correct some "incorrect" mappings
-map Y y$
-map S ch
+nmap Y y$
+vmap Y yy
+nmap S ch
 nmap cw dwi
 nmap cW dWi
-map U <C-R>
+nmap U <C-R>
 
 " Alternate quickly through tabs.
 nmap ` :tabnext<CR>
