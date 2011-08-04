@@ -11,21 +11,8 @@ set backspace=2
 set showcmd
 set ruler
 
-filetype plugin indent on
-set tabstop=4
-set softtabstop=0
-set shiftwidth=4
-set nosmarttab
-set expandtab
-set autoindent
-set cindent
-set cinoptions=g2,:2,=2,l1,h2
-set textwidth=99
 set modeline
 set modelines=5
-
-set encoding=utf-8
-set termencoding=utf-8
 
 set wildmenu
 set wildmode=list:longest,full
@@ -51,4 +38,5 @@ let g:alternateSearchPath = "reg:/src/include/g,reg:/include/src/g,reg:/inc/src/
 
 runtime sfiera/arrows.vim
 runtime sfiera/consistency.vim
+runtime sfiera/style.vim
 runtime sfiera/vsearch.vim
