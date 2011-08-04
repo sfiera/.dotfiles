@@ -108,6 +108,8 @@ command W :wall
 command Wq :wqall
 command WQ :wqall
 
+runtime sfiera/arrows.vim
+
 command Trim :%s/ \+$//
 
 let g:alternateRelativeFiles = 1
