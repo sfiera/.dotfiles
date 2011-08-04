@@ -58,10 +58,9 @@ function! VisualSearch(dirrection)
     let @@=l:register
 endfunction
 
-command Q :qall
-command W :wall
-command Wq :wqall
-command WQ :wqall
+command -bang Q :qall<bang>
+command -bang W :wall<bang>
+command -bang WQ :wqall<bang>
 
 runtime sfiera/arrows.vim
 runtime sfiera/consistency.vim
