@@ -41,29 +41,13 @@ omap <silent>if af
 vnoremap <silent>af ggoG$
 vmap <silent>if af
 
-vnoremap <silent>m <ESC>:call VisualSearch('/')<CR>/<CR>
-vnoremap <silent>M <ESC>:call VisualSearch('?')<CR>?<CR>
-
-function! VisualSearch(dirrection)
-    let l:register=@@
-    normal! gvy
-    let l:search=escape(@@, '$.*/\[]')
-    if a:dirrection=='/'
-        execute 'normal! /'.l:search
-    else
-        execute 'normal! ?'.l:search
-    endif
-    let @/=l:search
-    normal! gV
-    let @@=l:register
-endfunction
-
 command -bang Q :qall<bang>
 command -bang W :wall<bang>
 command -bang WQ :wqall<bang>
 
 runtime sfiera/arrows.vim
 runtime sfiera/consistency.vim
+runtime sfiera/vsearch.vim
 
 command Trim :%s/ \+$//
 
