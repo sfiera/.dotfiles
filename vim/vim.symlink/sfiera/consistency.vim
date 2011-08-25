@@ -6,10 +6,10 @@ nmap cw dwi
 nmap cW dWi
 nmap U <C-R>
 
-noremap H :call NewH()<CR>
-noremap J :call NewJ()<CR>
-noremap K :call NewK()<CR>
-noremap L :call NewL()<CR>
+noremap J :call NewH()<CR>
+noremap K :call NewJ()<CR>
+noremap L :call NewK()<CR>
+noremap : :call NewL()<CR>
 
 function! NewH()
     let l:col = getpos(".")[2]

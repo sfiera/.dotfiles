@@ -24,11 +24,6 @@ noremap k j
 noremap l k
 noremap ; l
 
-noremap J :call NewH()<CR>
-noremap K :call NewJ()<CR>
-noremap L :call NewK()<CR>
-noremap : :call NewL()<CR>
-
 " Alternate quickly through tabs.
 nmap ` :tabnext<CR>
 nmap ~ :tabprevious<CR>
