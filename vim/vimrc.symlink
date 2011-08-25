@@ -25,8 +25,8 @@ noremap l k
 noremap ; l
 
 " Alternate quickly through tabs.
-nmap ` :tabnext<CR>
-nmap ~ :tabprevious<CR>
+nnoremap ` :tabnext<CR>
+nnoremap ~ :tabprevious<CR>
 
 onoremap <silent>af :<C-u>normal! ggVG$<CR>
 omap <silent>if af
