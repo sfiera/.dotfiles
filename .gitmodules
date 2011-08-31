@@ -22,3 +22,6 @@
 [submodule "vim/vim.symlink/bundle/emacsmodeline"]
 	path = vim/vim.symlink/bundle/emacsmodeline
 	url = git://github.com/sfiera/vim-emacsmodeline.git
+[submodule "vim/vim.symlink/bundle/snipmate"]
+	path = vim/vim.symlink/bundle/snipmate
+	url = git://github.com/msanders/snipmate.vim.git
