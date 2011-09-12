@@ -17,12 +17,30 @@ set modelines=5
 set wildmenu
 set wildmode=list:longest,full
 
-noremap z :
+noremap ¡ :
+noremap h :
+noremap H :
 
 noremap j h
+noremap J _
 noremap k j
+noremap K }
 noremap l k
+noremap L {
 noremap ; l
+noremap : $
+
+noremap S ch
+noremap Y y$
+vnoremap Y yy
+noremap cw dwi
+noremap cW dWi
+noremap U <C-R>
+
+noremap q @
+noremap Q q
+noremap m '
+noremap M m
 
 " Alternate quickly through tabs.
 nnoremap ` :tabnext<CR>
@@ -42,6 +60,5 @@ let g:SuperTabLeadingSpaceCompletion = 0
 let g:alternateSearchPath = "reg:/src/include/g,reg:/include/src/g,reg:/inc/src/g,reg:/src/inc/g"
 
 runtime sfiera/arrows.vim
-runtime sfiera/consistency.vim
 runtime sfiera/style.vim
 runtime sfiera/vsearch.vim
