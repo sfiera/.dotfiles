@@ -37,7 +37,7 @@ noremap Y y$
 vnoremap Y yy
 noremap cw dwi
 noremap cW dWi
-noremap U <C-R>
+nnoremap U <C-R>
 
 noremap q @
 noremap Q q
