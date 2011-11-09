@@ -17,5 +17,7 @@ bindkey -M vicmd k down-line-or-history
 bindkey -M vicmd l up-line-or-history
 bindkey -M vicmd \; forward-char
 
+bindkey -M vicmd \' vi-repeat-find
+
 # Bindings in command mode.
 bindkey -M vicmd 'u' undo

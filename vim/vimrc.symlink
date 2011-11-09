@@ -32,6 +32,8 @@ noremap L {
 noremap ; l
 noremap : $
 
+noremap ' ;
+
 noremap S ch
 noremap Y y$
 vnoremap Y yy
