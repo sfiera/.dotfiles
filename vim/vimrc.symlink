@@ -17,9 +17,11 @@ set modelines=5
 set wildmenu
 set wildmode=list:longest,full
 
-noremap ¡ :
-noremap h :
-noremap H :
+noremap ¡ q:i
+noremap h q:i
+noremap H q:i
+noremap / q/i
+noremap ? q?i
 
 noremap j h
 noremap J _
