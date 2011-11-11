@@ -2,9 +2,10 @@
 
 export ZSH=~/.dotfiles
 
-# Set up editors
+# Set up tools
 export EDITOR=vim
 export VISUAL=vim
+export DIFF="git diff --no-index"
 
 # UTF-8 for everything, all the time.
 export LC_ALL="en_US.UTF-8"
