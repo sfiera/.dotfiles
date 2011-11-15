@@ -16,6 +16,10 @@ set modelines=5
 
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vimswp//
+if has('persistent_undo')
+    set undodir=~/.vimswp//
+    set undofile
+endif
 
 set wildmenu
 set wildmode=list:longest,full
