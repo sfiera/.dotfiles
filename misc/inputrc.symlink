@@ -2,3 +2,15 @@ set editing-mode            vi
 set show-all-if-ambiguous   on
 
 $include /etc/inputrc
+
+set keymap vi
+
+"j": backward-char
+"k": next-history
+"l": previous-history
+";": forward-char
+
+"J": beginning-of-line
+"K": history-search-forward
+"L": history-search-backward
+":": end-of-line
