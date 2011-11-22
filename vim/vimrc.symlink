@@ -1,4 +1,11 @@
-" Pathogen {{{
+" -*- mode: vim; tab-width: 4; indent-tabs-mode: nil; fill-column: 99 -*-
+"
+" ~sfiera/.vimrc
+" Brief: sfiera's vimrc
+" Maintainer: Chris Pickel <sfiera@gmail.com>
+"
+
+" Set up pathogen {{{
 filetype on   " Ensure that the following line doesn't cause an error.
 filetype off  " Ensure that pathogen is around when we turn it back on.
 call pathogen#runtime_append_all_bundles()
@@ -29,7 +36,7 @@ set wildmenu
 set wildmode=list:longest,full
 " }}}
 
-" Bindings {{{
+" Key bindings {{{
 
 " Always use comand-line window {{{
 noremap ¡ q:i
@@ -39,7 +46,7 @@ noremap / q/i
 noremap ? q?i
 " }}}
 
-" Use jkl; in place of {{{
+" Use jkl; in place of hjkl {{{
 noremap j h
 noremap J _
 noremap k j
@@ -52,6 +59,7 @@ noremap ' ;
 " }}}
 
 " Fix some vi inconsistencies {{{
+" TODO(sfiera): make cw/cW repeat properly with .
 noremap S ch
 noremap Y y$
 vnoremap Y yy
