@@ -1,8 +1,11 @@
+" Pathogen {{{
 filetype on   " Ensure that the following line doesn't cause an error.
 filetype off  " Ensure that pathogen is around when we turn it back on.
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
+" }}}
 
+" Options {{{
 syntax enable
 colorscheme sfiera
 
@@ -10,6 +13,7 @@ set nocompatible
 set backspace=2
 set showcmd
 set ruler
+set foldmethod=marker
 
 set modeline
 set modelines=5
@@ -23,13 +27,19 @@ endif
 
 set wildmenu
 set wildmode=list:longest,full
+" }}}
 
+" Bindings {{{
+
+" Always use comand-line window {{{
 noremap ¡ q:i
 noremap h q:i
 noremap H q:i
 noremap / q/i
 noremap ? q?i
+" }}}
 
+" Use jkl; in place of {{{
 noremap j h
 noremap J _
 noremap k j
@@ -38,38 +48,64 @@ noremap l k
 noremap L {
 noremap ; l
 noremap : $
-
 noremap ' ;
+" }}}
 
+" Fix some vi inconsistencies {{{
 noremap S ch
 noremap Y y$
 vnoremap Y yy
 nnoremap cw dwi
 nnoremap cW dWi
-nnoremap U <C-R>
+" }}}
 
+" Rebind uppercase to match lowercase {{{
+nnoremap U <C-R>
 noremap q @
 noremap Q q
 noremap m '
 noremap M m
+" }}}
 
-" Alternate quickly through tabs.
+" Use jkl; for folding {{{
+nnoremap zj zc
+nnoremap zJ zMzX
+nnoremap zk zj
+nnoremap zK zj
+nnoremap zl zk
+nnoremap zL zk
+nnoremap z; zo
+nnoremap z: zRzX
+" }}}
+
+" Alternate quickly through tabs {{{
 nnoremap ` :tabnext<CR>
 nnoremap ~ :tabprevious<CR>
+" }}}
 
+" "in file", "a file" motions {{{
 onoremap <silent>af :<C-u>normal! ggVG$<CR>
 omap <silent>if af
 vnoremap <silent>af ggoG$
 vmap <silent>if af
+" }}}
 
+" }}}
+
+" Commands {{{
 command -bang Q :qall<bang>
 command -bang W :wall<bang>
 command -bang WQ :wqall<bang>
+" }}}
 
+" Plugin settings {{{
 let g:alternateRelativeFiles = 1
 let g:SuperTabLeadingSpaceCompletion = 0
 let g:alternateSearchPath = "reg:/src/include/g,reg:/include/src/g,reg:/inc/src/g,reg:/src/inc/g"
+" }}}
 
+" Other files {{{
 runtime sfiera/arrows.vim
 runtime sfiera/style.vim
 runtime sfiera/vsearch.vim
+" }}}
