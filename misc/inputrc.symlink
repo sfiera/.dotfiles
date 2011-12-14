@@ -3,7 +3,13 @@ set show-all-if-ambiguous   on
 
 $include /etc/inputrc
 
-set keymap vi
+set keymap vi-insert
+
+"\e[3~": vi-movement-mode
+
+set keymap vi-command
+
+"\e[3~":
 
 "j": backward-char
 "k": next-history
