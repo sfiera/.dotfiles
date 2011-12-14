@@ -41,24 +41,30 @@ set wildmode=list:longest,full
 
 " Key bindings {{{
 
-nnoremap <silent> <Tab> :nohlsearch<CR>
+" Use Forward-Delete as Escape {{{
+nnoremap <silent> <Del> :nohlsearch<CR>
+inoremap <silent> <Del> <Esc>
+vnoremap <silent> <Del> <Esc>
+onoremap <silent> <Del> <Esc>
+cnoremap <silent> <Del> <C-F>
+cnoremap <silent> <Esc> <C-F>
+" }}}
 
-" Make comand-line window accessible via h<Esc> {{{
-cnoremap <Esc> <C-F>
+" Use hjkl; in place of :hjkl {{{
+noremap j h
+noremap k j
+noremap l k
+noremap ; l
+
+noremap J _
+noremap K }
+noremap L {
+noremap : $
+
 noremap h :
 noremap H :
 noremap ¡ :
-" }}}
 
-" Use jkl; in place of hjkl {{{
-noremap j h
-noremap J _
-noremap k j
-noremap K }
-noremap l k
-noremap L {
-noremap ; l
-noremap : $
 noremap ' ;
 " }}}
 
