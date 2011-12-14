@@ -41,7 +41,7 @@ set wildmode=list:longest,full
 
 " Key bindings {{{
 
-nnoremap <silent> <Esc> :nohlsearch<CR>
+nnoremap <silent> <Tab> :nohlsearch<CR>
 
 " Make comand-line window accessible via h<Esc> {{{
 cnoremap <Esc> <C-F>
