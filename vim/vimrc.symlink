@@ -25,6 +25,9 @@ set foldmethod=marker
 set modeline
 set modelines=5
 
+set hlsearch
+set incsearch
+
 set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vimswp//
 if has('persistent_undo')
@@ -38,12 +41,13 @@ set wildmode=list:longest,full
 
 " Key bindings {{{
 
-" Always use comand-line window {{{
-noremap ¡ q:i
-noremap h q:i
-noremap H q:i
-noremap / q/i
-noremap ? q?i
+nnoremap <silent> <Esc> :nohlsearch<CR>
+
+" Make comand-line window accessible via h<Esc> {{{
+cnoremap <Esc> <C-F>
+noremap h :
+noremap H :
+noremap ¡ :
 " }}}
 
 " Use jkl; in place of hjkl {{{
