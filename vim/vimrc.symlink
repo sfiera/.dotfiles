@@ -37,16 +37,23 @@ endif
 
 set wildmenu
 set wildmode=list:longest,full
+
+" Only wait (1/6)s for escape sequences.
+set timeoutlen=133
 " }}}
 
 " Key bindings {{{
 
-" Use Forward-Delete as Escape {{{
-nnoremap <silent> <Del> :nohlsearch<CR>
-inoremap <silent> <Del> <Esc>
-vnoremap <silent> <Del> <Esc>
-onoremap <silent> <Del> <Esc>
-cnoremap <silent> <Del> <C-F>
+" Catch screwy xterm escape sequence {{{
+nnoremap <Esc>[?1;2c <NOP>
+cnoremap <Esc>[?1;2c <NOP>
+vnoremap <Esc>[?1;2c <NOP>
+onoremap <Esc>[?1;2c <NOP>
+inoremap <Esc>[?1;2c <NOP>
+" }}}
+
+" Make Esc hide highlighting and enter command-line mode {{{
+nnoremap <silent> <Esc> :nohlsearch<CR>
 cnoremap <silent> <Esc> <C-F>
 " }}}
 
