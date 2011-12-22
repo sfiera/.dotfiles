@@ -73,6 +73,11 @@ noremap H :
 noremap ¡ :
 
 noremap ' ;
+
+noremap _ <NOP>
+noremap { <NOP>
+noremap } <NOP>
+noremap $ <NOP>
 " }}}
 
 " Fix some vi inconsistencies {{{
@@ -90,6 +95,9 @@ noremap q @
 noremap Q q
 noremap m '
 noremap M m
+
+nnoremap <C-R> <NOP>
+noremap  @ <NOP>
 " }}}
 
 " Use jkl; for folding {{{
@@ -101,6 +109,12 @@ nnoremap zl zk
 nnoremap zL zk
 nnoremap z; zo
 nnoremap z: zRzX
+
+nnoremap zo <NOP>
+nnoremap zc <NOP>
+nnoremap zM <NOP>
+nnoremap zR <NOP>
+nnoremap zX <NOP>
 " }}}
 
 " Alternate quickly through tabs {{{
