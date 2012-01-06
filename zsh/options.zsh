@@ -23,7 +23,7 @@ setopt NO_BG_NICE
 
 # Prompting
 setopt PROMPT_SP
-setopt PROMPT_SUBST
+#setopt PROMPT_SUBST
 
 # URL quote magic
 autoload -U url-quote-magic
