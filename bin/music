@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+RSYNC=(rsync -rtv --delete --iconv=UTF-8-MAC,UTF8)
+
+if [[ -e ~/Music/Library/ ]]; then
+    $RSYNC a.sfiera.net:mp3/192/ ~/Music/Library/
+fi
+if [[ -e ~/Music/Mobile/ ]]; then
+    $RSYNC a.sfiera.net:mp3/192/ ~/Music/Mobile/
+fi
