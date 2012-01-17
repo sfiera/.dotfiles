@@ -10,11 +10,11 @@ cd() {
 }
 
 pd() {
-    pushd "$@" >/dev/null && d
+    pushd "$@" && d
 }
 
 od() {
-    popd "$@" >/dev/null && d
+    popd "$@" && d
 }
 
 rd() {

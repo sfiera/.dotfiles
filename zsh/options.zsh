@@ -17,6 +17,7 @@ setopt HIST_REDUCE_BLANKS
 # Input/Output
 setopt CORRECT
 setopt PRINT_EXIT_VALUE
+setopt PUSHD_SILENT
 
 # Job Control
 setopt NO_BG_NICE
