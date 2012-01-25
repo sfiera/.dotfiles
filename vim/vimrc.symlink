@@ -18,9 +18,17 @@ colorscheme sfiera
 
 set nocompatible
 set backspace=2
+set showmode
 set showcmd
 set ruler
 set foldmethod=marker
+set laststatus=2
+set ttyfast
+set cursorline
+set scrolloff=5
+
+set relativenumber
+set numberwidth=8
 
 set modeline
 set modelines=5
@@ -37,6 +45,8 @@ endif
 
 set wildmenu
 set wildmode=list:longest,full
+
+hi! link Label Statement
 
 " Only wait (1/6)s for escape sequences.
 set timeoutlen=133
