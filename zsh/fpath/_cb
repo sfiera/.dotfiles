@@ -1,0 +1,5 @@
+#compdef cb
+
+_arguments -s -A \
+    '-x[create new branch]' \
+    ':git branch:_git_branch'

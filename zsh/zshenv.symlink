@@ -15,6 +15,8 @@ declare -U path
 path=(~/bin ~/.local/bin $ZSH/bin /opt/local/bin /opt/local/sbin $path)
 export PATH
 
+fpath=($ZSH/zsh/fpath $fpath)
+
 export MANPATH=""
 
 export -T DYLD_FALLBACK_LIBRARY_PATH dyld_fallback_library_path

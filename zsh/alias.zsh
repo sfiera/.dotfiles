@@ -25,5 +25,20 @@ rd() {
     esac
 }
 
+b() {
+    git branch
+}
+
+cb() {
+    case "$#" in
+        0|1) git checkout "${1-master}" ;;
+        2) case $1 in
+            -x) git checkout -b "$2" ;;
+            *)  echo "usage: $0 [-x] [BRANCH]" >&2 ;;
+        esac ;;
+        *) echo "usage: $0 [-x] [BRANCH]" >&2 ;;
+    esac
+}
+
 # if $DARWIN
 alias preview="open -f -a Preview"
