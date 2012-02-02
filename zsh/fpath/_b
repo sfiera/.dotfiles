@@ -1,3 +1,10 @@
 #compdef b
 
-_arguments
+_arguments -A : \
+      '-a[attach to branch]' \
+      '-c[create and attach to branch]' \
+      '-n[create branch]' \
+      '-m[rename branch]' \
+      '-d[delete branch]' \
+      '-D[delete branch unsafely]' \
+      ':git branch:_git_branch'

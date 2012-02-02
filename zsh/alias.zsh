@@ -26,18 +26,57 @@ rd() {
 }
 
 b() {
-    git branch
-}
+    local action
+    zparseopts -D \
+        a+=action \
+        c+=action \
+        n+=action \
+        m+=action \
+        d+=action \
+        D+=action
 
-cb() {
-    case "$#" in
-        0|1) git checkout "${1-master}" ;;
-        2) case $1 in
-            -x) git checkout -b "$2" ;;
-            *)  echo "usage: $0 [-x] [BRANCH]" >&2 ;;
-        esac ;;
-        *) echo "usage: $0 [-x] [BRANCH]" >&2 ;;
+    case $#action in
+        0)
+            if [[ $# == 0 ]]; then
+                git branch
+                return 0
+            fi
+            action=(-a)
+            ;&
+        1)
+            case "${action[1]}$#" in
+            -a1)
+                if [[ ! -f "$(git rev-parse --git-dir)/refs/heads/$1" ]]; then
+                    echo "error: branch '$1' not found." >&2
+                    return 1
+                fi
+                git checkout "$1"
+                return 0 ;;
+            -n1|-n2)
+                git branch -- "$@"
+                return 0 ;;
+            -c1|-c2)
+                git checkout -b "$@"
+                return 0 ;;
+            -m2)
+                git branch -m -- "$@"
+                return 0 ;;
+            -d0|-D0)
+                ;;
+            -d*|-D*)
+                git branch ${action[1]} -- "$@"
+                return 0 ;;
+            esac ;;
     esac
+
+    echo "usage: $0" >&2
+    echo "       $0 [-a] BRANCH" >&2
+    echo "       $0 -c NEW [OLD]" >&2
+    echo "       $0 -n NEW [OLD]" >&2
+    echo "       $0 -m OLD NEW" >&2
+    echo "       $0 -d BRANCH..." >&2
+    echo "       $0 -D BRANCH..." >&2
+    return 64
 }
 
 # if $DARWIN
