@@ -1,8 +1,7 @@
 #compdef git_branch
 
 if git rev-parse --show-toplevel >/dev/null 2>/dev/null; then
-    local GIT_DIR=$(git rev-parse --git-dir)
-    for REF in $GIT_DIR/refs/heads**/*(.); do
-        compadd "${REF#$GIT_DIR/refs/heads/}"
+    git show-ref --heads --abbrev=7 | while read SHA REF; do
+        compadd "${REF#refs/heads/}"
     done
 fi

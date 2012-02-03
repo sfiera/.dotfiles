@@ -46,7 +46,7 @@ b() {
         1)
             case "${action[1]}$#" in
             -a1)
-                if [[ ! -f "$(git rev-parse --git-dir)/refs/heads/$1" ]]; then
+                if ! git show-ref --quiet --verify "refs/heads/$1"; then
                     echo "error: branch '$1' not found." >&2
                     return 1
                 fi
