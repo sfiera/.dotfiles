@@ -58,8 +58,11 @@ b() {
             -c1|-c2)
                 git checkout -b "$@"
                 return 0 ;;
+            -m1)
+                git branch -m -- "$1"
+                return 0 ;;
             -m2)
-                git branch -m -- "$@"
+                git branch -m -- "$2" "$1"
                 return 0 ;;
             -d0|-D0)
                 ;;
@@ -73,7 +76,7 @@ b() {
     echo "       $0 [-a] BRANCH" >&2
     echo "       $0 -c NEW [OLD]" >&2
     echo "       $0 -n NEW [OLD]" >&2
-    echo "       $0 -m OLD NEW" >&2
+    echo "       $0 -m NEW [OLD]" >&2
     echo "       $0 -d BRANCH..." >&2
     echo "       $0 -D BRANCH..." >&2
     return 64
