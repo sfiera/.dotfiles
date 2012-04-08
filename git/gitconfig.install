@@ -12,7 +12,7 @@
 @ git config --global alias.ci          "commit"
 @ git config --global alias.co          "checkout"
 @ git config --global alias.up          "pull"
-@ git config --global alias.fold        "commit --amend -CHEAD"
+@ git config --global alias.fold        "commit --amend -CHEAD --reset-author"
 @ git config --global alias.diffstat    "diff --stat"
 @ git config --global alias.trim        "clean -Xfd"
 @ git config --global alias.ff          "merge --ff-only"
