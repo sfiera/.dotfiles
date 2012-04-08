@@ -17,3 +17,4 @@
 @ git config --global alias.trim        "clean -Xfd"
 @ git config --global alias.ff          "merge --ff-only"
 @ git config --global alias.mm          "merge --no-ff"
+@ git config --global alias.lg          "log --format=oneline --abbrev-commit"
