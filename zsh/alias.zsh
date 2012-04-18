@@ -27,11 +27,11 @@ rd() {
 
 b() {
     local action
-    zparseopts -D \
-        a+=action \
-        c+=action \
-        n+=action \
-        m+=action \
+    zparseopts -D -E \
+        a+:=action \
+        c+:=action \
+        n+:=action \
+        m+:=action \
         d+=action \
         D+=action
 
@@ -41,29 +41,30 @@ b() {
                 git branch
                 return 0
             fi
-            action=(-a)
+            action=(-a $1); shift
             ;&
-        1)
+        2)
             case "${action[1]}$#" in
-            -a1)
-                if ! git show-ref --quiet --verify "refs/heads/$1"; then
-                    echo "error: branch '$1' not found." >&2
+            -a0)
+                BRANCH="${action[2]}"
+                if ! git show-ref --quiet --verify "refs/heads/$BRANCH"; then
+                    echo "error: branch '$BRANCH' not found." >&2
                     return 1
                 fi
-                git checkout "$1"
+                git checkout "$BRANCH"
                 return 0 ;;
-            -n1|-n2)
-                git branch -- "$@"
+            -n0|-n1)
+                git branch -- "$@" "${action[2]}"
                 return 0 ;;
-            -c1|-c2)
-                git checkout -b "$@"
+            -c0|-c1)
+                git checkout -b "${action[2]}" "$@"
                 return 0 ;;
-            -m1)
-                git branch -m -- "$1"
+            -m0|-m1)
+                git branch -m -- "$@" "${action[2]}"
                 return 0 ;;
-            -m2)
-                git branch -m -- "$2" "$1"
-                return 0 ;;
+            esac ;;
+        1)
+            case "${action[1]}$#" in
             -d0|-D0)
                 ;;
             -d*|-D*)
