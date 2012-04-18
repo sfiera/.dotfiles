@@ -3,4 +3,4 @@
 if [[ "$#" != 1 ]]; then
     echo 1>&2 "usage: $0 HOST"
 fi
-dtach -n /tmp/dtach-$USER-$1 /usr/bin/ssh -N $1
+dtach -A /tmp/dtach-$USER-$1 /usr/bin/ssh -N $1
