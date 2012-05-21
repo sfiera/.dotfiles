@@ -1,0 +1,6 @@
+#!/usr/bin/python
+
+try:
+    from see import see
+except ImportError:
+    pass

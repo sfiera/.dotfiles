@@ -27,3 +27,5 @@ export DYLD_FALLBACK_LIBRARY_PATH
 if [[ -f ~/.zshenv.local ]]; then
     source ~/.zshenv.local
 fi
+
+export PYTHONSTARTUP="$HOME/.pythonrc.py"
