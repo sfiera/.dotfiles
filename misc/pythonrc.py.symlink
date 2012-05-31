@@ -3,4 +3,4 @@
 try:
     from see import see
 except ImportError:
-    pass
+    print "Couldn't import module 'see'."
