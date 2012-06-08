@@ -78,14 +78,23 @@ noremap K }
 noremap L {
 noremap : $
 
+noremap gj 0
+noremap gk G
+noremap gl gg
+noremap g; $
+
 noremap h :
 noremap H :
-noremap ¡ :
+noremap gh <NOP>
 
+noremap 0 <NOP>
 noremap _ <NOP>
 noremap { <NOP>
 noremap } <NOP>
 noremap $ <NOP>
+
+noremap gg <NOP>
+noremap G <NOP>
 " }}}
 
 " Fix some vi inconsistencies {{{
