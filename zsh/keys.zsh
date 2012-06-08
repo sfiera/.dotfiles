@@ -7,19 +7,44 @@ bindkey -v
 # Bindings in insert mode.
 bindkey -M viins -rp '^['
 bindkey -M viins '^[[3~' vi-cmd-mode
-bindkey -M viins '^[[A' up-line-or-history
-bindkey -M viins '^[[B' down-line-or-history
-bindkey -M viins '^[[C' forward-char
-bindkey -M viins '^[[D' backward-char
+
+for MAP in viins vicmd; do
+    bindkey -M $MAP -r '^[[A'
+    bindkey -M $MAP -r '^[[B'
+    bindkey -M $MAP -r '^[[C'
+    bindkey -M $MAP -r '^[[D'
+done
 
 bindkey -M vicmd '^[[3~' beep
+
 bindkey -M vicmd j backward-char
 bindkey -M vicmd k down-line-or-history
 bindkey -M vicmd l up-line-or-history
 bindkey -M vicmd \; forward-char
 
-bindkey -M vicmd \' vi-repeat-find
+bindkey -M vicmd J vi-beginning-of-line
+bindkey -M vicmd K history-beginning-search-forward-inclusive
+bindkey -M vicmd L history-beginning-search-backward-inclusive
+bindkey -M vicmd : vi-end-of-line
 
-# Bindings in command mode.
+bindkey -M vicmd , vi-rev-repeat-find
+bindkey -M vicmd . vi-repeat-find
+
 bindkey -M vicmd 'u' undo
 bindkey -M vicmd 'U' redo
+
+# New ZLE widgets
+
+history-beginning-search-forward-inclusive() {
+    zle vi-add-next
+    zle history-beginning-search-forward
+    zle vi-cmd-mode
+}
+zle -N history-beginning-search-forward-inclusive
+
+history-beginning-search-backward-inclusive() {
+    zle vi-add-next
+    zle history-beginning-search-backward
+    zle vi-cmd-mode
+}
+zle -N history-beginning-search-backward-inclusive
