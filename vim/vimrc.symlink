@@ -82,8 +82,6 @@ noremap h :
 noremap H :
 noremap ¡ :
 
-noremap ' ;
-
 noremap _ <NOP>
 noremap { <NOP>
 noremap } <NOP>
@@ -99,12 +97,15 @@ nnoremap cw dwi
 nnoremap cW dWi
 " }}}
 
-" Rebind uppercase to match lowercase {{{
+" Rebind paired (capitals; adjacent keys) to match {{{
 nnoremap U <C-R>
 noremap q @
 noremap Q q
 noremap m `
 noremap M m
+
+noremap ' .
+noremap . ;
 
 nnoremap <C-R> <NOP>
 noremap  @ <NOP>
