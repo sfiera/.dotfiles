@@ -142,8 +142,8 @@ nnoremap zX <NOP>
 " }}}
 
 " Alternate quickly through tabs {{{
-nnoremap ` :tabnext<CR>
-nnoremap ~ :tabprevious<CR>
+nnoremap ` gt
+nnoremap ~ gT
 " }}}
 
 " "in file", "a file" motions {{{
