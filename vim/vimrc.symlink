@@ -67,6 +67,10 @@ nnoremap <silent> <Esc> :nohlsearch<CR>
 cnoremap <silent> <Esc> <C-F>
 " }}}
 
+" More magic {{{
+noremap / /\v
+" }}}
+
 " Use hjkl; in place of :hjkl {{{
 noremap j h
 noremap k j
