@@ -103,7 +103,7 @@ nnoremap cW dWi
 nnoremap U <C-R>
 noremap q @
 noremap Q q
-noremap m '
+noremap m `
 noremap M m
 
 nnoremap <C-R> <NOP>
