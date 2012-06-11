@@ -146,6 +146,14 @@ nnoremap zR <NOP>
 nnoremap zX <NOP>
 " }}}
 
+" {{{
+noremap gs *
+noremap gS #
+
+noremap * <NOP>
+noremap # <NOP>
+" }}}
+
 " Alternate quickly through tabs {{{
 nnoremap ` gt
 nnoremap ~ gT
