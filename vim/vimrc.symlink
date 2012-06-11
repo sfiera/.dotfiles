@@ -87,14 +87,16 @@ noremap h :
 noremap H :
 noremap gh <NOP>
 
+noremap G %
+
 noremap 0 <NOP>
 noremap _ <NOP>
+noremap ^ <NOP>
 noremap { <NOP>
 noremap } <NOP>
 noremap $ <NOP>
 
 noremap gg <NOP>
-noremap G <NOP>
 " }}}
 
 " Make w mirror e in place of b {{{
