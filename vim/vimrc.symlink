@@ -48,8 +48,9 @@ set wildmode=list:longest,full
 
 hi! link Label Statement
 
-" Only wait (1/6)s for escape sequences.
-set timeoutlen=133
+" Only wait (1/6)s for escape sequences.  Don't time out maps.
+set notimeout
+set ttimeoutlen=133
 " }}}
 
 " Key bindings {{{
