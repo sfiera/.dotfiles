@@ -96,6 +96,7 @@ noremap ^ <NOP>
 noremap { <NOP>
 noremap } <NOP>
 noremap $ <NOP>
+noremap % <NOP>
 
 noremap gg <NOP>
 " }}}
