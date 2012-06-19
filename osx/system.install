@@ -1,0 +1,3 @@
+if [ -x /usr/bin/osascript ]; then
+    /usr/bin/osascript $(dirname "$0")/system.applescript
+fi
