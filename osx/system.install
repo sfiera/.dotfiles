@@ -22,7 +22,13 @@ fi
 
 @ defaults write com.apple.menuextra.clock IsAnalog -bool true
 
-#defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
+@ defaults write -g NSUserKeyEquivalents -dict-add "Previous Tab" '"@$["'
+@ defaults write -g NSUserKeyEquivalents -dict-add "Next Tab" '"@$]"'
+@ defaults write -g NSUserKeyEquivalents -dict-add "Previous Panel" '"@$["'
+@ defaults write -g NSUserKeyEquivalents -dict-add "Next Panel" '"@$]"'
+
+@ defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Add to Pinboard" '"@D"'
+@ defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Pinboard" '"@~B"'
 
 INCONSOLATA=~/Library/Fonts/Inconsolata.otf
 if [ ! -f $INCONSOLATA ]; then
