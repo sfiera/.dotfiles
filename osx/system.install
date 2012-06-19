@@ -1,3 +1,27 @@
-if [ -x /usr/bin/osascript ]; then
-    /usr/bin/osascript $(dirname "$0")/system.applescript
+if [ "$(uname)" != "Darwin" ]; then
+    echo "not darwin; skipping."
+    return
 fi
+
+#/usr/bin/osascript $(dirname "$0")/system.applescript
+
+@ defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
+@ defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+@ defaults write NSGlobalDomain AppleShowScrollBars Always
+
+@ defaults write com.apple.dock autohide -bool true
+@ defaults write com.apple.dock magnification -bool false
+@ defaults write com.apple.dock orientation left
+@ defaults write com.apple.dock tilesize -int 128
+
+@ defaults write com.apple.screensaver askForPassword -int 1
+@ defaults write com.apple.screensaver askForPasswordDelay -int 5
+
+@ defaults write com.apple.universalaccess stickyKey -bool true
+@ defaults write com.apple.universalaccess stickyKeyBeepOnModifier -bool false
+
+@ defaults write com.apple.menuextra.clock IsAnalog -bool true
+
+#defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
+
+@ killall Finder Dock SystemUIServer
