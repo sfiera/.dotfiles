@@ -1,0 +1,23 @@
+#!/bin/zsh
+
+if [ ! -f ~/.ssh/id_rsa.pub ]; then
+    ssh-keygen
+fi
+
+for machine in $@; do
+    echo -n "Authorizing $machine… "
+    if ssh -o ChallengeResponseAuthentication=no \
+           -o GSSAPIAuthentication=no \
+           -o HostbasedAuthentication=no \
+           -o KbdInteractiveAuthentication=no \
+           -o PasswordAuthentication=no \
+           -o PubkeyAuthentication=yes \
+           -o RHostsRSAAuthentication=no \
+           -o RSAAuthentication=no \
+           $machine return 2>/dev/null; then
+        echo "already authorized"
+    else
+        echo
+        ssh $machine sh -c "cat >> ~/.ssh/authorized_keys" <~/.ssh/id_rsa.pub
+    fi
+done
