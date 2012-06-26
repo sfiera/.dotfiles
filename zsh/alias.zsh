@@ -5,16 +5,37 @@ alias si="sort | uniq"
 
 alias d="dirs -v"
 
+# Preserve directory stack across exec and into subshelss
+update_dirs() {
+    pwds=()
+    dirs -lp | while read DIR; do
+        pwds=($pwds $DIR)
+    done
+}
+typeset -T PWDS pwds
+if [[ "${#pwds}" == 0 ]]; then
+    update_dirs
+else
+    builtin dirs -c
+    builtin cd $pwds[${#pwds}]
+    if [[ ${#pwds} > 1 ]]; then
+        for i in {1..$((${#pwds}-1))..-1}; do
+            builtin pushd -q $pwds[$i]
+        done
+    fi
+fi
+export PWDS
+
 cd() {
-    builtin cd "$@" && d
+    builtin cd "$@" && update_dirs && d
 }
 
 pd() {
-    pushd "$@" && d
+    pushd "$@" && update_dirs && d
 }
 
 od() {
-    popd "$@" && d
+    popd "$@" && update_dirs && d
 }
 
 rd() {
