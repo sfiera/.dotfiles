@@ -15,7 +15,15 @@ for MAP in viins vicmd; do
     bindkey -M $MAP -r '^[[D'
 done
 
-bindkey -M vicmd '^[[3~' beep
+bindkey -M vicmd '^[' beep
+bindkey -M vicmd -r '^[OA'
+bindkey -M vicmd -r '^[OB'
+bindkey -M vicmd -r '^[OC'
+bindkey -M vicmd -r '^[OD'
+bindkey -M vicmd -r '^[OF'
+bindkey -M vicmd -r '^[OH'
+bindkey -M vicmd -r '^[[2~'
+bindkey -M vicmd -r '^[[3~'
 
 bindkey -M vicmd j backward-char
 bindkey -M vicmd k down-line-or-history
