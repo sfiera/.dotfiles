@@ -14,7 +14,7 @@ for machine in $@; do
            -o PubkeyAuthentication=yes \
            -o RHostsRSAAuthentication=no \
            -o RSAAuthentication=no \
-           $machine return 2>/dev/null; then
+           -Tn $machine 2>/dev/null; then
         echo "already authorized"
     else
         echo
