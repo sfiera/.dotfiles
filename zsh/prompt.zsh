@@ -52,7 +52,7 @@ function set_prompt {
         root|sfiera|chpickel)   local LOCATION="$MACHINE" ;;
         *)                      local LOCATION="$USER@$MACHINE" ;;
     esac
-    PS1="$NEWLINE$(tint_fg $PS_COLOR $LOCATION)"
+    PS1="$(tint_fg $PS_COLOR $LOCATION)"
 
     if git rev-parse --show-toplevel >/dev/null 2>/dev/null; then
         GIT_PREFIX=$(git rev-parse --show-prefix)
@@ -80,11 +80,14 @@ function set_prompt {
 }
 
 function precmd {
+    echo
     set_prompt
 }
 
 zle-keymap-select() {
-    set_prompt
-    zle reset-prompt
+    if [[ "$SUPPRESS_ZLE_KEYMAP_SELECT" != y ]]; then
+        set_prompt
+        zle reset-prompt
+    fi
 }
 zle -N zle-keymap-select

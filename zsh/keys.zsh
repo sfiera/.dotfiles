@@ -44,15 +44,19 @@ bindkey -M vicmd 'U' redo
 # New ZLE widgets
 
 history-beginning-search-forward-inclusive() {
+    SUPPRESS_ZLE_KEYMAP_SELECT=y
     zle vi-add-next
     zle history-beginning-search-forward
     zle vi-cmd-mode
+    SUPPRESS_ZLE_KEYMAP_SELECT=n
 }
 zle -N history-beginning-search-forward-inclusive
 
 history-beginning-search-backward-inclusive() {
+    SUPPRESS_ZLE_KEYMAP_SELECT=y
     zle vi-add-next
     zle history-beginning-search-backward
     zle vi-cmd-mode
+    SUPPRESS_ZLE_KEYMAP_SELECT=n
 }
 zle -N history-beginning-search-backward-inclusive
