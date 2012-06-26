@@ -6,7 +6,7 @@ bindkey -v
 
 # Bindings in insert mode.
 bindkey -M viins -rp '^['
-bindkey -M viins '^[[3~' vi-cmd-mode
+bindkey -M viins '^[' vi-cmd-mode
 
 for MAP in viins vicmd; do
     bindkey -M $MAP -r '^[[A'
