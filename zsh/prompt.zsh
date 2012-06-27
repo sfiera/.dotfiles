@@ -42,6 +42,7 @@ function tint_bg {
     echo "$START$*$RESET"
 }
 
+PS1_PATH=
 function set_prompt {
     local NEWLINE="
 "
@@ -54,23 +55,26 @@ function set_prompt {
     esac
     PS1="$(tint_fg $PS_COLOR $LOCATION)"
 
-    if git rev-parse --show-toplevel >/dev/null 2>/dev/null; then
+    if [[ $1 == fast ]]; then
+        # Reuse PS1_PATH
+    elif git rev-parse --show-toplevel >/dev/null 2>/dev/null; then
         GIT_PREFIX=$(git rev-parse --show-prefix)
         GIT_PREFIX=${GIT_PREFIX%/}
         GIT_TOPLEVEL=${HERE%${GIT_PREFIX}}
         if [[ ( $GIT_TOPLEVEL != $HERE ) || -z $GIT_PREFIX ]]; then
-            PS1="$PS1:$(tint_fg $DIM_COLOR $GIT_TOPLEVEL)$GIT_PREFIX"
+            PS1_PATH="$(tint_fg $DIM_COLOR $GIT_TOPLEVEL)$GIT_PREFIX"
         else
-            PS1="$PS1:$HERE"
+            PS1_PATH="$HERE"
         fi
         if git_dirty; then
-            PS1="$PS1:$(tint_fg $DIRTY_COLOR $(git_branch))"
+            PS1_PATH="$PS1_PATH:$(tint_fg $DIRTY_COLOR $(git_branch))"
         else
-            PS1="$PS1:$(tint_fg $CLEAN_COLOR $(git_branch))"
+            PS1_PATH="$PS1_PATH:$(tint_fg $CLEAN_COLOR $(git_branch))"
         fi
     else
-        PS1="$PS1:$HERE"
+        PS1_PATH="$HERE"
     fi
+    PS1="$PS1:$PS1_PATH"
 
     if [[ $KEYMAP == vicmd ]]; then
         PS1="$PS1$NEWLINE$(tint_bg $PS_COLOR $(tint_fg 0 %#)) "
@@ -79,15 +83,21 @@ function set_prompt {
     fi
 }
 
-function precmd {
+precmd() {
     echo
-    set_prompt
+    set_prompt full
 }
 
 zle-keymap-select() {
     if [[ "$SUPPRESS_ZLE_KEYMAP_SELECT" != y ]]; then
-        set_prompt
+        set_prompt fast
         zle reset-prompt
     fi
 }
 zle -N zle-keymap-select
+
+update-prompt() {
+    set_prompt full
+    zle reset-prompt
+}
+zle -N update-prompt

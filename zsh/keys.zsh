@@ -15,7 +15,7 @@ for MAP in viins vicmd; do
     bindkey -M $MAP -r '^[[D'
 done
 
-bindkey -M vicmd '^[' beep
+bindkey -M vicmd '^[' update-prompt
 bindkey -M vicmd -r '^[OA'
 bindkey -M vicmd -r '^[OB'
 bindkey -M vicmd -r '^[OC'
