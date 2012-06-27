@@ -19,7 +19,7 @@ else
     builtin dirs -c
     builtin cd $pwds[${#pwds}]
     if [[ ${#pwds} > 1 ]]; then
-        for i in {1..$((${#pwds}-1))..-1}; do
+        for ((i = $((${#pwds} - 1)); i > 0; --i)); do
             builtin pushd -q $pwds[$i]
         done
     fi
