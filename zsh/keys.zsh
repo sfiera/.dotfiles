@@ -41,6 +41,9 @@ bindkey -M vicmd . vi-repeat-find
 bindkey -M vicmd 'u' undo
 bindkey -M vicmd 'U' redo
 
+bindkey -M vicmd w vi-backward-word
+bindkey -M vicmd -r b
+
 # New ZLE widgets
 
 history-beginning-search-forward-inclusive() {
