@@ -2,6 +2,7 @@
 
 alias ls="/bin/ls -F"
 alias si="sort | uniq"
+alias cloak="cloak -f'./%g/%b/%A/%d%k%t'"
 
 alias d="dirs -v"
 
