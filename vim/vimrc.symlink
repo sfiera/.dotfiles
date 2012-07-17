@@ -55,17 +55,11 @@ set ttimeoutlen=133
 
 " Key bindings {{{
 
-" Catch screwy xterm escape sequence {{{
-nnoremap <Esc>[?1;2c <NOP>
-cnoremap <Esc>[?1;2c <NOP>
-vnoremap <Esc>[?1;2c <NOP>
-onoremap <Esc>[?1;2c <NOP>
-inoremap <Esc>[?1;2c <NOP>
-" }}}
-
-" Make Esc hide highlighting and enter command-line mode {{{
-nnoremap <silent> <Esc> :nohlsearch<CR>
+" Make Esc enter command-line mode; g[/?] hide incsearch {{{
 cnoremap <silent> <Esc> <C-F>
+
+nnoremap <silent> g/ :nohlsearch<CR>
+nnoremap <silent> g? :nohlsearch<CR>
 " }}}
 
 " Use hjkl; in place of :hjkl {{{
