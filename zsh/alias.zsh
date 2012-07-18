@@ -54,6 +54,7 @@ b() {
         c+:=action \
         n+:=action \
         m+:=action \
+        v+=action \
         d+=action \
         D+=action
 
@@ -92,10 +93,13 @@ b() {
             -d*|-D*)
                 git branch ${action[1]} -- "$@"
                 return 0 ;;
+            -v0)
+                git branch -v
+                return 0 ;;
             esac ;;
     esac
 
-    echo "usage: $0" >&2
+    echo "usage: $0 [-v]" >&2
     echo "       $0 [-a] BRANCH" >&2
     echo "       $0 -c NEW [OLD]" >&2
     echo "       $0 -n NEW [OLD]" >&2
