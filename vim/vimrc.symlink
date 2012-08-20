@@ -52,6 +52,7 @@ hi! link Label Statement
 
 " Only wait (1/6)s for escape sequences.  Don't time out maps.
 set notimeout
+set ttimeout
 set ttimeoutlen=133
 " }}}
 
