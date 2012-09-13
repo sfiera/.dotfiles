@@ -19,11 +19,6 @@ fpath=($ZSH/zsh/fpath $fpath)
 
 export MANPATH=""
 
-export -T DYLD_FALLBACK_LIBRARY_PATH dyld_fallback_library_path
-declare -U dyld_fallback_library_path
-dyld_fallback_library_path=(/opt/local/lib $dyld_fallback_library_path)
-export DYLD_FALLBACK_LIBRARY_PATH
-
 if [[ -f ~/.zshenv.local ]]; then
     source ~/.zshenv.local
 fi
