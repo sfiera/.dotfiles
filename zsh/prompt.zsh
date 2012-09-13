@@ -12,17 +12,17 @@ if [[ "$terminfo[colors]" -ge 8 ]] colors
 
 function git_branch {
     local GITREF
-    if GITREF=$(git symbolic-ref HEAD 2>/dev/null); then
+    if GITREF=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null); then
         echo ${GITREF#refs/heads/}
     else
-        GITREF=$(git rev-parse HEAD)
+        GITREF=$(/usr/bin/git rev-parse HEAD)
         echo "(${GITREF[0,7]})"
     fi
 }
 
 function git_dirty {
     local GITSTATUS
-    GITSTATUS=$(git status 2>/dev/null | tail -n1)
+    GITSTATUS=$(/usr/bin/git status 2>/dev/null | tail -n1)
     if [[ $GITSTATUS == "nothing to commit (working directory clean)" ]]; then
         return 1
     fi
@@ -57,8 +57,8 @@ function set_prompt {
 
     if [[ $1 == fast ]]; then
         # Reuse PS1_PATH
-    elif git rev-parse --show-toplevel >/dev/null 2>/dev/null; then
-        GIT_PREFIX=$(git rev-parse --show-prefix)
+    elif /usr/bin/git rev-parse --show-toplevel >/dev/null 2>/dev/null; then
+        GIT_PREFIX=$(/usr/bin/git rev-parse --show-prefix)
         GIT_PREFIX=${GIT_PREFIX%/}
         GIT_TOPLEVEL=${HERE%${GIT_PREFIX}}
         if [[ ( $GIT_TOPLEVEL != $HERE ) || -z $GIT_PREFIX ]]; then
