@@ -1,5 +1,6 @@
 HashKnownHosts          no
 EscapeChar              ^^
+UserKnownHostsFile      ~/.ssh/known_hosts ~/.dotfiles/ssh/known_hosts
 
 Host durendal durendal.a.sfiera.net a.sfiera.net
     HostName a.sfiera.net

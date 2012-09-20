@@ -1,33 +1,5 @@
 #!/bin/zsh
 
-hosts=($(cut -d' ' -f1 <ssh/known_hosts))
-
-current-host() {
-    ssh-keygen -F $1 | grep -v ^#
-}
-
-correct-host() {
-    ssh-keygen -F $1 -f ssh/known_hosts | grep -v ^#
-}
-
-for host ($hosts); do
-    if current-host $host | grep . >/dev/null; then
-        if diff <(correct-host $host) <(current-host $host) >/dev/null; then
-            echo "skipping $host ssh key"
-        else
-            echo "WARNING: $host key mismatch:"
-            diff <(correct-host $host) <(current-host $host)
-            echo
-            echo "replacing $host ssh key"
-            ssh-keygen -R $host
-            correct-host $host >>~/.ssh/known_hosts
-        fi
-    else
-        echo "installing $host ssh key"
-        correct-host $host >>~/.ssh/known_hosts
-    fi
-done
-
 if [[ -e ~/.ssh/config ]]; then
     echo "~/.ssh/config exists; not overwriting."
 else
