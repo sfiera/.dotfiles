@@ -39,6 +39,7 @@ set hlsearch
 set incsearch
 
 set backupskip=/tmp/*,/private/tmp/*
+set backupdir=~/.vimswp//
 set directory=~/.vimswp//
 if has('persistent_undo')
     set undodir=~/.vimswp//
