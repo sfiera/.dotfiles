@@ -1,0 +1,19 @@
+HashKnownHosts          no
+EscapeChar              ^^
+
+Host durendal durendal.a.sfiera.net a.sfiera.net
+    HostName a.sfiera.net
+    ForwardAgent yes
+
+Host florence florence.sfiera.net
+    HostName florence.sfiera.net
+    ForwardAgent yes
+
+Host hauteclaire hauteclaire.a.sfiera.net
+    HostName hauteclaire.a.sfiera.net
+    ForwardAgent yes
+
+Host force force.stwing.org force.stwing.upenn.edu
+    HostName force.stwing.org
+    User chpickel
+    ForwardAgent yes
