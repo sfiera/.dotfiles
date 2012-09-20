@@ -8,6 +8,8 @@
 	<array>
         <string>/usr/bin/ssh</string>
         <string>-i/Users/sfiera/.ssh/id_rsa</string>
+        <string>-oTCPKeepAlive=yes</string>
+        <string>-oServerAliveInterval=30</string>
 		<string>sfiera@florence.sfiera.net</string>
 		<string>nc</string>
         <string>localhost</string>
