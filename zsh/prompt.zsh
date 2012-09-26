@@ -31,7 +31,7 @@ function git_dirty {
 function tint_fg {
     local START=
     if [[ $1 == -b ]]; then
-        START="$START\e[1m"; shift
+        START="$START%{\e[1m%}"; shift
     fi
     local COLOR=$1; shift
     local START="$START%{\e[38;05;${COLOR}m%}"
