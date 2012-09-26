@@ -27,9 +27,6 @@ set ttyfast
 set cursorline
 set scrolloff=5
 
-if version >= 703
-    set relativenumber
-endif
 set numberwidth=8
 
 set modeline
