@@ -29,8 +29,12 @@ function git_dirty {
 }
 
 function tint_fg {
+    local START=
+    if [[ $1 == -b ]]; then
+        START="$START\e[1m"; shift
+    fi
     local COLOR=$1; shift
-    local START="%{\e[38;05;${COLOR}m%}"
+    local START="$START%{\e[38;05;${COLOR}m%}"
     local RESET="%{\e[0m%}"
     echo "$START$*$RESET"
 }
@@ -53,7 +57,7 @@ function set_prompt {
         root|sfiera|chpickel)   local LOCATION="$MACHINE" ;;
         *)                      local LOCATION="$USER@$MACHINE" ;;
     esac
-    PS1="$(tint_fg $PS_COLOR $LOCATION)"
+    PS1="$(tint_fg -b $PS_COLOR $LOCATION)"
 
     if [[ $1 == fast ]]; then
         # Reuse PS1_PATH
@@ -67,9 +71,9 @@ function set_prompt {
             PS1_PATH="$HERE"
         fi
         if git_dirty; then
-            PS1_PATH="$PS1_PATH:$(tint_fg $DIRTY_COLOR $(git_branch))"
+            PS1_PATH="$PS1_PATH:$(tint_fg -b $DIRTY_COLOR $(git_branch))"
         else
-            PS1_PATH="$PS1_PATH:$(tint_fg $CLEAN_COLOR $(git_branch))"
+            PS1_PATH="$PS1_PATH:$(tint_fg -b $CLEAN_COLOR $(git_branch))"
         fi
     else
         PS1_PATH="$HERE"
@@ -77,9 +81,9 @@ function set_prompt {
     PS1="$PS1:$PS1_PATH"
 
     if [[ $KEYMAP == vicmd ]]; then
-        PS1="$PS1$NEWLINE$(tint_bg $PS_COLOR $(tint_fg 0 %#)) "
+        PS1="$PS1$NEWLINE$(tint_bg $PS_COLOR $(tint_fg -b 0 %#)) "
     else
-        PS1="$PS1$NEWLINE$(tint_fg $PS_COLOR %#) "
+        PS1="$PS1$NEWLINE$(tint_fg -b $PS_COLOR %#) "
     fi
 }
 
