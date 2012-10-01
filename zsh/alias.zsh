@@ -74,7 +74,14 @@ b() {
                     echo "error: branch '$BRANCH' not found." >&2
                     return 1
                 fi
+                # Stash changes unconditionally--will fail if nothing to stash; that's OK.
+                git stash save "b: stashing before switching branches." >/dev/null
                 git checkout "$BRANCH"
+                git stash list | sed 's/^\(stash@{[0-9]*}\): On \(.*\): .*: stashing before switching branches\.$/\1 \2/' | while read NAME BRANCH2; do
+                    if [[ "$BRANCH" == "$BRANCH2" ]]; then
+                        git stash pop "$NAME" >/dev/null
+                    fi
+                done
                 return 0 ;;
             -n0|-n1)
                 git branch -- "$@" "${action[2]}"
