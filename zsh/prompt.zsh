@@ -4,7 +4,8 @@ MACHINE=${MACHINE-%m}
 
 PS_COLOR=${PS_COLOR-142}
 DIRTY_COLOR=${DIRTY_COLOR-167}
-CLEAN_COLOR=${CLEAN_COLOR-185}
+STAGE_COLOR=${STAGE_COLOR-185}
+CLEAN_COLOR=${CLEAN_COLOR-70}
 DIM_COLOR=${DIM_COLOR-239}
 
 autoload colors zsh/terminfo
@@ -20,12 +21,17 @@ function git_branch {
     fi
 }
 
-function git_dirty {
-    local GITSTATUS
-    GITSTATUS=$(/usr/bin/git status 2>/dev/null | tail -n1)
-    if [[ $GITSTATUS == "nothing to commit (working directory clean)" ]]; then
-        return 1
-    fi
+function git_color {
+    local COLOR
+    COLOR=$CLEAN_COLOR
+    /usr/bin/git status --porcelain 2>/dev/null | while read LINE; do
+        COLOR=$STAGE_COLOR
+        if [[ "${LINE[2]}" != " " ]]; then
+            COLOR=$DIRTY_COLOR
+            break
+        fi
+    done
+    echo $COLOR
 }
 
 function tint_fg {
@@ -70,11 +76,7 @@ function set_prompt {
         else
             PS1_PATH="$HERE"
         fi
-        if git_dirty; then
-            PS1_PATH="$PS1_PATH:$(tint_fg -b $DIRTY_COLOR $(git_branch))"
-        else
-            PS1_PATH="$PS1_PATH:$(tint_fg -b $CLEAN_COLOR $(git_branch))"
-        fi
+        PS1_PATH="$PS1_PATH:$(tint_fg -b $(git_color) $(git_branch))"
     else
         PS1_PATH="$HERE"
     fi
