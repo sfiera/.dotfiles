@@ -24,7 +24,7 @@ function git_branch {
 function git_color {
     local COLOR
     COLOR=$CLEAN_COLOR
-    /usr/bin/git status --porcelain 2>/dev/null | while read LINE; do
+    /usr/bin/git status --porcelain 2>/dev/null | while IFS= read LINE; do
         COLOR=$STAGE_COLOR
         if [[ "${LINE[2]}" != " " ]]; then
             COLOR=$DIRTY_COLOR
