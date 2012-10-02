@@ -16,8 +16,42 @@ function git_branch {
     if GITREF=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null); then
         echo ${GITREF#refs/heads/}
     else
-        GITREF=$(/usr/bin/git rev-parse HEAD)
-        echo "(${GITREF[0,7]})"
+        return 1
+    fi
+}
+
+function git_ref {
+    GITREF=$(/usr/bin/git rev-parse HEAD)
+    echo "${GITREF[0,7]}"
+}
+
+function git_ahead {
+    local GIT_BRANCH=$1
+    local GIT_REMOTE GIT_MERGE GIT_UPSTREAM
+    if ! GIT_REMOTE=$(/usr/bin/git config branch.$GIT_BRANCH.remote 2>/dev/null); then
+        return
+    fi
+    if ! GIT_MERGE=$(/usr/bin/git config branch.$GIT_BRANCH.merge 2>/dev/null); then
+        return
+    fi
+    if [[ $GIT_REMOTE == "." ]]; then
+        GIT_UPSTREAM=$GIT_MERGE
+    else
+        GIT_UPSTREAM=$GIT_REMOTE/${GIT_MERGE#refs/heads/}
+    fi
+    local GIT_AHEAD=0 GIT_BEHIND=0
+    /usr/bin/git rev-list --left-right $GIT_ORIGIN...$GIT_UPSTREAM | while read LINE; do
+        if [[ ${LINE[1]} == ">" ]]; then
+            ((GIT_BEHIND+=1))
+        else
+            ((GIT_AHEAD+=1))
+        fi
+    done
+    if [[ $GIT_AHEAD > 0 ]]; then
+        echo $(tint_fg $CLEAN_COLOR +$GIT_AHEAD)
+    fi
+    if [[ $GIT_BEHIND > 0 ]]; then
+        echo $(tint_fg $DIRTY_COLOR -$GIT_BEHIND)
     fi
 }
 
@@ -76,7 +110,12 @@ function set_prompt {
         else
             PS1_PATH="$HERE"
         fi
-        PS1_PATH="$PS1_PATH:$(tint_fg -b $(git_color) $(git_branch))"
+        local GIT_BRANCH
+        if GIT_BRANCH=$(git_branch); then
+            PS1_PATH="$PS1_PATH:$(tint_fg -b $(git_color) $GIT_BRANCH)$(git_ahead $GIT_BRANCH)"
+        else
+            PS1_PATH="$PS1_PATH:$(tint_fg -b $(git_color) \($(git_ref)\))"
+        fi
     else
         PS1_PATH="$HERE"
     fi
