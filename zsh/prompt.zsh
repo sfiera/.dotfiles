@@ -68,9 +68,9 @@ function set_prompt {
     if [[ $1 == fast ]]; then
         # Reuse PS1_PATH
     elif /usr/bin/git rev-parse --show-toplevel >/dev/null 2>/dev/null; then
-        GIT_PREFIX=$(/usr/bin/git rev-parse --show-prefix)
+        local GIT_PREFIX=$(/usr/bin/git rev-parse --show-prefix)
         GIT_PREFIX=${GIT_PREFIX%/}
-        GIT_TOPLEVEL=${HERE%${GIT_PREFIX}}
+        local GIT_TOPLEVEL=${HERE%${GIT_PREFIX}}
         if [[ ( $GIT_TOPLEVEL != $HERE ) || -z $GIT_PREFIX ]]; then
             PS1_PATH="$(tint_fg $DIM_COLOR $GIT_TOPLEVEL)$GIT_PREFIX"
         else
