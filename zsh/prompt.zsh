@@ -48,11 +48,12 @@ function git_ahead {
         fi
     done
     if [[ $GIT_AHEAD > 0 ]]; then
-        echo $(tint_fg $CLEAN_COLOR +$GIT_AHEAD)
+        echo -n $(tint_fg $CLEAN_COLOR +$GIT_AHEAD)
     fi
     if [[ $GIT_BEHIND > 0 ]]; then
-        echo $(tint_fg $DIRTY_COLOR -$GIT_BEHIND)
+        echo -n $(tint_fg $DIRTY_COLOR -$GIT_BEHIND)
     fi
+    echo
 }
 
 function git_color {
