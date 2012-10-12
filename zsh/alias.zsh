@@ -49,19 +49,26 @@ rd() {
 
 b() {
     local action
+    local all
+    local verbose
     zparseopts -D -E \
         a+:=action \
         c+:=action \
         n+:=action \
         m+:=action \
-        v+=action \
         d+=action \
-        D+=action
+        D+=action \
+        A+=all \
+        v+=verbose
+
+    if [[ $#all > 0 ]]; then
+        all=(-a)  # lowercase
+    fi
 
     case $#action in
         0)
             if [[ $# == 0 ]]; then
-                git branch
+                git branch $verbose $all
                 return 0
             fi
             action=(-a $1); shift
@@ -99,9 +106,6 @@ b() {
                 ;;
             -d*|-D*)
                 git branch ${action[1]} -- "$@"
-                return 0 ;;
-            -v0)
-                git branch -v
                 return 0 ;;
             esac ;;
     esac
