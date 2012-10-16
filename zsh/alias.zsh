@@ -52,15 +52,17 @@ b() {
     local action
     local all
     local verbose
-    zparseopts -D -E \
-        a+:=action \
-        c+:=action \
-        n+:=action \
-        m+:=action \
-        d+=action \
-        D+=action \
-        A+=all \
-        v+=verbose
+    if ! zparseopts -D \
+            a+:=action \
+            c+:=action \
+            n+:=action \
+            m+:=action \
+            d+=action \
+            D+=action \
+            A+=all \
+            v+=verbose; then
+        return false
+    fi
 
     if [[ $#all > 0 ]]; then
         all=(-a)  # lowercase
@@ -111,7 +113,7 @@ b() {
             esac ;;
     esac
 
-    echo "usage: $0 [-v]" >&2
+    echo "usage: $0 [-Av]" >&2
     echo "       $0 [-a] BRANCH" >&2
     echo "       $0 -c NEW [OLD]" >&2
     echo "       $0 -n NEW [OLD]" >&2
