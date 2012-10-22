@@ -48,10 +48,10 @@ function git_ahead {
         fi
     done
     if [[ $GIT_AHEAD > 0 ]]; then
-        echo -n $(tint_fg $CLEAN_COLOR +$GIT_AHEAD)
+        echo -n $(tint $CLEAN_COLOR +$GIT_AHEAD)
     fi
     if [[ $GIT_BEHIND > 0 ]]; then
-        echo -n $(tint_fg $DIRTY_COLOR -$GIT_BEHIND)
+        echo -n $(tint $DIRTY_COLOR -$GIT_BEHIND)
     fi
     echo
 }
@@ -69,20 +69,25 @@ function git_color {
     echo $COLOR
 }
 
-function tint_fg {
+function tint {
     local START=
-    if [[ $1 == -b ]]; then
-        START="$START%{\e[1m%}"; shift
-    fi
+    local BOLD=0
+    local REVERSE=0
+    while [[ $# > 0 ]]; do
+        case $1 in
+            -b) BOLD=1; shift ;;
+            -r) REVERSE=1; shift ;;
+            *) break ;;
+        esac
+    done
     local COLOR=$1; shift
     local START="$START%{\e[38;05;${COLOR}m%}"
-    local RESET="%{\e[0m%}"
-    echo "$START$*$RESET"
-}
-
-function tint_bg {
-    local COLOR=$1; shift
-    local START="%{\e[48;05;${COLOR}m%}"
+    if [[ $BOLD != 0 ]]; then
+        START="$START%{\e[1m%}"
+    fi
+    if [[ $REVERSE != 0 ]]; then
+        START="$START%{\e[7m%}"
+    fi
     local RESET="%{\e[0m%}"
     echo "$START$*$RESET"
 }
@@ -98,7 +103,7 @@ function set_prompt {
         root|sfiera|chpickel)   local LOCATION="$MACHINE" ;;
         *)                      local LOCATION="$USER@$MACHINE" ;;
     esac
-    PS1="$(tint_fg -b $PS_COLOR $LOCATION)"
+    PS1="$(tint -b $PS_COLOR $LOCATION)"
 
     if [[ $1 == fast ]]; then
         # Reuse PS1_PATH
@@ -107,15 +112,15 @@ function set_prompt {
         GIT_PREFIX=${GIT_PREFIX%/}
         local GIT_TOPLEVEL=${HERE%${GIT_PREFIX}}
         if [[ ( $GIT_TOPLEVEL != $HERE ) || -z $GIT_PREFIX ]]; then
-            PS1_PATH="$(tint_fg $DIM_COLOR $GIT_TOPLEVEL)$GIT_PREFIX"
+            PS1_PATH="$(tint $DIM_COLOR $GIT_TOPLEVEL)$GIT_PREFIX"
         else
             PS1_PATH="$HERE"
         fi
         local GIT_BRANCH
         if GIT_BRANCH=$(git_branch); then
-            PS1_PATH="$PS1_PATH:$(tint_fg -b $(git_color) $GIT_BRANCH)$(git_ahead $GIT_BRANCH)"
+            PS1_PATH="$PS1_PATH:$(tint -b $(git_color) $GIT_BRANCH)$(git_ahead $GIT_BRANCH)"
         else
-            PS1_PATH="$PS1_PATH:$(tint_fg -b $(git_color) \($(git_ref)\))"
+            PS1_PATH="$PS1_PATH:$(tint -b $(git_color) \($(git_ref)\))"
         fi
     else
         PS1_PATH="$HERE"
@@ -123,9 +128,9 @@ function set_prompt {
     PS1="$PS1:$PS1_PATH"
 
     if [[ $KEYMAP == vicmd ]]; then
-        PS1="$PS1$NEWLINE$(tint_bg $PS_COLOR $(tint_fg -b 0 %#)) "
+        PS1="$PS1$NEWLINE$(tint -r -b $PS_COLOR %#) "
     else
-        PS1="$PS1$NEWLINE$(tint_fg -b $PS_COLOR %#) "
+        PS1="$PS1$NEWLINE$(tint -b $PS_COLOR %#) "
     fi
 }
 
