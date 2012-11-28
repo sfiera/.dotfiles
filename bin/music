@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-RSYNC=(rsync -rtv --delete --iconv=UTF-8-MAC,UTF8)
+RSYNC=(rsync -rtv --delete)
 if [[ $# > 0 ]]; then
     while [[ $# > 0 ]]; do
         RSYNC=($RSYNC --include=$1)
