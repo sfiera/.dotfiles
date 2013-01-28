@@ -3,7 +3,6 @@
 alias ls="/bin/ls -F"
 alias si="sort | uniq"
 alias cloak="cloak -f'./%g/%b/%A/%d%k%t'"
-alias pbedit="pbpaste | vipe | pbcopy"
 
 alias d="dirs -v"
 
@@ -122,6 +121,3 @@ b() {
     echo "       $0 -D BRANCH..." >&2
     return 64
 }
-
-# if $DARWIN
-alias preview="open -f -a Preview"
