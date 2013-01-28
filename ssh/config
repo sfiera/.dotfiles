@@ -3,7 +3,7 @@ EscapeChar              ^^
 UserKnownHostsFile      ~/.ssh/known_hosts ~/.dotfiles/ssh/known_hosts
 StrictHostKeyChecking   ask
 
-Host olivant olivant.a.sfiera.net a.sfiera.net
+Host olifan olifan.a.sfiera.net a.sfiera.net
     HostName a.sfiera.net
     ForwardAgent yes
 
