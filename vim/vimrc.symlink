@@ -169,6 +169,8 @@ vmap <silent>if af
 command -bang Q :qall<bang>
 command -bang W :wall<bang>
 command -bang WQ :wqall<bang>
+
+cmap w!! %!sudo tee > /dev/null %
 " }}}
 
 " Plugin settings {{{
