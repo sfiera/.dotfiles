@@ -92,6 +92,11 @@ noremap gk G
 noremap gl gg
 noremap g; $
 
+noremap <C-W>j <C-W>h
+noremap <C-W>k <C-W>j
+noremap <C-W>l <C-W>k
+noremap <C-W>; <C-W>l
+
 noremap h :
 noremap H :
 noremap gh <NOP>
