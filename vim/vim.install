@@ -5,4 +5,5 @@ if [[ -e $VUNDLE ]]; then
     echo "$VUNDLE exists; not overwriting."
 else
     @ git clone https://github.com/gmarik/vundle.git $VUNDLE
+    @ vundle install
 fi
