@@ -5,11 +5,22 @@
 " Maintainer: Chris Pickel <sfiera@sfzmail.com>
 "
 
-" Set up pathogen {{{
+" Set up Vundle {{{
 filetype on   " Ensure that the following line doesn't cause an error.
 filetype off  " Ensure that pathogen is around when we turn it back on.
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+set rtp+=~/.vim/vundle
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+
+Bundle 'a.vim'
+Bundle 'SWIG-syntax'
+Bundle 'sfiera/vim-emacsmodeline'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-markdown'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
+Bundle 'pangloss/vim-javascript'
 " }}}
 
 " Options {{{

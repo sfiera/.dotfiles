@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+usage() {
+    echo >&2 "usage: vundle install"
+    echo >&2 "       vundle update"
+    echo >&2 "       vundle clean"
+    exit 64
+}
+
+if [[ $# != 1 ]]; then
+    usage
+fi
+
+COMMAND=$1; shift
+case $COMMAND in
+    install)    vim +BundleInstall +qall ;;
+    update)     vim +BundleInstall! +qall ;;
+    clean)      vim +BundleClean +qall ;;
+    *) ;;
+esac
