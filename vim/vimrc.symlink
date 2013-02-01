@@ -8,7 +8,7 @@
 " Set up Vundle {{{
 filetype on   " Ensure that the following line doesn't cause an error.
 filetype off  " Ensure that pathogen is around when we turn it back on.
-set rtp+=~/.vim/vundle
+set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 
 Bundle 'gmarik/vundle'
