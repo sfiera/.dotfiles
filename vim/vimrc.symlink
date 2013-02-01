@@ -21,6 +21,8 @@ Bundle 'tpope/vim-markdown'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'pangloss/vim-javascript'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
 " }}}
 
 " Options {{{
