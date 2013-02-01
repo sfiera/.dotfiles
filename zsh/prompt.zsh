@@ -1,8 +1,17 @@
 #!/bin/zsh
 
 MACHINE=${MACHINE-%m}
+MACHINE=${(%)MACHINE}
 
-PS_COLOR=${PS_COLOR-142}
+typeset -A PS_COLORS
+PS_COLORS=(
+    florence 169
+    graban 69
+    hauteclaire 99
+    joyeuse 52
+    olifan 64
+)
+
 DIRTY_COLOR=${DIRTY_COLOR-167}
 STAGE_COLOR=${STAGE_COLOR-185}
 CLEAN_COLOR=${CLEAN_COLOR-70}
@@ -94,6 +103,7 @@ function tint {
 
 PS1_PATH=
 function set_prompt {
+    local PS_COLOR="${PS_COLORS[$MACHINE]-142}"
     local NEWLINE="
 "
     local HERE="%~"
