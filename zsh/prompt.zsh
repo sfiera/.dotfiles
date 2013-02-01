@@ -5,6 +5,7 @@ MACHINE=${(%)MACHINE}
 
 typeset -A PS_COLORS
 PS_COLORS=(
+    durendal 22
     florence 169
     graban 69
     hauteclaire 99
