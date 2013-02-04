@@ -92,10 +92,14 @@ noremap gk G
 noremap gl gg
 noremap g; $
 
-noremap <C-W>j <C-W>h
-noremap <C-W>k <C-W>j
-noremap <C-W>l <C-W>k
-noremap <C-W>; <C-W>l
+nnoremap <C-W>j <C-W>h
+nnoremap <C-W>k <C-W>j
+nnoremap <C-W>l <C-W>k
+nnoremap <C-W>; <C-W>l
+nnoremap <C-W>J <C-W>H
+nnoremap <C-W>K <C-W>J
+nnoremap <C-W>L <C-W>K
+nnoremap <C-W>: <C-W>L
 
 noremap h :
 noremap H :
