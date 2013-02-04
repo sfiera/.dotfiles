@@ -173,9 +173,9 @@ nnoremap ~ gT
 
 " "in file", "a file" motions {{{
 onoremap <silent>af :<C-u>normal! ggVG$<CR>
-omap <silent>if af
+onoremap <silent>if :<C-u>normal! gg0vG$<CR>
 vnoremap <silent>af ggoG$
-vmap <silent>if af
+vnoremap <silent>if ggoG$
 " }}}
 
 " }}}
