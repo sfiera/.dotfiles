@@ -118,13 +118,6 @@ noremap % <NOP>
 noremap gg <NOP>
 " }}}
 
-" Make w mirror e in place of b {{{
-nnoremap w b
-nnoremap W B
-nnoremap b <NOP>
-nnoremap B <NOP>
-" }}}
-
 " Fix some vi inconsistencies {{{
 " TODO(sfiera): make cw/cW repeat properly with .
 noremap S ch
