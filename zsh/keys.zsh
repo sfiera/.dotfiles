@@ -37,6 +37,7 @@ bindkey -M vicmd : vi-end-of-line
 
 bindkey -M vicmd , vi-rev-repeat-find
 bindkey -M vicmd . vi-repeat-find
+bindkey -M vicmd \' vi-repeat-change
 
 bindkey -M vicmd 'u' undo
 bindkey -M vicmd 'U' redo
