@@ -10,10 +10,10 @@ if [[ $# > 0 ]]; then
 fi
 
 if [[ -e ~/Music/Library/ ]]; then
-    echo $RSYNC a.sfiera.net:mp3/192/ ~/Music/Library/
-    $RSYNC a.sfiera.net:mp3/192/ ~/Music/Library/
+    echo $RSYNC a.sfiera.net:/srv/mp3/192/ ~/Music/Library/
+    $RSYNC a.sfiera.net:/srv/mp3/192/ ~/Music/Library/
 fi
 if [[ -e ~/Music/Mobile/ ]]; then
-    echo $RSYNC a.sfiera.net:mp3/96/ ~/Music/Mobile/
-    $RSYNC a.sfiera.net:mp3/96/ ~/Music/Mobile/
+    echo $RSYNC a.sfiera.net:/srv/mp3/96/ ~/Music/Mobile/
+    $RSYNC a.sfiera.net:/srv/mp3/96/ ~/Music/Mobile/
 fi
