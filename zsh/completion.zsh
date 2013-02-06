@@ -10,7 +10,7 @@ declare -U remote_users
 declare -U remote_hosts
 declare -U remote_users_hosts
 
-cat $ZSH/ssh/config | while read CMD VALUE UNUSED; do
+cat ~/.ssh/config | while read CMD VALUE UNUSED; do
     if [[ "$CMD" == "Host" ]]; then
         if [[ ! -z "$REMOTE_HOST" ]]; then
             remote_users_hosts=("$LOGNAME@$REMOTE_HOST" $remote_users_hosts)
