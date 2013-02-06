@@ -6,6 +6,11 @@ alias cloak="cloak -f'./%g/%b/%A/%d%k%t'"
 
 alias d="dirs -v"
 
+@() {
+    echo "$@"
+    "$@"
+}
+
 # Preserve directory stack across exec and into subshelss
 update_dirs() {
     pwds=()
