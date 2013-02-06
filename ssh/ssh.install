@@ -1,7 +1,0 @@
-#!/bin/zsh
-
-if [[ -e ~/.ssh/config ]]; then
-    echo "~/.ssh/config exists; not overwriting."
-else
-    @ ln -s ../.dotfiles/ssh/config ~/.ssh/config
-fi

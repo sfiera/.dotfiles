@@ -2,10 +2,19 @@
 
 for config_file (~/.dotfiles/**/*.symlink); do
     source="${config_file#$HOME/}"
-    destination="$HOME/.${${config_file##*/}%.*}"
-    if [[ -e "$destination" ]]; then
-        echo "~/.${${config_file##*/}%.*} exists; not overwriting."
+    destination=".${${${config_file##*/}%.symlink}//\%//}"
+    tmp=$destination
+    while [[ $tmp != ${tmp#*/} ]]; do
+        source=../$source
+        tmp=${tmp#*/}
+    done
+    destination_dir="$(dirname $destination)"
+    if [[ ! -d ~/$destination_dir ]]; then
+        @ mkdir -p ~/$destination_dir
+    fi
+    if [[ -e ~/$destination ]]; then
+        echo "~/$destination exists; not overwriting."
     else
-        @ ln -s "$source" "$destination"
+        @ ln -s $source ~/$destination
     fi
 done
