@@ -8,6 +8,7 @@ for machine in $@; do
     echo -n "Authorizing $machine… "
     if ssh -o ChallengeResponseAuthentication=no \
            -o GSSAPIAuthentication=no \
+           -o GSSAPIKeyExchange=no \
            -o HostbasedAuthentication=no \
            -o KbdInteractiveAuthentication=no \
            -o PasswordAuthentication=no \
@@ -18,6 +19,8 @@ for machine in $@; do
         echo "already authorized"
     else
         echo
-        ssh $machine sh -c "cat >> ~/.ssh/authorized_keys" <~/.ssh/id_rsa.pub
+        cat ~/.ssh/id_rsa.pub | \
+            ssh -o PasswordAuthentication=yes $machine \
+            sh -c "cat >> ~/.ssh/authorized_keys"
     fi
 done

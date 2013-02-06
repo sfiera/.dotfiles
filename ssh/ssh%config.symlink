@@ -23,3 +23,6 @@ Host force force.stwing.org force.stwing.upenn.edu
     HostName force.stwing.org
     User chpickel
     ForwardAgent yes
+
+Host *
+    PasswordAuthentication no
