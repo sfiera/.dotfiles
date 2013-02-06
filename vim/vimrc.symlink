@@ -22,7 +22,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'pangloss/vim-javascript'
 
-if (v:version > 703) && has('patch584') && has('python')
+if (v:version >= 703) && has('patch584') && has('python')
     Bundle 'Valloric/YouCompleteMe'
 endif
 Bundle 'scrooloose/syntastic'
