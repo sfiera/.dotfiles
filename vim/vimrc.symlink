@@ -184,9 +184,9 @@ vnoremap <silent>if ggoG$
 " }}}
 
 " Commands {{{
-command -bang Q :qall<bang>
-command -bang W :wall<bang>
-command -bang WQ :wqall<bang>
+command! -bang Q :qall<bang>
+command! -bang W :wall<bang>
+command! -bang WQ :wqall<bang>
 
 cmap w!! %!sudo tee > /dev/null %
 " }}}
