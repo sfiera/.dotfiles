@@ -89,7 +89,7 @@ noremap ; l
 noremap J _
 noremap K }
 noremap L {
-noremap : $
+noremap : g_
 
 noremap gj 0
 noremap gk G
