@@ -60,7 +60,7 @@ endif
 set wildmenu
 set wildmode=list:longest,full
 
-set guifont=Source\ Code\ Pro\ ExtraLight:h16
+set guifont=Source\ Code\ Pro\ ExtraLight:h14
 hi! link Label Statement
 
 " Only wait (1/6)s for escape sequences.  Don't time out maps.
