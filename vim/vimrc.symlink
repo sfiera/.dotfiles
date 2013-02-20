@@ -33,6 +33,7 @@ syntax enable
 colorscheme sfiera
 
 set nocompatible
+set nomodeline
 set backspace=2
 set showmode
 set showcmd
@@ -44,9 +45,6 @@ set cursorline
 set scrolloff=5
 
 set numberwidth=8
-
-set modeline
-set modelines=5
 
 set hlsearch
 set incsearch
