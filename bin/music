@@ -1,19 +1,36 @@
 #!/bin/zsh
 
-RSYNC=(rsync -rtv --delete)
+set -o errexit
+set -o nounset
+
+zparseopts -D \
+    n+=dry_run \
+    t+=transcode
+
+if [[ $#dry_run > 0 ]]; then
+    RSYNC=(rsync -rtvn --delete)
+else
+    RSYNC=(rsync -rtv --delete)
+fi
 if [[ $# > 0 ]]; then
     while [[ $# > 0 ]]; do
-        RSYNC=($RSYNC --include=$1)
+        RSYNC=($RSYNC --include="**/$1/**")
         shift
     done
     RSYNC=($RSYNC --include='*/' --exclude='*')
 fi
 
+@() {
+    echo "$@"
+    "$@"
+}
+
+if [[ $#transcode > 0 ]]; then
+    @ transcode
+fi
 if [[ -e ~/Music/Library/ ]]; then
-    echo $RSYNC a.sfiera.net:/srv/mp3/192/ ~/Music/Library/
-    $RSYNC a.sfiera.net:/srv/mp3/192/ ~/Music/Library/
+    @ $RSYNC a.sfiera.net:/srv/mp3/192/ ~/Music/Library/
 fi
 if [[ -e ~/Music/Mobile/ ]]; then
-    echo $RSYNC a.sfiera.net:/srv/mp3/96/ ~/Music/Mobile/
-    $RSYNC a.sfiera.net:/srv/mp3/96/ ~/Music/Mobile/
+    @ $RSYNC a.sfiera.net:/srv/mp3/96/ ~/Music/Mobile/
 fi
