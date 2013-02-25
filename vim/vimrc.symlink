@@ -135,12 +135,17 @@ noremap q @
 noremap Q q
 noremap m `
 noremap M m
-
-noremap ' .
-noremap . ;
+noremap s ;
+noremap S ,
 
 nnoremap <C-R> <NOP>
 noremap  @ <NOP>
+noremap , <NOP>
+noremap ' <NOP>
+" }}}
+
+" Make <Space> useful {{{
+map <Space> .
 " }}}
 
 " Use jkl; for folding {{{
@@ -199,5 +204,5 @@ let g:alternateSearchPath = "reg:/src/include/g,reg:/include/src/g,reg:/inc/src/
 " Other files {{{
 runtime sfiera/arrows.vim
 runtime sfiera/style.vim
-runtime sfiera/vsearch.vim
+" runtime sfiera/vsearch.vim
 " }}}
