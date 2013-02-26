@@ -89,11 +89,6 @@ noremap K }
 noremap L {
 noremap : g_
 
-noremap gj 0
-noremap gk G
-noremap gl gg
-noremap g; $
-
 nnoremap <C-W>j <C-W>h
 nnoremap <C-W>k <C-W>j
 nnoremap <C-W>l <C-W>k
@@ -105,9 +100,7 @@ nnoremap <C-W>: <C-W>L
 
 noremap h :
 noremap H :
-noremap gh <NOP>
-
-noremap G %
+noremap ¡ :
 
 noremap 0 <NOP>
 noremap _ <NOP>
@@ -116,8 +109,6 @@ noremap { <NOP>
 noremap } <NOP>
 noremap $ <NOP>
 noremap % <NOP>
-
-noremap gg <NOP>
 " }}}
 
 " Fix some vi inconsistencies {{{
@@ -148,7 +139,34 @@ noremap ' <NOP>
 map <Space> .
 " }}}
 
-" Use jkl; for folding {{{
+" Gstar {{{
+map G g
+
+noremap gj 0
+noremap gk G
+noremap gl gg
+noremap g; $
+
+noremap gh %
+
+noremap gs *
+noremap gS #
+
+map gw <C-W>
+map gW <C-W>
+noremap ga <C-A>
+noremap gA <C-X>
+noremap gv <C-V>
+noremap gV <C-V>
+
+noremap * <NOP>
+noremap # <NOP>
+noremap gg <NOP>
+" }}}
+
+" Zstar {{{
+map Z z
+
 nnoremap zj zc
 nnoremap zJ zMzX
 nnoremap zk zj
@@ -163,14 +181,6 @@ nnoremap zc <NOP>
 nnoremap zM <NOP>
 nnoremap zR <NOP>
 nnoremap zX <NOP>
-" }}}
-
-" {{{
-noremap gs *
-noremap gS #
-
-noremap * <NOP>
-noremap # <NOP>
 " }}}
 
 " Alternate quickly through tabs {{{
