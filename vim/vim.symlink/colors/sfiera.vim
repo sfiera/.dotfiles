@@ -8,6 +8,7 @@ hi Normal                           guifg=#cccccc
 hi Normal                           guibg=#141414
 hi NonText      ctermfg=black       guifg=black
 hi NonText      ctermbg=black       guibg=black
+hi ColorColumn  ctermbg=black       guibg=black
 hi Comment      ctermfg=28          guifg=#008700
 hi Constant     ctermfg=36          guifg=#00af87
 hi Identifier   ctermfg=26          guifg=#005fd7

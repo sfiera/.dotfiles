@@ -57,6 +57,8 @@ if has('persistent_undo')
     set undofile
 endif
 
+let &colorcolumn="+" . join(range(2,999),",+")
+
 set wildmenu
 set wildmode=list:longest,full
 
