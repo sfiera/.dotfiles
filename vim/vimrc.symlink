@@ -164,6 +164,8 @@ noremap gV <C-V>
 noremap * <NOP>
 noremap # <NOP>
 noremap gg <NOP>
+
+noremap gz :YcmDiags<CR>
 " }}}
 
 " Zstar {{{
