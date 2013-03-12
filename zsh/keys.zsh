@@ -35,12 +35,17 @@ bindkey -M vicmd K history-beginning-search-forward-inclusive
 bindkey -M vicmd L history-beginning-search-backward-inclusive
 bindkey -M vicmd : vi-end-of-line
 
-bindkey -M vicmd , vi-rev-repeat-find
-bindkey -M vicmd . vi-repeat-find
-bindkey -M vicmd \' vi-repeat-change
+bindkey -M vicmd s vi-repeat-find
+bindkey -M vicmd S vi-rev-repeat-find
+bindkey -M vicmd ' ' vi-repeat-change
 
-bindkey -M vicmd 'u' undo
-bindkey -M vicmd 'U' redo
+bindkey -M vicmd u undo
+bindkey -M vicmd U redo
+bindkey -M vicmd m vi-goto-mark
+bindkey -M vicmd M vi-set-mark
+
+bindkey -M vicmd -s G g
+bindkey -M vicmd gh vi-match-bracket
 
 # New ZLE widgets
 
