@@ -201,6 +201,8 @@ nnoremap ` gt
 nnoremap ~ gT
 noremap <Tab> :call altr#forward()<CR>
 noremap <S-Tab> :call altr#back()<CR>
+nnoremap , :call altr#back()<CR>
+nnoremap . :call altr#forward()<CR>
 " }}}
 
 " "in file", "a file" motions {{{
