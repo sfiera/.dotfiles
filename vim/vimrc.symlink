@@ -123,7 +123,9 @@ nnoremap cW dWi
 " }}}
 
 " Rebind paired (capitals; adjacent keys) to match {{{
-nnoremap U <C-R>
+nnoremap <silent> u :<C-U>call repeat#wrap("u",         v:count)<CR>
+nnoremap <silent> U :<C-U>call repeat#wrap("\<Lt>C-R>", v:count)<CR>
+
 noremap q @
 noremap Q q
 noremap m `
@@ -138,10 +140,12 @@ noremap ' <NOP>
 " }}}
 
 " Make <Space> useful {{{
-map <Space> .
+nnoremap <silent> <Space> :<C-U>call repeat#run(v:count)<CR>
+
+nnoremap . <NOP>
 " }}}
 
-" Gstar {{{
+" g* {{{
 map G g
 
 noremap gj 0
@@ -168,7 +172,7 @@ noremap gg <NOP>
 noremap gz :YcmDiags<CR>
 " }}}
 
-" Zstar {{{
+" z* {{{
 map Z z
 
 nnoremap zj zc
