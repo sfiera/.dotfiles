@@ -184,6 +184,11 @@ nnoremap zL zk
 nnoremap z; zo
 nnoremap z: zRzX
 
+nnoremap zs :split<CR>
+nnoremap zS :below split<CR>
+nnoremap zd :tab split<CR>
+nnoremap zD :tab split<CR>gT
+
 nnoremap zo <NOP>
 nnoremap zc <NOP>
 nnoremap zM <NOP>
