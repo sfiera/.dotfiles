@@ -5,18 +5,18 @@ MACHINE=${(%)MACHINE}
 
 typeset -A PS_COLORS
 PS_COLORS=(
-    durendal 22
-    florence 169
-    graban 69
-    hauteclaire 99
-    joyeuse 52
-    olifan 64
+    durendal 2
+    florence 5
+    graban 4
+    hauteclaire 13
+    joyeuse 9
+    olifan 2
 )
 
-DIRTY_COLOR=${DIRTY_COLOR-167}
-STAGE_COLOR=${STAGE_COLOR-185}
-CLEAN_COLOR=${CLEAN_COLOR-70}
-DIM_COLOR=${DIM_COLOR-239}
+DIRTY_COLOR=${DIRTY_COLOR-1}
+STAGE_COLOR=${STAGE_COLOR-142}
+CLEAN_COLOR=${CLEAN_COLOR-2}
+DIM_COLOR=${DIM_COLOR-10}
 
 autoload colors zsh/terminfo
 if [[ "$terminfo[colors]" -ge 8 ]] colors
@@ -129,9 +129,9 @@ function set_prompt {
         fi
         local GIT_BRANCH
         if GIT_BRANCH=$(git_branch); then
-            PS1_PATH="$PS1_PATH:$(tint -b $(git_color) $GIT_BRANCH)$(git_ahead $GIT_BRANCH)"
+            PS1_PATH="$PS1_PATH:$(tint $(git_color) $GIT_BRANCH)$(git_ahead $GIT_BRANCH)"
         else
-            PS1_PATH="$PS1_PATH:$(tint -b $(git_color) \($(git_ref)\))"
+            PS1_PATH="$PS1_PATH:$(tint $(git_color) \($(git_ref)\))"
         fi
     else
         PS1_PATH="$HERE"
