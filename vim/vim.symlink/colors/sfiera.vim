@@ -1,16 +1,18 @@
+" -*- mode: vim; tab-width: 4; indent-tabs-mode: nil; fill-column: 99 -*-
+"
+" ~sfiera/.vim/colors/sfiera.vim
+" Brief: sfiera's colors
+" Maintainer: Chris Pickel <sfiera@sfzmail.com>
+"
+" Preamble {{{
 set background=dark
 hi clear
 if exists("syntax_on")
   syntax reset
 endif
 let g:colors_name = "sfiera"
-
-hi Normal                           guifg=#cccccc
-hi Normal                           guibg=#141414
-hi NonText      ctermfg=black       guifg=black
-hi NonText      ctermbg=black       guibg=black
-hi ColorColumn  ctermbg=black       guibg=black
-hi Comment      ctermfg=10          guifg=#008700
+" }}}
+" Code {{{
 hi Constant     ctermfg=13          guifg=#00af87
 hi Identifier   ctermfg=4           guifg=#005fd7
 hi Preproc      ctermfg=142         guifg=#afaf00
@@ -21,6 +23,16 @@ hi Underlined   ctermfg=darkcyan    guifg=darkcyan
 hi Underlined   cterm=underline     gui=underline
 hi! link Label Statement
 
+hi label        ctermfg=blue
+hi operator     ctermfg=blue
+
+hi title        cterm=bold          gui=bold
+" }}}
+" Comments {{{
+hi Comment      ctermfg=10          guifg=#008700
+hi Todo         ctermbg=none    ctermfg=142     cterm=underline
+" }}}
+" Errors {{{
 hi ErrorMsg     ctermfg=red
 hi ErrorMsg     ctermbg=white
 hi WarningMsg   ctermfg=cyan
@@ -28,25 +40,8 @@ hi ModeMsg      ctermfg=blue
 hi MoreMsg      ctermfg=yellow
 hi Error        ctermfg=red
 hi Error        ctermbg=white
-
-hi Todo         ctermfg=142
-hi Todo         ctermbg=none
-hi Todo         cterm=underline     gui=underline
-hi Cursor       ctermfg=black
-hi Cursor       ctermbg=white
-hi LineNr       ctermfg=Magenta
-hi title        cterm=bold          gui=bold
-
-hi StatusLineNC ctermfg=black
-hi StatusLineNC ctermbg=blue
-hi StatusLine   ctermfg=cyan
-hi StatusLine   ctermbg=blue
-
-hi label        ctermfg=blue
-hi operator     ctermfg=blue
-hi clear Visual
-hi Visual       ctermbg=10          guibg=#5fafd7
-
+" }}}
+" vimdiff {{{
 hi DiffChange   ctermbg=Green
 hi DiffChange   ctermfg=black
 hi DiffText     ctermbg=lightGreen
@@ -55,23 +50,26 @@ hi DiffAdd      ctermbg=blue
 hi DiffAdd      ctermfg=black
 hi DiffDelete   ctermbg=cyan
 hi DiffDelete   ctermfg=black
+" }}}
+" Interface {{{
+hi NonText      ctermbg=232     ctermfg=232
+hi ColorColumn  ctermbg=232
 
-hi Folded       ctermfg=4           guifg=#121212
-hi Folded       ctermbg=none        guibg=none
-hi FoldColumn   ctermbg=gray
-hi FoldColumn   ctermfg=black
-hi cIf0         ctermfg=gray
+hi StatusLine   ctermbg=14      ctermfg=0       cterm=none
+hi StatusLineNC ctermbg=blue    ctermfg=black
+hi CursorLine   ctermbg=black                   cterm=none
+hi TablineSel   ctermbg=0       ctermfg=3       cterm=none
+hi TablineFill  ctermbg=232     ctermfg=10      cterm=none
+hi Tabline      ctermbg=232     ctermfg=10      cterm=none
 
-hi Ignore       ctermfg=darkgray
-
-hi CursorLine   cterm=none          gui=none
-hi CursorLine   ctermbg=black       guibg=#1b1b1b
-hi IncSearch    cterm=underline
-hi IncSearch    ctermfg=none
-hi IncSearch    ctermbg=none
-hi Search       cterm=underline
-hi Search       ctermfg=none
-hi Search       ctermbg=none
-hi StatusLine   cterm=none          gui=none
-hi StatusLine   ctermbg=14          guibg=#5f5f87
-hi StatusLine   ctermfg=0           guifg=#121212
+hi Visual       ctermbg=10
+hi IncSearch    ctermbg=none    ctermfg=none    cterm=underline
+hi Search       ctermbg=none    ctermfg=none    cterm=underline
+hi Cursor       ctermfg=black   ctermbg=white
+hi LineNr       ctermfg=magenta
+" }}}
+" Folds {{{
+hi Folded       ctermbg=none    ctermfg=4     
+hi FoldColumn   ctermbg=gray    ctermfg=black
+hi! link cIf0 Comment
+" }}}
