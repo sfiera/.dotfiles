@@ -4,7 +4,6 @@
 " Brief: sfiera's vimrc
 " Maintainer: Chris Pickel <sfiera@sfzmail.com>
 "
-
 " Set up Vundle {{{
 filetype on   " Ensure that the following line doesn't cause an error.
 filetype off  " Ensure that pathogen is around when we turn it back on.
@@ -27,7 +26,6 @@ if (v:version >= 703) && has('patch584') && has('python')
 endif
 Bundle 'scrooloose/syntastic'
 " }}}
-
 " Options {{{
 syntax enable
 colorscheme sfiera
@@ -70,7 +68,6 @@ set notimeout
 set ttimeout
 set ttimeoutlen=133
 " }}}
-
 " Key bindings {{{
 
 " Make Esc enter command-line mode; g[/?] hide incsearch {{{
@@ -213,7 +210,6 @@ vnoremap <silent>if ggoG$
 " }}}
 
 " }}}
-
 " Commands {{{
 command! -bang Q :qall<bang>
 command! -bang W :wall<bang>
@@ -221,7 +217,6 @@ command! -bang WQ :wqall<bang>
 
 cmap w!! %!sudo tee > /dev/null %
 " }}}
-
 " Plugin settings {{{
 call altr#remove_all()
 
@@ -244,7 +239,6 @@ call altr#define('%.py', '%_test.py', '%.*.py')
 
 call altr#define('%.html', '%.css', '%.js')
 " }}}
-
 " Other files {{{
 runtime sfiera/arrows.vim
 runtime sfiera/style.vim
