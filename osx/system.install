@@ -69,6 +69,8 @@ fi
     </dict>
 </array>'
 
+@ defaults write com.googlecode.iterm2 PrefsCustomFolder /Users/sfiera/.dotfiles/osx/prefs
+
 INCONSOLATA=~/Library/Fonts/Inconsolata.otf
 if [[ ! -f $INCONSOLATA ]]; then
     echo curl "http://levien.com/type/myfonts/Inconsolata.otf > $INCONSOLATA"
