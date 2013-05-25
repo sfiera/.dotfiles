@@ -4289,10 +4289,6 @@
 	<true/>
 	<key>SUFeedURL</key>
 	<string>http://iterm2.googlecode.com/svn/trunk/appcasts/testing.xml</string>
-	<key>SUHasLaunchedBefore</key>
-	<true/>
-	<key>SULastCheckTime</key>
-	<date>2013-05-24T17:08:40Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
