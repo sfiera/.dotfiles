@@ -41,6 +41,7 @@ set laststatus=2
 set ttyfast
 set cursorline
 set scrolloff=5
+set scrolljump=-25
 
 set numberwidth=8
 
