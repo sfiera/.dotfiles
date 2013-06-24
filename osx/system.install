@@ -31,8 +31,7 @@ fi
 @ defaults write -g NSUserKeyEquivalents -dict-add "Previous Panel" '"@$["'
 @ defaults write -g NSUserKeyEquivalents -dict-add "Next Panel" '"@$]"'
 
-@ defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Add to Pinboard" '"@D"'
-@ defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Pinboard" '"@~B"'
+@ defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Add to Pinboard" '"^D"'
 
 @ defaults write -g NSUserReplacementItems '<array>
     <dict>
