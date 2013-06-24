@@ -80,11 +80,11 @@ font() {
     fi
     case $1 in
         SourceCodePro*)
-            URL=$GOOGLEFONTS/ofl/sourcecodepro/$FONT ;;
+            URL=$GOOGLEFONTS/sourcecodepro/$FONT ;;
         Inconsolata.otf)
             URL=http://levien.com/type/myfonts/$FONT ;;
         Montserrat-*)
-            URL=$GOOGLEFONTS/ofl/montserrat/$FONT
+            URL=$GOOGLEFONTS/montserrat/$FONT
     esac
     curl $URL >$LIBRARY/$FONT
 }
