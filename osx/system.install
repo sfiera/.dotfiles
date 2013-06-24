@@ -76,5 +76,3 @@ if [[ ! -f $INCONSOLATA ]]; then
     echo curl "http://levien.com/type/myfonts/Inconsolata.otf > $INCONSOLATA"
     curl http://levien.com/type/myfonts/Inconsolata.otf > $INCONSOLATA
 fi
-
-@ killall Finder Dock SystemUIServer
