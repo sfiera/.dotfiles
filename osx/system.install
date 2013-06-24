@@ -71,8 +71,34 @@ fi
 
 @ defaults write com.googlecode.iterm2 PrefsCustomFolder /Users/sfiera/.dotfiles/osx/prefs
 
-INCONSOLATA=~/Library/Fonts/Inconsolata.otf
-if [[ ! -f $INCONSOLATA ]]; then
-    echo curl "http://levien.com/type/myfonts/Inconsolata.otf > $INCONSOLATA"
-    curl http://levien.com/type/myfonts/Inconsolata.otf > $INCONSOLATA
-fi
+font() {
+    local LIBRARY=~/Library/Fonts
+    local GOOGLEFONTS=https://googlefontdirectory.googlecode.com/hg/ofl
+    local FONT=$1
+    if [[ -f $LIBRARY/$FONT ]]; then
+        echo "already installed; skipping"
+        return 0
+    fi
+    case $1 in
+        SourceCodePro*)
+            URL=$GOOGLEFONTS/ofl/sourcecodepro/$FONT ;;
+        Inconsolata.otf)
+            URL=http://levien.com/type/myfonts/$FONT ;;
+        Montserrat-*)
+            URL=$GOOGLEFONTS/ofl/montserrat/$FONT
+    esac
+    curl $URL >$LIBRARY/$FONT
+}
+
+@ font Inconsolata.otf
+
+@ font SourceCodePro-Black.ttf
+@ font SourceCodePro-Bold.ttf
+@ font SourceCodePro-ExtraLight.ttf
+@ font SourceCodePro-Light.ttf
+@ font SourceCodePro-Medium.ttf
+@ font SourceCodePro-Regular.ttf
+@ font SourceCodePro-Semibold.ttf
+
+@ font Montserrat-Regular.ttf
+@ font Montserrat-Bold.ttf
