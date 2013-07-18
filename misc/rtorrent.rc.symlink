@@ -1,0 +1,4 @@
+directory   = ~/.rtdownloads/
+session     = ~/.rtsession/
+upload_rate = 300
+port_range  = 49152-49152
