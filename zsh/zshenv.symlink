@@ -3,8 +3,8 @@
 export ZSH=~/.dotfiles
 
 # Set up tools
-export EDITOR=vim
-export VISUAL=vim
+export EDITOR=vi
+export VISUAL=vi
 export DIFF="git diff --no-index"
 
 # UTF-8 for everything, all the time.
