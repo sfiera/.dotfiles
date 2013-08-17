@@ -7,16 +7,20 @@ Host durendal durendal.a.sfiera.net a.sfiera.net
     HostName a.sfiera.net
     ForwardAgent yes
 
-Host olifan olifan.a.sfiera.net
-    HostName olifan.a.sfiera.net
+Host olifan olifan.b.sfiera.net
+    HostName olifan.b.sfiera.net
     ForwardAgent yes
 
 Host florence florence.sfiera.net
     HostName florence.sfiera.net
     ForwardAgent yes
 
-Host hauteclaire hauteclaire.a.sfiera.net
-    HostName hauteclaire.a.sfiera.net
+Host courtain courtain.b.sfiera.net b.sfiera.net
+    HostName b.sfiera.net
+    ForwardAgent yes
+
+Host hauteclaire hauteclaire.b.sfiera.net
+    HostName hauteclaire.b.sfiera.net
     ForwardAgent yes
 
 Host force force.stwing.org force.stwing.upenn.edu
