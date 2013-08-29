@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 autoload -U compinit
-compinit
+compinit -i
 
 remote_users=("$LOGNAME")
 remote_hosts=()

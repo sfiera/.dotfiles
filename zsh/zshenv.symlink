@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+skip_global_compinit=1
 export ZSH=~/.dotfiles
 
 # Set up tools
