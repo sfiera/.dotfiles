@@ -1,0 +1,49 @@
+#!/bin/zsh
+
+local FONTS
+case $(uname) in
+    Darwin) FONTS=~/Library/Fonts ;;
+    Linux) FONTS=~/.fonts ;;
+    *) return
+esac
+
+local ANY_FONTS_INSTALLED=
+font() {
+    local GOOGLEFONTS=https://googlefontdirectory.googlecode.com/hg/ofl
+    local FONT=$1
+    mkdir -p $FONTS
+    if [[ -f $FONTS/$FONT ]]; then
+        return 0
+    fi
+    case $1 in
+        SourceCodePro*)
+            URL=$GOOGLEFONTS/sourcecodepro/$FONT ;;
+        Inconsolata.otf)
+            URL=http://levien.com/type/myfonts/$FONT ;;
+        Montserrat-*)
+            URL=$GOOGLEFONTS/montserrat/$FONT
+    esac
+    curl $URL >$FONTS/$FONT
+    ANY_FONTS_INSTALLED=1
+}
+
+@ font Inconsolata.otf
+
+@ font SourceCodePro-Black.ttf
+@ font SourceCodePro-Bold.ttf
+@ font SourceCodePro-ExtraLight.ttf
+@ font SourceCodePro-Light.ttf
+@ font SourceCodePro-Medium.ttf
+@ font SourceCodePro-Regular.ttf
+@ font SourceCodePro-Semibold.ttf
+
+@ font Montserrat-Regular.ttf
+@ font Montserrat-Bold.ttf
+
+if [[ -n $ANY_FONTS_INSTALLED ]]; then
+    local FONTS
+    case $(uname) in
+        Darwin) ;;
+        Linux) fc-cache -fv ;;
+    esac
+fi
