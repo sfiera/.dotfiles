@@ -1,0 +1,187 @@
+diff -Naur /etc/lirc/hardware.conf /etc/lirc/hardware.conf.new
+--- /etc/lirc/hardware.conf	2013-12-08 14:36:30.220853010 +0900
++++ /etc/lirc/hardware.conf.new	2013-09-13 20:04:09.093740639 +0900
+@@ -1,9 +1,9 @@
+ # /etc/lirc/hardware.conf
+ #
+ #Chosen Remote Control
+-REMOTE="None"
++REMOTE="RM-820"
+ REMOTE_MODULES=""
+-REMOTE_DRIVER=""
++REMOTE_DRIVER="alsa_usb"
+ REMOTE_DEVICE=""
+ REMOTE_SOCKET=""
+ REMOTE_LIRCD_CONF=""
+@@ -19,7 +19,7 @@
+ TRANSMITTER_LIRCD_ARGS=""
+ 
+ #Enable lircd
+-START_LIRCD="false"
++START_LIRCD="true"
+ 
+ #Don't start lircmd even if there seems to be a good config file
+ #START_LIRCMD="false"
+diff -Naur /etc/lirc/lircd.conf /etc/lirc/lircd.conf.new
+--- /etc/lirc/lircd.conf	2013-12-08 14:36:30.232852782 +0900
++++ /etc/lirc/lircd.conf.new	2013-09-13 20:04:37.805739433 +0900
+@@ -9,3 +9,4 @@
+ #Ubuntu include directives from your selected remote and/or
+ #transmitter.
+ 
++include "/usr/share/lirc/remotes/creative/lircd.conf.creative-rm-820"
+diff -Naur /etc/lirc/lircrc /etc/lirc/lircrc.new
+--- /etc/lirc/lircrc	1970-01-01 09:00:00.000000000 +0900
++++ /etc/lirc/lircrc.new	2013-09-13 20:03:12.793743007 +0900
+@@ -0,0 +1,100 @@
++# knobmute
++# knobvol-
++# knobvol+
++
++begin
++    prog = irexec
++    remote = RM-820
++    button = knobvol-
++    repeat = 1
++    config = mpc volume -- -6
++end
++
++begin
++    prog = irexec
++    remote = RM-820
++    button = knobvol+
++    repeat = 1
++    config = mpc volume -- +6
++end
++
++begin
++    prog = irexec
++    remote = RM-820
++    button = knobmute
++    config = mpc -q toggle
++end
++
++# vol+
++# vol-
++# mute
++# power
++# menu/back
++# menu/back-long
++
++begin
++    prog = irexec
++    remote = RM-820
++    button = vol-
++    repeat = 1
++    config = mpc volume -- +6
++end
++
++begin
++    prog = irexec
++    remote = RM-820
++    button = vol+
++    repeat = 1
++    config = mpc volume -- -6
++end
++
++# up
++# down
++# left
++# right
++# ok
++
++# repeat
++# shuffle
++# return
++
++begin
++    prog = irexec
++    remote = RM-820
++    button = repeat
++    config = mpc -q repeat
++end
++
++begin
++    prog = irexec
++    remote = RM-820
++    button = shuffle
++    config = mpc -q random
++end
++
++# bb
++# bb-long
++# play-pause
++# ff
++# ff-long
++
++begin
++    prog = irexec
++    remote = RM-820
++    button = bb
++    config = mpc -q prev
++end
++
++begin
++    prog = irexec
++    remote = RM-820
++    button = play-pause
++    config = mpc -q toggle
++end
++
++begin
++    prog = irexec
++    remote = RM-820
++    button = ff
++    config = mpc -q next
++end
+diff -Naur /usr/share/lirc/remotes/creative/lircd.conf.creative-rm-820 /mnt/ubuntu/usr/share/lirc/remotes/creative/lircd.conf.creative-rm-820
+--- /usr/share/lirc/remotes/creative/lircd.conf.creative-rm-820	1970-01-01 09:00:00.000000000 +0900
++++ /usr/share/lirc/remotes/creative/lircd.conf.creative-rm-820.new	2013-09-13 20:05:29.861737243 +0900
+@@ -0,0 +1,47 @@
++#
++# /usr/share/lirc/remotes/creative/lircd.conf.creative_RM-820
++# this config file was written by netikras using
++# lircd-0.9.0 on Fri Jan 27 19:40 2012
++#
++# contributed by: "netikras" <dariuxas@gmail.com>
++#
++#
++# brand:                       Creative
++# model no. of remote control: RM-820
++# devices being controlled by this remote: Creative SB X-FI Surround 5.1
++#
++# This remote comes with the SoundBlaster X-FI Surround 5.1 USB sound card.
++#
++
++begin remote
++
++	name	RM-820
++	bits	8
++	gap		300000
++
++	begin codes
++		knobmute		0x0d
++		knobvol-		0x0f
++		knobvol+		0x10
++		vol+			0x2b
++		vol-			0x2c
++		mute			0x2a
++		menu/back		0x2d
++		menu/back-long	0x1b
++		up				0x31
++		down			0x32
++		left			0x27
++		right			0x28
++		ok				0x30
++		repeat			0x3c
++		shuffle			0x3b
++		return			0x1a
++		bb				0x33
++		bb-long			0x35
++		play-pause		0x2f
++		ff				0x34
++		ff-long			0x36
++		power			0x29
++	end codes
++
++end remote
