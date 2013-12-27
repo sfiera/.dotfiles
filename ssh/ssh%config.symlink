@@ -30,3 +30,5 @@ Host force force.stwing.org force.stwing.upenn.edu
 
 Host *
     PasswordAuthentication no
+    KbdInteractiveAuthentication no
+    ChallengeResponseAuthentication no
