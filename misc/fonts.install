@@ -44,6 +44,6 @@ if [[ -n $ANY_FONTS_INSTALLED ]]; then
     local FONTS
     case $(uname) in
         Darwin) ;;
-        Linux) fc-cache -fv ;;
+        Linux) fc-cache -fv || true ;;
     esac
 fi
