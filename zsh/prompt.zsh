@@ -102,7 +102,7 @@ function tint {
         0|1|2|3|4|5|6|7) 
             START="${START}3${COLOR}m" ;;
         *)
-            START="${START}38;05;${COLOR}m" ;;
+            START="${START}38;5;${COLOR}m" ;;
     esac
     local RESET="\e[0m"
     echo "%{$START%}$*%{$RESET%}"
