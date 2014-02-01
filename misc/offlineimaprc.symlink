@@ -1,0 +1,25 @@
+# Sample minimal config file.  Copy this to ~/.offlineimaprc and edit to
+# suit to get started fast.
+
+[general]
+accounts            = default
+pythonfile          = ~/.dotfiles/misc/offlineimap.py
+
+[Account default]
+localrepository     = local
+remoterepository    = sfz
+
+[Repository local]
+type                = Maildir
+localfolders        = ~/.mail
+sep                 = /
+
+[Repository sfz]
+type                = IMAP
+ssl                 = yes
+cert_fingerprint    = 6d1b5b5ee0180ab493b71d3b94534b5ab937d042
+remotehost          = imap.gmail.com
+remoteuser          = sfiera@sfzmail.com
+remotepassfile      = ~/.offlineimappass
+folderfilter        = folderfilter
+nametrans           = nametrans
