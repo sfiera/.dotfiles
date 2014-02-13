@@ -20,7 +20,9 @@ for machine in $@; do
     else
         echo
         cat ~/.ssh/id_rsa.pub | \
-            ssh -o PasswordAuthentication=yes $machine \
-            sh -c "cat >> ~/.ssh/authorized_keys"
+            ssh -o PasswordAuthentication=yes \
+                -o KbdInteractiveAuthentication=yes \
+                $machine \
+                sh -c "cat >> ~/.ssh/authorized_keys"
     fi
 done
