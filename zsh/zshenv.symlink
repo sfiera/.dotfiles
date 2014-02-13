@@ -24,4 +24,5 @@ if [[ -f ~/.zshenv.local ]]; then
     source ~/.zshenv.local
 fi
 
+export PYTHONPATH="$HOME/.local/lib/python2.7/site-packages"
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
