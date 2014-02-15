@@ -32,6 +32,8 @@ fi
 @ defaults write -g NSUserKeyEquivalents -dict-add "Next Panel" '"@$]"'
 
 @ defaults write com.google.Chrome NSUserKeyEquivalents -dict-add "Add to Pinboard" '"^D"'
+@ defaults write com.codeux.irc.textual NSUserKeyEquivalents -dict-add "Move Backward" '"@$["'
+@ defaults write com.codeux.irc.textual NSUserKeyEquivalents -dict-add "Move Forward" '"@$]"'
 
 @ defaults write -g NSUserReplacementItems '<array>
     <dict>
