@@ -239,6 +239,8 @@ call altr#define([
 call altr#define('%.py', '%_test.py', '%.*.py')
 
 call altr#define('%.html', '%.css', '%.js')
+
+let g:syntastic_c_compiler_options = '-fblocks'
 " }}}
 " Other files {{{
 runtime sfiera/arrows.vim
