@@ -21,8 +21,12 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'pangloss/vim-javascript'
 
-if (v:version >= 703) && has('patch584') && has('python')
-    Bundle 'Valloric/YouCompleteMe'
+if has('python')
+    if v:version >= 704
+        Bundle 'Valloric/YouCompleteMe'
+    elseif (v:version >= 703) && has('patch584')
+        Bundle 'Valloric/YouCompleteMe'
+    endif
 endif
 Bundle 'scrooloose/syntastic'
 " }}}
@@ -241,6 +245,7 @@ call altr#define('%.py', '%_test.py', '%.*.py')
 call altr#define('%.html', '%.css', '%.js')
 
 let g:syntastic_c_compiler_options = '-fblocks'
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 " }}}
 " Other files {{{
 runtime sfiera/arrows.vim
