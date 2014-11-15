@@ -1,0 +1,15 @@
+#!/usr/bin/python
+
+import subprocess
+import sys
+
+if len(sys.argv) == 1:
+    data = sys.stdin.read()
+progname, path = sys.argv
+
+sub = subprocess.Popen(["file", "-b", "--mime-type", sys.argv[1]], stdout=subprocess.PIPE)
+mime = sub.communicate()[0].strip()
+with open(path) as f:
+    data = f.read()
+
+print "data:%s;base64,%s" % (mime, data.encode("base64").replace("\n", ""))
