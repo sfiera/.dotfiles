@@ -31,4 +31,5 @@ def folderfilter(folder):
     return decode(folder) in FOLDERS
 
 def nametrans(folder):
-    return FOLDERS[decode(folder)]
+    folder = decode(folder)
+    return FOLDERS.get(folder, folder.encode("utf-8"))
