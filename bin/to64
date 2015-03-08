@@ -4,12 +4,18 @@ import subprocess
 import sys
 
 if len(sys.argv) == 1:
-    data = sys.stdin.read()
-progname, path = sys.argv
+    mime = "application/octet-stream"
+    f = sys.stdin
+elif len(sys.argv) == 2:
+    progname, path = sys.argv
+    sub = subprocess.Popen(["file", "-b", "--mime-type", path],
+                           stdout=subprocess.PIPE)
+    mime = sub.communicate()[0].strip()
+    f = open(path)
 
-sub = subprocess.Popen(["file", "-b", "--mime-type", sys.argv[1]], stdout=subprocess.PIPE)
-mime = sub.communicate()[0].strip()
-with open(path) as f:
-    data = f.read()
-
-print "data:%s;base64,%s" % (mime, data.encode("base64").replace("\n", ""))
+sys.stdout.write("data:%s;base64," % mime)
+data = f.read(1023)
+while data:
+    sys.stdout.write(data.encode("base64").replace("\n", ""))
+    data = f.read(1023)
+print
