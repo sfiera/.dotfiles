@@ -3,6 +3,7 @@
 alias ls="/bin/ls -F"
 alias si="sort | uniq"
 alias cloak="cloak --path='./%g/%b/%A/%d%k%t'"
+alias suvi="sudo -e"
 
 alias d="dirs -v"
 
