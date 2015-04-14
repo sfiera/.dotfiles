@@ -126,3 +126,11 @@ b() {
     echo "       $0 -D BRANCH..." >&2
     return 64
 }
+
+g() {
+    if [[ $# == 0 ]]; then
+        git status --short --branch
+    else
+        git "$@"
+    fi
+}
