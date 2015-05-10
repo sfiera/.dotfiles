@@ -3,6 +3,11 @@
 autoload -U compinit
 compinit -i
 
+compdef g=git
+compdef si=uniq
+compdef pd=pushd
+compdef od=popd
+
 remote_users=("$LOGNAME")
 remote_hosts=()
 remote_users_hosts=()
