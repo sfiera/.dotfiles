@@ -252,4 +252,8 @@ let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 runtime sfiera/arrows.vim
 runtime sfiera/style.vim
 " runtime sfiera/vsearch.vim
+"
+if glob(expand("~/.vimrc.local")) != ""
+    source ~/.vimrc.local
+endif
 " }}}
