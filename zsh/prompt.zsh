@@ -9,6 +9,7 @@ PS_COLORS=(
     courtain 4
     florence 5
     hauteclaire 13
+    joyeuse 13
     misericorde 6
     olifan 2
 )
