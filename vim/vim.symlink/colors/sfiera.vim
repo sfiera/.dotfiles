@@ -74,3 +74,6 @@ hi Folded       ctermbg=none    ctermfg=4
 hi FoldColumn   ctermbg=gray    ctermfg=black
 hi! link cIf0 Comment
 " }}}
+
+hi SyntasticWarning ctermbg=0 cterm=underline
+hi SyntasticError ctermbg=0 ctermfg=1 cterm=underline
