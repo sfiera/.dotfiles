@@ -605,6 +605,8 @@
 	<string></string>
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
+	<key>NeverWarnAboutShortLivedSessions_E8133925-7F11-4D73-9542-778F90625DCF</key>
+	<true/>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -4346,6 +4348,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20140112</string>
+	<string>2.1.1</string>
 </dict>
 </plist>
