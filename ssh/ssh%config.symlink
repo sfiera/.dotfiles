@@ -23,6 +23,10 @@ Host hauteclaire hauteclaire.b.sfiera.net
     HostName hauteclaire.b.sfiera.net
     ForwardAgent yes
 
+Host joyeuse joyeuse.b.sfiera.net
+    HostName joyeuse.b.sfiera.net
+    ForwardAgent yes
+
 Host force force.stwing.org force.stwing.upenn.edu
     HostName force.stwing.org
     User chpickel
