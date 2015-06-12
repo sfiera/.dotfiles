@@ -1,0 +1,27 @@
+#!/bin/zsh
+
+set -o errexit
+set -o nounset
+
+usage() {
+    echo >&2 "usage: $0 [-d]"
+    exit 64
+}
+
+base64=
+decrypt=
+if ! zparseopts -D \
+        a+=base64 \
+        d+=decrypt; then
+    usage
+fi
+
+if [[ $# != 0 ]]; then
+    usage
+fi
+
+if [[ -z "$decrypt" ]]; then
+    openssl aes-256-cbc $base64 -salt -in /dev/stdin -out /dev/stdout
+else
+    openssl aes-256-cbc -d $base64 -in /dev/stdin -out /dev/stdout
+fi
