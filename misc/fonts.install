@@ -23,22 +23,22 @@ font() {
         Montserrat-*)
             URL=$GOOGLEFONTS/montserrat/$FONT
     esac
-    curl $URL >$FONTS/$FONT
+    @ curl $URL -o $FONTS/$FONT
     ANY_FONTS_INSTALLED=1
 }
 
-@ font Inconsolata.otf
+font Inconsolata.otf
 
-@ font SourceCodePro-Black.ttf
-@ font SourceCodePro-Bold.ttf
-@ font SourceCodePro-ExtraLight.ttf
-@ font SourceCodePro-Light.ttf
-@ font SourceCodePro-Medium.ttf
-@ font SourceCodePro-Regular.ttf
-@ font SourceCodePro-Semibold.ttf
+font SourceCodePro-Black.ttf
+font SourceCodePro-Bold.ttf
+font SourceCodePro-ExtraLight.ttf
+font SourceCodePro-Light.ttf
+font SourceCodePro-Medium.ttf
+font SourceCodePro-Regular.ttf
+font SourceCodePro-Semibold.ttf
 
-@ font Montserrat-Regular.ttf
-@ font Montserrat-Bold.ttf
+font Montserrat-Regular.ttf
+font Montserrat-Bold.ttf
 
 if [[ -n $ANY_FONTS_INSTALLED ]]; then
     local FONTS
