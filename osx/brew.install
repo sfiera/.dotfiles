@@ -1,0 +1,36 @@
+#!/bin/zsh
+
+if [[ ! -f "/usr/local/bin/brew" ]]; then
+    echo -n "Install Homebrew? [n] "
+    read ANSWER
+    if [[ $ANSWER =~ ^[Yy]$ ]]; then
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+fi
+
+brew() {
+    CMD=$1; shift
+    if [[ "$CMD" == "install" ]]; then
+        PKG=$1; shift
+        if [[ ! -d "/usr/local/Cellar/$PKG" ]]; then
+            /usr/local/bin/brew install $PKG $*
+        fi
+    else
+        /usr/local/bin/brew $CMD $*
+    fi
+}
+
+if [[ -f "/usr/local/bin/brew" ]]; then
+    @ brew tap homebrew/dupes
+    @ brew install imagemagick
+    @ brew install librsvg --without-gtk+ --without-x11
+    @ brew install moreutils
+    @ brew install mpc
+    @ brew install ninja
+    @ brew install optipng
+    @ brew install python
+    @ brew install rsync
+    @ brew install sassc
+    @ brew install youtube-dl
+    @ brew install zsh
+fi
