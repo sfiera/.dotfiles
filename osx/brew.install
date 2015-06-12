@@ -8,29 +8,32 @@ if [[ ! -f "/usr/local/bin/brew" ]]; then
     fi
 fi
 
-brew() {
-    CMD=$1; shift
-    if [[ "$CMD" == "install" ]]; then
-        PKG=$1; shift
-        if [[ ! -d "/usr/local/Cellar/$PKG" ]]; then
-            /usr/local/bin/brew install $PKG $*
-        fi
-    else
-        /usr/local/bin/brew $CMD $*
+brew_install() {
+    PKG=$1; shift
+    if [[ ! -d "/usr/local/Cellar/$PKG" ]]; then
+        @ brew install $PKG $*
+    fi
+}
+
+brew_tap() {
+    TAP=$1; shift
+    DIR=${TAP/\//\/homebrew-}
+    if [[ ! -d "/usr/local/Library/Taps/$DIR" ]]; then
+        @ brew tap $TAP $*
     fi
 }
 
 if [[ -f "/usr/local/bin/brew" ]]; then
-    @ brew tap homebrew/dupes
-    @ brew install imagemagick
-    @ brew install librsvg --without-gtk+ --without-x11
-    @ brew install moreutils
-    @ brew install mpc
-    @ brew install ninja
-    @ brew install optipng
-    @ brew install python
-    @ brew install rsync
-    @ brew install sassc
-    @ brew install youtube-dl
-    @ brew install zsh
+    brew_tap homebrew/dupes
+    brew_install imagemagick
+    brew_install librsvg --without-gtk+ --without-x11
+    brew_install moreutils
+    brew_install mpc
+    brew_install ninja
+    brew_install optipng
+    brew_install python
+    brew_install rsync
+    brew_install sassc
+    brew_install youtube-dl
+    brew_install zsh
 fi
