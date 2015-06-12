@@ -7,10 +7,8 @@ alias suvi="sudo -e"
 
 alias d="dirs -v"
 
-@() {
-    echo "$@"
-    "$@"
-}
+function $ { echo $ $*; $* }
+function @ { echo $*; $* }
 
 # Preserve directory stack across exec and into subshelss
 update_dirs() {
