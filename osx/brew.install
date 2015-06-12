@@ -25,6 +25,7 @@ brew_tap() {
 
 if [[ -f "/usr/local/bin/brew" ]]; then
     brew_tap homebrew/dupes
+    brew_install dict
     brew_install imagemagick
     brew_install librsvg --without-gtk+ --without-x11
     brew_install moreutils
