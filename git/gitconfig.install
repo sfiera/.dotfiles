@@ -1,22 +1,30 @@
 #!/bin/zsh
 
-@ git config --global user.name         "Chris Pickel"
-@ git config --global user.email        "sfiera@sfzmail.com"
+gc() {
+    NAME=$1; shift
+    VALUE=$1; shift
+    if [[ $(git config --global $NAME) != $VALUE ]]; then
+        @ git config --global $NAME $VALUE
+    fi
+}
 
-@ git config --global core.excludesfile "~/.dotfiles/git/exclude"
-@ git config --global core.whitespace   "trailing-space,space-before-tab"
-@ git config --global color.ui          "auto"
-@ git config --global push.default      "matching"
-@ git config --global diff.algorithm    "patience"
+gc user.name         "Chris Pickel"
+gc user.email        "sfiera@sfzmail.com"
 
-@ git config --global alias.man         "help"
-@ git config --global alias.st          "status"
-@ git config --global alias.ci          "commit"
-@ git config --global alias.co          "checkout"
-@ git config --global alias.up          "pull"
-@ git config --global alias.fold        "commit --amend -CHEAD --reset-author"
-@ git config --global alias.diffstat    "diff --stat"
-@ git config --global alias.trim        "clean -Xfd"
-@ git config --global alias.ff          "merge --ff-only"
-@ git config --global alias.mm          "merge --no-ff"
-@ git config --global alias.lg          "log --format=oneline --abbrev-commit"
+gc core.excludesfile "~/.dotfiles/git/exclude"
+gc core.whitespace   "trailing-space,space-before-tab"
+gc color.ui          "auto"
+gc push.default      "matching"
+gc diff.algorithm    "patience"
+
+gc alias.man         "help"
+gc alias.st          "status"
+gc alias.ci          "commit"
+gc alias.co          "checkout"
+gc alias.up          "pull"
+gc alias.fold        "commit --amend -CHEAD --reset-author"
+gc alias.diffstat    "diff --stat"
+gc alias.trim        "clean -Xfd"
+gc alias.ff          "merge --ff-only"
+gc alias.mm          "merge --no-ff"
+gc alias.lg          "log --format=oneline --abbrev-commit"
