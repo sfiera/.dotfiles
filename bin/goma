@@ -5,24 +5,29 @@ set -o nounset
 
 PROGNAME=$0
 usage() {
-    echo >&2 "usage: $PROGNAME [-ad]"
+    echo >&2 "usage: $PROGNAME [-ad] [in [out]]"
     exit 64
 }
 
 base64=
 decrypt=
 if ! zparseopts -D \
-        a+=base64 \
-        d+=decrypt; then
+        a=base64 \
+        d=decrypt; then
     usage
 fi
 
-if [[ $# != 0 ]]; then
-    usage
-fi
+in=()
+out=()
+case $# in
+2)  out=(-out $2) ;&
+1)  in=(-in $1) ;&
+0)  ;;
+*)  usage ;;
+esac
 
 if [[ -z "$decrypt" ]]; then
-    openssl aes-256-cbc $base64 -salt -in /dev/stdin -out /dev/stdout
+    openssl aes-256-cbc $base64 -salt $in $out
 else
-    openssl aes-256-cbc -d $base64 -in /dev/stdin -out /dev/stdout
+    openssl aes-256-cbc -d $base64 $in $out
 fi
