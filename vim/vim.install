@@ -1,10 +1,10 @@
 #!/bin/zsh
 
 VUNDLE=~/.dotfiles/vim/vim.symlink/bundle/vundle
-if [[ -e $VUNDLE ]]; then
-    echo "$VUNDLE exists; not overwriting."
-else
+if [[ ! -e $VUNDLE ]]; then
     @ git clone https://github.com/gmarik/vundle.git $VUNDLE
     @ vundle install
 fi
-@ mkdir -p ~/.vimswp
+if [[ ! -e ~/.vimswp ]]; then
+    @ mkdir ~/.vimswp
+fi
