@@ -26,4 +26,3 @@ fi
 
 export PYTHONPATH="$HOME/.local/lib/python2.7/site-packages"
 export PYTHONSTARTUP="$HOME/.pythonrc.py"
-export GOPATH="$HOME/.go"
