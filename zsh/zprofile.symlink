@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+# Add common path locations
+declare -U path
+path=(~/bin ~/.local/bin $ZSH/bin /opt/local/bin /opt/local/sbin $path)
+export PATH
