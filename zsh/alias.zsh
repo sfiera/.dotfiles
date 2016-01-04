@@ -4,11 +4,13 @@ alias ls="/bin/ls -F"
 alias si="sort | uniq"
 alias cloak="cloak --path='./%g/%b/%A/%d%k%t'"
 alias suvi="sudo -e"
+alias pk="pkill -fI"
 
 alias d="dirs -v"
 
 function $ { echo $ $*; $* }
 function @ { echo $*; $* }
+function lsn { ls $* | sort -n | column }
 
 # Preserve directory stack across exec and into subshelss
 update_dirs() {
