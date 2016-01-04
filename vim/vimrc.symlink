@@ -73,6 +73,8 @@ hi! link Label Statement
 set notimeout
 set ttimeout
 set ttimeoutlen=133
+
+set completeopt=menuone
 " }}}
 " Key bindings {{{
 
@@ -170,9 +172,26 @@ noremap gV <C-V>
 
 noremap * <NOP>
 noremap # <NOP>
-noremap gg <NOP>
 
+noremap gg :call ShowHideDoc()<CR>
 noremap gz :YcmDiags<CR>
+
+function! ShowHideDoc()
+python << EOF
+import ycm.vimsupport
+old = None
+if ycm.vimsupport.JumpToPreviewWindow():
+    old = vim.current.buffer[:]
+    ycm.vimsupport.JumpToPreviousWindow()
+vim.command("YcmCompleter GetDoc")
+new = None
+if ycm.vimsupport.JumpToPreviewWindow():
+    new = vim.current.buffer[:]
+    ycm.vimsupport.JumpToPreviousWindow()
+if old == new:
+    vim.command("pclose")
+EOF
+endfunction
 " }}}
 
 " z* {{{
