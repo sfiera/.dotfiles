@@ -245,6 +245,7 @@ call altr#define('%.py', '%_test.py', '%.*.py')
 
 call altr#define('%.html', '%.css', '%.js')
 
+let g:ycm_global_ycm_extra_conf = '~/.dotfiles/vim/ycm.py'
 let g:syntastic_c_compiler_options = '-fblocks'
 " }}}
 " Other files {{{
