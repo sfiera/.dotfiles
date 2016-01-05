@@ -173,25 +173,8 @@ noremap gV <C-V>
 noremap * <NOP>
 noremap # <NOP>
 
-noremap gg :call ShowHideDoc()<CR>
+noremap gg :ShowHideDoc<CR>
 noremap gz :YcmDiags<CR>
-
-function! ShowHideDoc()
-python << EOF
-import ycm.vimsupport
-old = None
-if ycm.vimsupport.JumpToPreviewWindow():
-    old = vim.current.buffer[:]
-    ycm.vimsupport.JumpToPreviousWindow()
-vim.command("YcmCompleter GetDoc")
-new = None
-if ycm.vimsupport.JumpToPreviewWindow():
-    new = vim.current.buffer[:]
-    ycm.vimsupport.JumpToPreviousWindow()
-if old == new:
-    vim.command("pclose")
-EOF
-endfunction
 " }}}
 
 " z* {{{
@@ -239,6 +222,25 @@ vnoremap <silent>if ggoG$
 command! -bang Q :qall<bang>
 command! -bang W :wall<bang>
 command! -bang WQ :wqall<bang>
+
+command! ShowHideDoc :call ShowHideDoc()
+
+function! ShowHideDoc()
+python << EOF
+import ycm.vimsupport
+old = None
+if ycm.vimsupport.JumpToPreviewWindow():
+    old = vim.current.buffer[:]
+    ycm.vimsupport.JumpToPreviousWindow()
+vim.command("YcmCompleter GetDoc")
+new = None
+if ycm.vimsupport.JumpToPreviewWindow():
+    new = vim.current.buffer[:]
+    ycm.vimsupport.JumpToPreviousWindow()
+if old == new:
+    vim.command("pclose")
+EOF
+endfunction
 " }}}
 " Plugin settings {{{
 call altr#remove_all()
