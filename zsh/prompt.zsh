@@ -12,6 +12,8 @@ PS_COLORS=(
     joyeuse 13
     misericorde 6
     olifan 2
+    baptism 6
+    flamberge 1
 )
 
 DIRTY_COLOR=${DIRTY_COLOR-1}
