@@ -47,11 +47,24 @@ if [[ -f "/usr/local/bin/brew" ]]; then
     brew_install zsh
 
     brew_cask_install bartender
+    brew_cask_install bonjour-browser
     brew_cask_install brogue
     brew_cask_install cakebrew
+    brew_cask_install cloak
+    brew_cask_install flux
+    brew_cask_install google-chrome
+    brew_cask_install google-drive
+    brew_cask_install handbrake
+    brew_cask_install iterm2
     brew_cask_install macpass
     brew_cask_install macvim
+    brew_cask_install makemkv
+    brew_cask_install minecraft
+    brew_cask_install mplayer-osx-extended
+    brew_cask_install seil
     brew_cask_install spectacle
+    brew_cask_install steam
     brew_cask_install theremin
     brew_cask_install wmail
+    brew_cask_install zoom
 fi
