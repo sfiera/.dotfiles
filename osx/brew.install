@@ -23,8 +23,16 @@ brew_tap() {
     fi
 }
 
+brew_cask_install() {
+    PKG=$1; shift
+    if [[ ! -d "/opt/homebrew-cask/Caskroom/$PKG" ]]; then
+        @ brew cask install $PKG $*
+    fi
+}
+
 if [[ -f "/usr/local/bin/brew" ]]; then
     brew_tap homebrew/dupes
+
     brew_install dict
     brew_install imagemagick
     brew_install librsvg --without-gtk+ --without-x11
@@ -37,4 +45,13 @@ if [[ -f "/usr/local/bin/brew" ]]; then
     brew_install sassc
     brew_install youtube-dl
     brew_install zsh
+
+    brew_cask_install bartender
+    brew_cask_install brogue
+    brew_cask_install cakebrew
+    brew_cask_install macpass
+    brew_cask_install macvim
+    brew_cask_install spectacle
+    brew_cask_install theremin
+    brew_cask_install wmail
 fi
