@@ -11,6 +11,10 @@ export DIFF="git diff --no-index"
 # UTF-8 for everything, all the time.
 export LC_ALL="en_US.UTF-8"
 
+declare -U path
+path=(~/bin ~/.local/bin $ZSH/bin /opt/local/bin /opt/local/sbin $path)
+export PATH
+
 fpath=($ZSH/zsh/fpath $fpath)
 
 export MANPATH=""
