@@ -61,7 +61,7 @@ def FlagsForFile(f):
 
     flags = []
     flags.extend(config.get("cflags", []))
-    if ext in [".cpp", ".cc", ".cxx"]:
+    if ext in [".hpp", ".cpp", ".hh", ".cc", ".hxx", ".cxx"]:
         flags.extend(config.get("cflags_cc", []))
     else:
         flags.extend(config.get("cflags_c", []))
