@@ -1,5 +1,10 @@
 #!/bin/zsh
 
+if [ "$(uname)" != "Darwin" ]; then
+    echo "not darwin; skipping osx/brew.install."
+    return
+fi
+
 if [[ ! -f "/usr/local/bin/brew" ]]; then
     echo -n "Install Homebrew? [n] "
     read ANSWER
