@@ -12,11 +12,17 @@ alias MAC=true
 alias WORK=true
 
 if [[ ! -f self ]]; then
-    echo -n "platform [MAC]: "
-    read PLATFORM
+    if [[ $(uname) == "Darwin" ]]; then
+        echo -n "platform [MAC]: "
+        read PLATFORM
+        echo ${PLATFORM:-MAC} >> self
+    else
+        echo -n "platform [LINUX]: "
+        read PLATFORM
+        echo ${PLATFORM:-LINUX} >> self
+    fi
     echo -n "place [HOME]: "
     read PLACE
-    echo ${PLATFORM:-MAC} >> self
     echo ${PLACE:-HOME} >> self
 fi
 cat self | while read LINE; do
