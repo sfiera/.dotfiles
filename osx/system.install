@@ -1,27 +1,54 @@
 #!/bin/zsh
 
-if [ "$(uname)" != "Darwin" ]; then
-    echo "not darwin; skipping osx/system.install."
-    return
-fi
+LINUX return
 
 #/usr/bin/osascript $(dirname "$0")/system.applescript
 
-@ defaults write -g AppleEnableMenuBarTransparency -bool false
-@ defaults write -g AppleShowAllExtensions -bool true
-@ defaults write -g AppleShowScrollBars Always
+pref() {
+    if [[ $# == 4 ]]; then
+        TYPE=$3
+        VALUE=$4
+    elif [[ $# == 3 ]]; then
+        TYPE=-string
+        VALUE=$3
+    else
+        return 64
+    fi
+    DOMAIN=$1
+    KEY=$2
 
-@ defaults write com.apple.dock autohide -bool true
-@ defaults write com.apple.dock magnification -bool false
-@ defaults write com.apple.dock orientation left
-@ defaults write com.apple.dock tilesize -int 128
+    if defaults read $DOMAIN $KEY >/dev/null 2>&1; then
+        CURR="$(defaults read $DOMAIN $KEY)"
+        if [[ $TYPE == -bool ]]; then
+            case $CURR in
+                0) CURR=false ;;
+                1) CURR=true ;;
+                *) ;;
+            esac
+        fi
+        if [[ $CURR == $VALUE ]]; then
+            return
+        fi
+    fi
 
-@ defaults write com.apple.screensaver askForPassword -int 1
-@ defaults write com.apple.screensaver askForPasswordDelay -int 5
+    @ defaults write $DOMAIN $KEY $TYPE $VALUE
+}
 
-@ defaults write com.apple.universalaccess stickyKey -bool true
-@ defaults write com.apple.universalaccess stickyKeyBeepOnModifier -bool false
+pref -g AppleEnableMenuBarTransparency -bool false
+pref -g AppleShowAllExtensions -bool true
+pref -g AppleShowScrollBars Always
 
-@ defaults write com.apple.menuextra.clock IsAnalog -bool true
+pref com.apple.dock autohide -bool true
+pref com.apple.dock magnification -bool false
+pref com.apple.dock orientation left
+pref com.apple.dock tilesize -int 128
 
-@ defaults write com.googlecode.iterm2 PrefsCustomFolder /Users/sfiera/.dotfiles/osx/prefs
+pref com.apple.screensaver askForPassword -int 1
+pref com.apple.screensaver askForPasswordDelay -int 5
+
+pref com.apple.universalaccess stickyKey -bool true
+pref com.apple.universalaccess stickyKeyBeepOnModifier -bool false
+
+pref com.apple.menuextra.clock IsAnalog -bool true
+
+pref com.googlecode.iterm2 PrefsCustomFolder /Users/sfiera/.dotfiles/osx/prefs
