@@ -51,6 +51,7 @@ if [[ -f "/usr/local/bin/brew" ]]; then
     brew_install sassc
     brew_install youtube-dl
     brew_install zsh
+    @ brew linkapps
 
     brew_cask_install bartender
     brew_cask_install bonjour-browser
