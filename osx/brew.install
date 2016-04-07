@@ -41,6 +41,7 @@ if [[ -f "/usr/local/bin/brew" ]]; then
     brew_install dict
     brew_install imagemagick
     brew_install librsvg --without-gtk+ --without-x11
+    brew_install macvim
     brew_install moreutils
     brew_install mpc
     brew_install ninja
@@ -62,7 +63,6 @@ if [[ -f "/usr/local/bin/brew" ]]; then
     brew_cask_install handbrake
     brew_cask_install iterm2
     brew_cask_install macpass
-    brew_cask_install macvim
     brew_cask_install makemkv
     brew_cask_install minecraft
     brew_cask_install mplayer-osx-extended
