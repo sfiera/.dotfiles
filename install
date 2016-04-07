@@ -15,20 +15,23 @@ alias SERVER=true
 
 if [[ ! -f self ]]; then
     if [[ $(uname) == "Darwin" ]]; then
-        echo -n "platform [MAC]: "
-        read PLATFORM
-        echo ${PLATFORM:-MAC} >> self
+        DPLATFORM=MAC
+        DPLACE=HOME
+        DTYPE=DESKTOP
     else
-        echo -n "platform [LINUX]: "
-        read PLATFORM
-        echo ${PLATFORM:-LINUX} >> self
+        DPLATFORM=LINUX
+        DPLACE=HOME
+        DTYPE=SERVER
     fi
-    echo -n "place [HOME]: "
+    echo -n "platform [$DPLATFORM]: "
+    read PLATFORM
+    echo ${PLATFORM:-$DPLATFORM} >> self
+    echo -n "place [$DPLACE]: "
     read PLACE
-    echo ${PLACE:-HOME} >> self
-    echo -n "type [DESKTOP]: "
+    echo ${PLACE:-$DPLACE} >> self
+    echo -n "type [$DTYPE]: "
     read TYPE
-    echo ${TYPE:-DESKTOP} >> self
+    echo ${TYPE:-$DTYPE} >> self
 fi
 cat self | while read LINE; do
     alias $LINE=
