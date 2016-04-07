@@ -303,26 +303,28 @@ python vim.command('return "%s"' % InsertTab())
 endfunction
 " }}}
 " Plugin settings {{{
-call altr#remove_all()
+if filereadable(expand("~/.vim/bundle/vim-altr/.git/HEAD"))
+    call altr#remove_all()
 
-call altr#define([
-\   'include/%.h',  'include/%.hh',  'include/%.hpp',
-\   'src/%.h',      'src/%.hh',      'src/%.hpp',
-\   'src/%.c',      'src/%.cc',      'src/%.cpp',      'src/%.m',      'src/%.mm',
-\   'src/%_test.c', 'src/%_test.cc', 'src/%_test.cpp', 'src/%_test.m', 'src/%_test.mm',
-\   'src/%.*.c',    'src/%.*.cc',    'src/%.*.cpp',    'src/%.*.m',    'src/%.*.mm',
-\   ])
+    call altr#define([
+    \   'include/%.h',  'include/%.hh',  'include/%.hpp',
+    \   'src/%.h',      'src/%.hh',      'src/%.hpp',
+    \   'src/%.c',      'src/%.cc',      'src/%.cpp',      'src/%.m',      'src/%.mm',
+    \   'src/%_test.c', 'src/%_test.cc', 'src/%_test.cpp', 'src/%_test.m', 'src/%_test.mm',
+    \   'src/%.*.c',    'src/%.*.cc',    'src/%.*.cpp',    'src/%.*.m',    'src/%.*.mm',
+    \   ])
 
-call altr#define([
-\   '%.h',      '%.hh',      '%.hpp',
-\   '%.c',      '%.cc',      '%.cpp',      '%.m',      '%.mm',
-\   '%_test.c', '%_test.cc', '%_test.cpp', '%_test.m', '%_test.mm',
-\   '%.*.c',    '%.*.cc',    '%.*.cpp',    '%.*.m',    '%.test.mm',
-\   ])
+    call altr#define([
+    \   '%.h',      '%.hh',      '%.hpp',
+    \   '%.c',      '%.cc',      '%.cpp',      '%.m',      '%.mm',
+    \   '%_test.c', '%_test.cc', '%_test.cpp', '%_test.m', '%_test.mm',
+    \   '%.*.c',    '%.*.cc',    '%.*.cpp',    '%.*.m',    '%.test.mm',
+    \   ])
 
-call altr#define('%.py', '%_test.py', '%.*.py')
+    call altr#define('%.py', '%_test.py', '%.*.py')
 
-call altr#define('%.html', '%.css', '%.js')
+    call altr#define('%.html', '%.css', '%.js')
+endif
 
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []

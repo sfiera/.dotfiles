@@ -1,7 +1,12 @@
 filetype plugin indent on
 set tabstop=4
-set softtabstop=-1
-set shiftwidth=0
+if v:version >= 704
+    set softtabstop=-1
+    set shiftwidth=0
+else
+    set softtabstop=4
+    set shiftwidth=4
+endif
 set nosmarttab
 set expandtab
 set autoindent
