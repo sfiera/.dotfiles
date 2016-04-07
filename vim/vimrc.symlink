@@ -326,6 +326,7 @@ if filereadable(expand("~/.vim/bundle/vim-altr/.git/HEAD"))
     call altr#define('%.html', '%.css', '%.js')
 endif
 
+let g:ycm_check_if_ycm_core_present = 0
 let g:ycm_key_list_select_completion = []
 let g:ycm_key_list_previous_completion = []
 let g:ycm_global_ycm_extra_conf = '~/.dotfiles/vim/ycm.py'
