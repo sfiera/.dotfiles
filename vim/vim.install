@@ -3,7 +3,7 @@
 VUNDLE=~/.dotfiles/vim/vim.symlink/bundle/vundle
 if [[ ! -e $VUNDLE ]]; then
     @ git clone https://github.com/gmarik/vundle.git $VUNDLE
-    @ vundle install
+    @ bin/vundle install
 fi
 if [[ ! -e ~/.vimswp ]]; then
     @ mkdir ~/.vimswp
