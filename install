@@ -5,6 +5,24 @@ function @ {
     $@
 }
 
+alias ALL=
+alias LINUX=true
+alias HOME=true
+alias MAC=true
+alias WORK=true
+
+if [[ ! -f self ]]; then
+    echo -n "platform [MAC]: "
+    read PLATFORM
+    echo -n "place [HOME]: "
+    read PLACE
+    echo ${PLATFORM:-MAC} >> self
+    echo ${PLACE:-HOME} >> self
+fi
+cat self | while read LINE; do
+    alias $LINE=
+done
+
 setopt ERR_EXIT
 export ZSH=$(dirname $0)
 for config_file ($ZSH/**/*.install) source $config_file

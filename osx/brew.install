@@ -1,9 +1,6 @@
 #!/bin/zsh
 
-if [ "$(uname)" != "Darwin" ]; then
-    echo "not darwin; skipping osx/brew.install."
-    return
-fi
+LINUX return
 
 if [[ ! -f "/usr/local/bin/brew" ]]; then
     echo -n "Install Homebrew? [n] "
@@ -15,16 +12,17 @@ fi
 
 brew_install() {
     PKG=$1; shift
-    if [[ ! -d "/usr/local/Cellar/$PKG" ]]; then
+    NAME=${PKG/*\//}
+    if [[ ! -d "/usr/local/Cellar/$NAME" ]]; then
         @ brew install $PKG $*
     fi
 }
 
-brew_tap() {
-    TAP=$1; shift
-    DIR=${TAP/\//\/homebrew-}
-    if [[ ! -d "/usr/local/Library/Taps/$DIR" ]]; then
-        @ brew tap $TAP $*
+brew_linkapp() {
+    PKG=$1; shift
+    APP=$1; shift
+    if [[ ! -d "/Applications/$APP" ]]; then
+        @ brew linkapps $PKG
     fi
 }
 
@@ -35,42 +33,44 @@ brew_cask_install() {
     fi
 }
 
-if [[ -f "/usr/local/bin/brew" ]]; then
-    brew_tap homebrew/dupes
-
-    brew_install dict
-    brew_install imagemagick
-    brew_install librsvg --without-gtk+ --without-x11
-    brew_install macvim
-    brew_install moreutils
-    brew_install mpc
-    brew_install ninja
-    brew_install optipng
-    brew_install python
-    brew_install rsync
-    brew_install sassc
-    brew_install youtube-dl
-    brew_install zsh
-    @ brew linkapps
-
-    brew_cask_install bartender
-    brew_cask_install bonjour-browser
-    brew_cask_install brogue
-    brew_cask_install cakebrew
-    brew_cask_install cloak
-    brew_cask_install flux
-    brew_cask_install google-chrome
-    brew_cask_install google-drive
-    brew_cask_install handbrake
-    brew_cask_install iterm2
-    brew_cask_install macpass
-    brew_cask_install makemkv
-    brew_cask_install minecraft
-    brew_cask_install mplayer-osx-extended
-    brew_cask_install seil
-    brew_cask_install spectacle
-    brew_cask_install steam
-    brew_cask_install theremin
-    brew_cask_install wmail
-    brew_cask_install zoom
+if [[ ! -f "/usr/local/bin/brew" ]]; then
+    return
 fi
+
+ALL   brew_install dict
+HOME  brew_install imagemagick
+HOME  brew_install librsvg --without-gtk+ --without-x11
+ALL   brew_install macvim
+ALL   brew_install moreutils
+ALL   brew_install mpc
+ALL   brew_install ninja
+HOME  brew_install optipng
+ALL   brew_install python
+HOME  brew_install sassc
+HOME  brew_install youtube-dl
+ALL   brew_install zsh
+
+ALL   brew_install homebrew/dupes/rsync
+
+ALL   brew_linkapp macvim MacVim.app
+
+ALL   brew_cask_install bartender
+ALL   brew_cask_install bonjour-browser
+ALL   brew_cask_install brogue
+ALL   brew_cask_install cakebrew
+HOME  brew_cask_install cloak
+ALL   brew_cask_install flux
+HOME  brew_cask_install google-chrome
+HOME  brew_cask_install google-drive
+HOME  brew_cask_install handbrake
+HOME  brew_cask_install iterm2
+ALL   brew_cask_install macpass
+HOME  brew_cask_install makemkv
+HOME  brew_cask_install minecraft
+HOME  brew_cask_install mplayer-osx-extended
+ALL   brew_cask_install seil
+ALL   brew_cask_install spectacle
+HOME  brew_cask_install steam
+ALL   brew_cask_install theremin
+ALL   brew_cask_install wmail
+ALL   brew_cask_install zoom
