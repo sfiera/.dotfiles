@@ -48,6 +48,8 @@ set cursorline
 set scrolloff=5
 set scrolljump=-25
 
+set nojoinspaces
+
 set numberwidth=8
 
 set hlsearch
@@ -141,7 +143,7 @@ noremap S ,
 nnoremap <C-R> <NOP>
 noremap  @ <NOP>
 noremap , <NOP>
-noremap ' <NOP>
+noremap ' J
 " }}}
 
 " Make <Space> useful {{{
