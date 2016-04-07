@@ -52,7 +52,7 @@ hi DiffDelete   ctermbg=cyan
 hi DiffDelete   ctermfg=black
 " }}}
 " Interface {{{
-hi NonText      ctermbg=232     ctermfg=232
+hi NonText      ctermfg=10      ctermbg=8
 hi ColorColumn  ctermbg=232
 
 hi StatusLine   ctermbg=14      ctermfg=0       cterm=none
