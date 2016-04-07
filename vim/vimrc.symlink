@@ -330,10 +330,6 @@ let g:ycm_global_ycm_extra_conf = '~/.dotfiles/vim/ycm.py'
 let g:syntastic_c_compiler_options = '-fblocks'
 " }}}
 " Other files {{{
-runtime sfiera/arrows.vim
-runtime sfiera/style.vim
-" runtime sfiera/vsearch.vim
-"
 if glob(expand("~/.vimrc.local")) != ""
     source ~/.vimrc.local
 endif
