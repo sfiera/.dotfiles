@@ -6,7 +6,7 @@ set nosmarttab
 set expandtab
 set autoindent
 set cindent
-set cinoptions=g2,:2,=2,l1,h2
+set cinoptions=l1,N-s,(0,W2s
 set textwidth=99
 
 set encoding=utf-8
