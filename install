@@ -10,6 +10,8 @@ alias LINUX=true
 alias HOME=true
 alias MAC=true
 alias WORK=true
+alias DESKTOP=true
+alias SERVER=true
 
 if [[ ! -f self ]]; then
     if [[ $(uname) == "Darwin" ]]; then
@@ -24,6 +26,9 @@ if [[ ! -f self ]]; then
     echo -n "place [HOME]: "
     read PLACE
     echo ${PLACE:-HOME} >> self
+    echo -n "type [DESKTOP]: "
+    read TYPE
+    echo ${TYPE:-DESKTOP} >> self
 fi
 cat self | while read LINE; do
     alias $LINE=

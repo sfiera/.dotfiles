@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+SERVER return
+
 local FONTS
 case $(uname) in
     Darwin) FONTS=~/Library/Fonts ;;
