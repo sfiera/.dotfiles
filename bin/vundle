@@ -16,5 +16,5 @@ case $COMMAND in
     install)    vim +BundleInstall +qall ;;
     update)     vim +BundleInstall! +qall ;;
     clean)      vim +BundleClean +qall ;;
-    *) ;;
+    *)          usage ;;
 esac
