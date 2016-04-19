@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+VIMS=(
+    /Applications/MacVim.app/Contents/MacOS/Vim 
+    ~/Applications/MacVim.app/Contents/MacOS/Vim 
+    /usr/local/bin/vim
+    /usr/bin/vim
+)
+for VIM in $VIMS; do
+    if [[ -f $VIM ]]; then
+        exec $VIM $@
+    fi
+done
+echo >&2 "$0: not installed"
