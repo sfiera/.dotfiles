@@ -21,6 +21,10 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tikhomirov/vim-glsl'
+Bundle 'google/vim-maktaba'
+Bundle 'google/vim-glaive'
+Bundle 'google/vim-codefmt'
+Bundle 'scrooloose/syntastic'
 
 if has('python')
     if v:version >= 704
@@ -29,7 +33,6 @@ if has('python')
         Bundle 'Valloric/YouCompleteMe'
     endif
 endif
-Bundle 'scrooloose/syntastic'
 " }}}
 " Options {{{
 syntax enable
