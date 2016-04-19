@@ -55,7 +55,7 @@ hi DiffDelete   ctermfg=black
 hi NonText      ctermfg=10      ctermbg=8
 hi ColorColumn  ctermbg=232
 
-hi StatusLine   ctermbg=14      ctermfg=0       cterm=none
+hi StatusLine                                   cterm=reverse
 hi StatusLineNC ctermbg=blue    ctermfg=black
 hi CursorLine   ctermbg=black                   cterm=none
 hi TablineSel   ctermbg=0       ctermfg=3       cterm=none
