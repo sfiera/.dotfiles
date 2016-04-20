@@ -102,7 +102,7 @@ function tint {
     if [[ $REVERSE != 0 ]]; then
         START="${START}7;"
     fi
-    START="${START}38;5;${COLOR}m" ;;
+    START="${START}38;5;${COLOR}m"
     local RESET="\e[0m"
     echo "%{$START%}$*%{$RESET%}"
 }
