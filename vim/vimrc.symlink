@@ -24,6 +24,7 @@ Bundle 'tikhomirov/vim-glsl'
 Bundle 'google/vim-maktaba'
 Bundle 'google/vim-glaive'
 Bundle 'google/vim-codefmt'
+Bundle 'https://chromium.googlesource.com/chromium/src/tools/gn', {'rtp': 'misc/vim'}
 Bundle 'scrooloose/syntastic'
 
 if has('python')
