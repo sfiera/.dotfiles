@@ -14,6 +14,7 @@ PS_COLORS=(
     olifan 2
     baptism 6
     flamberge 1
+    sauvagine 3
 )
 
 DIRTY_COLOR=${DIRTY_COLOR-1}
