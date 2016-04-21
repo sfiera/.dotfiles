@@ -1,110 +1,158 @@
-import gyp.common
-import gyp.input
+import itertools
 import os
-
-DEFS = {
-    'COVERAGE': 0,
-    'INTERMEDIATE_DIR': 'out/cur',
-    'MACOSX_VERSION': '10.11',
-    'BUNDLED_DISCID': 1,
-    'BUNDLED_FLAC': 1,
-    'BUNDLED_LAME': 1,
-    'BUNDLED_MAD': 1,
-    'BUNDLED_MB5': 1,
-    'BUNDLED_MP4V2': 1,
-    'BUNDLED_NEON': 1,
-    'BUNDLED_OGG': 1,
-    'BUNDLED_VORBIS': 1,
-    'OS': gyp.common.GetFlavor({}),
-}
-
-GENERATOR_INPUT_INFO = {
-    'path_sections': [],
-    'generator_filelist_paths': None,
-    'generator_supports_multiple_toolsets': False,
-    'extra_sources_for_rules': [],
-    'generator_wants_static_library_dependencies_adjusted': False,
-    'non_configuration_keys': [],
-}
-
-INCLUDES=["defaults.gypi"]
+import shlex
+import subprocess
 
 
 def FlagsForFile(f):
-    _, ext = os.path.splitext(f)
-    gyp_file = find_gyp(f)
-    root = os.path.dirname(gyp_file)
-    flat_list, targets, data = gyp.input.Load(
-            build_files=[gyp_file], variables=DEFS, includes=INCLUDES,
-            depth=root, generator_input_info=GENERATOR_INPUT_INFO,
-            check=False, circular_check=True, duplicate_basename_check=True,
-            parallel=False, root_targets={})
-
-    # Find a target that includes `f` and grab its configurations.
-    # If we can't find anything, no flags.
-    configs = None
-    for k, v in targets.iteritems():
-        gyp_file = k.split(":")[0]
-        gyp_root = os.path.dirname(gyp_file)
-        rel_f = os.path.relpath(f, gyp_root)
-        if rel_f in v.get("sources", []):
-            configs = v["configurations"]
-            break
-    if configs is None:
-        return {}
-
-    # Prefer a configuration named "dev" or "Default" if there is one.
-    for key in ["dev", "Default", next(iter(configs))]:
-        if key in configs:
-            config = configs[key]
-            break
-
-    flags = []
-    flags.extend(config.get("cflags", []))
-    if ext in [".hpp", ".cpp", ".hh", ".cc", ".hxx", ".cxx"]:
-        flags.extend(config.get("cflags_cc", []))
-    else:
-        flags.extend(config.get("cflags_c", []))
-    flags.extend("-I" + os.path.join(gyp_root, x) for x in config.get("include_dirs", []))
-    flags.extend("-D" + x for x in config.get("defines", []))
-    if DEFS["OS"] == "mac":
-        sdk = config.get("xcode_settings", {}).get("SDKROOT")
-        if not sdk:
-            sdk = "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk"
-        flags.extend(["-isysroot", sdk])
-
     return {
-        "flags": flags,
+        "flags": get_flags(f),
         "do_cache": True,
     }
 
 
-def find_gyp(f):
-    f = os.path.abspath(f)
-    dirname = os.path.dirname(f)
-    while dirname != "/":
-        if os.path.isdir(os.path.join(dirname, ".git")):
-            gyps = [x for x in os.listdir(dirname) if x.endswith(".gyp")]
-            if len(gyps) == 1:
-                return os.path.join(dirname, gyps[0])
-            return None
-        dirname = os.path.dirname(dirname)
-        if dirname == "/":
+def get_flags(path):
+    root_dir, build_dir = find_build(path)
+    command = get_command(root_dir, build_dir, path)
+    if not command:
+        return []
+    flags = set()
+    for flag, value in zip(command[1:], command[2:] + [None]):
+        if not flag.startswith("-") or (len(flag) < 2) or (flag == "--"):
+            continue  # normal arg
+        if flag[1] == "I":
+            include_dir = os.path.normpath(os.path.join(build_dir, flag[2:]))
+            flags.add(("-I%s" % include_dir,))
+        elif (flag[1] in "DFOWfm") or flag.startswith("-std"):
+            flags.add((flag,))
+        elif flag == "-isysroot":
+            include_dir = os.path.normpath(os.path.join(build_dir, value))
+            flags.add(("-isysroot", include_dir))
+        elif flag.startswith("-isystem"):
+            include_dir = os.path.normpath(os.path.join(build_dir, flag[8:]))
+            flags.add(("-isystem", include_dir))
+        elif flag.startswith("--sysroot="):
+            include_dir = os.path.normpath(os.path.join(build_dir, flag[10:]))
+            flags.add(("--sysroot=%s" % include_dir,))
+    return list(itertools.chain(*sorted(flags)))
+
+
+def get_command(root_dir, build_dir, path):
+    path = os.path.relpath(path, build_dir)
+    for path in get_candidate_files(root_dir, build_dir, path):
+        for target in get_file_outputs(build_dir, path):
+            command = get_target_command(build_dir, path, target)
+            if command:
+                return command
+    return None
+
+
+def find_build(path):
+    directory = os.path.realpath(path)
+    while directory != "/":
+        directory = os.path.dirname(directory)
+        build_dir = os.path.join(directory, "out/cur")
+        if os.path.exists(build_dir):
+            return (
+                os.path.relpath(directory, os.getcwd()),
+                os.path.relpath(os.path.realpath(build_dir), os.getcwd()),
+            )
+
+
+def get_candidate_files(root_dir, build_dir, path):
+    """List files whose compilation flags might work for the file."""
+    # First candidate: the file itself.
+    yield path
+
+    # Second candidate: a file in the same target, with a matching
+    # extension. This works well if headers and sources are in different
+    # locations, like include/ and src/.
+    exts = source_extensions(path)
+    for target in get_gn_targets(build_dir, path):
+        sources = get_gn_sources(build_dir, target)
+        for ext in exts:
+            try:
+                source = next(s for s in sources if ext == os.path.splitext(s)[1])
+            except StopIteration:
+                continue
+            if source.startswith("//"):
+                source = os.path.relpath(os.path.join(root_dir, source[2:]), build_dir)
+            yield source
             break
+
+    # Third candidate: a file in the same directory. This works well for
+    # newly-created files that aren't in build files yet.
+    # TODO(sfiera)
+
+    # Fourth candidate: any file?
+    # TODO(sfiera)
+
+
+def source_extensions(path):
+    _, ext = os.path.splitext(path)
+    return {
+        ".h": [".m", ".cpp", ".cc", ".c"],
+        ".hh": [".cc"],
+        ".hpp": [".cpp"],
+    }.get(ext, [ext])
+
+
+def get_gn_targets(build_dir, path):
+    path = os.path.join(build_dir, path)
+    p = subprocess.Popen(["gn", "refs", build_dir, path],
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    stdout, _ = p.communicate()
+    if p.returncode != 0:
+        return []
+    return [x for x in stdout.split("\n") if x]
+
+
+def get_gn_sources(build_dir, target):
+    p = subprocess.Popen(["gn", "desc", build_dir, target],
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    stdout, _ = p.communicate()
+    if p.returncode != 0:
+        return []
+    _, _, sources_text = stdout.partition("\nsources:\n")
+    sources_text, _, _ = sources_text.partition("\n\n")
+    return [x.strip() for x in sources_text.split("\n")]
+
+
+def get_file_outputs(build_dir, path):
+    p = subprocess.Popen(["ninja", "-C", build_dir, "-t", "query", path],
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    stdout, _ = p.communicate()
+    if p.returncode != 0:
+        return
+    _, _, outputs_text = stdout.partition("\n  outputs:\n")
+    for line in outputs_text.split("\n"):
+        if line.endswith(".o") or line.endswith(".obj"):
+            yield line.strip()
+
+
+def get_target_command(build_dir, path, target):
+    p = subprocess.Popen(["ninja", "-C", build_dir, "-t", "commands", target],
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    stdout, _ = p.communicate()
+    if p.returncode != 0:
+        return None
+    for line in reversed(stdout.split("\n")):
+        command = shlex.split(line)
+        if path in command:
+            return command
     return None
 
 
 def main(args):
     import json
     for i, a in enumerate(args[1:]):
-        if len(args) > 2:
-            if i > 0:
-                print
+        if (len(args) > 2) and (i > 0):
+            print
         flags = FlagsForFile(a)
         flags = json.dumps(flags, indent=2, separators=(",", ": "))
         if len(args) > 2:
             flags = "%s: %s" % (a, flags)
-        print "\n  ".join(flags.split("\n"))
+        print flags
 
 
 if __name__ == "__main__":
