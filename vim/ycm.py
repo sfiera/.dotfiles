@@ -16,25 +16,25 @@ def get_flags(path):
     command = get_command(root_dir, build_dir, path)
     if not command:
         return []
-    flags = set()
+    flags = []
     for flag, value in zip(command[1:], command[2:] + [None]):
         if not flag.startswith("-") or (len(flag) < 2) or (flag == "--"):
             continue  # normal arg
         if flag[1] == "I":
             include_dir = os.path.normpath(os.path.join(build_dir, flag[2:]))
-            flags.add(("-I%s" % include_dir,))
+            flags.append("-I%s" % include_dir)
         elif (flag[1] in "DFOWfm") or flag.startswith("-std"):
-            flags.add((flag,))
+            flags.append(flag)
         elif flag == "-isysroot":
             include_dir = os.path.normpath(os.path.join(build_dir, value))
-            flags.add(("-isysroot", include_dir))
+            flags.extend(["-isysroot", include_dir])
         elif flag.startswith("-isystem"):
             include_dir = os.path.normpath(os.path.join(build_dir, flag[8:]))
-            flags.add(("-isystem", include_dir))
+            flags.extend(["-isystem", include_dir])
         elif flag.startswith("--sysroot="):
             include_dir = os.path.normpath(os.path.join(build_dir, flag[10:]))
-            flags.add(("--sysroot=%s" % include_dir,))
-    return list(itertools.chain(*sorted(flags)))
+            flags.append("--sysroot=%s" % include_dir)
+    return flags
 
 
 def get_command(root_dir, build_dir, path):
