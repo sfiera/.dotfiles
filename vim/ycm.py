@@ -16,8 +16,23 @@ def get_flags(path):
     command = get_command(root_dir, build_dir, path)
     if not command:
         return []
+
+    return rule_flags(root_dir, build_dir, command[1:]) + executable_flags(command[0])
+
+
+def get_command(root_dir, build_dir, path):
+    path = os.path.relpath(path, build_dir)
+    for path in get_candidate_files(root_dir, build_dir, path):
+        for target in get_file_outputs(build_dir, path):
+            command = get_target_command(build_dir, path, target)
+            if command:
+                return command
+    return None
+
+
+def rule_flags(root_dir, build_dir, args):
     flags = []
-    for flag, value in zip(command[1:], command[2:] + [None]):
+    for flag, value in zip(args, args[1:] + [None]):
         if not flag.startswith("-") or (len(flag) < 2) or (flag == "--"):
             continue  # normal arg
         if flag[1] == "I":
@@ -37,14 +52,23 @@ def get_flags(path):
     return flags
 
 
-def get_command(root_dir, build_dir, path):
-    path = os.path.relpath(path, build_dir)
-    for path in get_candidate_files(root_dir, build_dir, path):
-        for target in get_file_outputs(build_dir, path):
-            command = get_target_command(build_dir, path, target)
-            if command:
-                return command
-    return None
+def executable_flags(executable):
+    p = subprocess.Popen([executable, "-x", "c++", "-v", "-E", "/dev/null"],
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    stdout, _ = p.communicate()
+    if p.returncode != 0:
+        return []
+    _, _, include_text = stdout.partition("\n#include <...> search starts here:\n")
+    include_text, _, _ = include_text.partition("\nEnd of search list.\n")
+    flags = []
+    for line in include_text.split("\n"):
+        line = line.strip()
+        if line.endswith(" (framework directory)"):
+            line, _, _ = line.rsplit(" ", 2)
+            flags.extend(["-iframework", line])
+        else:
+            flags.extend(["-isystem", line.strip()])
+    return flags
 
 
 def find_build(path):
