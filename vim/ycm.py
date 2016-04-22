@@ -5,7 +5,24 @@ import subprocess
 
 
 def FlagsForFile(path):
-    "YCM entry hook."""
+    """YCM entry hook for gn+ninja projects.
+
+    Copy this file somewhere, load YouCompleteMe into your .vimrc with
+    the package manager of your choice, and set it as your global YCM
+    configuration:
+
+        let g:ycm_global_ycm_extra_conf = '~/path/to/ycm.py'
+
+    In any repository where you want to use it, create a symlink out/cur
+    that points to your actual build directory:
+
+        $ BUILD=dbg
+        $ gn gen out/$BUILD
+        $ rm -f out/cur
+        $ ln -s $BUILD out/cur
+
+    If you don't like linking out/cur, see FlagReader and subclass it.
+    """
     return {
         "flags": FlagReader(path).load(),
         "do_cache": True,
