@@ -4,6 +4,20 @@ import shlex
 import subprocess
 
 
+FLAG_MAP = {
+    "-finline-limit=64": [],
+    "-march=armv7-a": ["-m32"],
+    "-mthumb": [],
+    "-mthumb-interwork": [],
+    "-fno-tree-sra": [],
+    "-fno-caller-saves": [],
+    "-mfloat-abi=softfp": [],
+    "-mfpu=neon": [],
+    "-Wno-psabi": [],
+    "-Wno-unused-local-typedefs": [],
+}
+
+
 def FlagsForFile(f):
     return {
         "flags": get_flags(f),
@@ -17,7 +31,11 @@ def get_flags(path):
     if not command:
         return []
 
-    return rule_flags(root_dir, build_dir, command[1:]) + executable_flags(command[0])
+    flags = (rule_flags(build_dir, command[1:]) +
+             executable_flags(build_dir, command[0]))
+    flags = list(itertools.chain(*(FLAG_MAP.get(f, [f]) for f in flags)))
+
+    return flags
 
 
 def get_command(root_dir, build_dir, path):
@@ -30,7 +48,7 @@ def get_command(root_dir, build_dir, path):
     return None
 
 
-def rule_flags(root_dir, build_dir, args):
+def rule_flags(build_dir, args):
     flags = []
     for flag, value in zip(args, args[1:] + [None]):
         if not flag.startswith("-") or (len(flag) < 2) or (flag == "--"):
@@ -52,7 +70,8 @@ def rule_flags(root_dir, build_dir, args):
     return flags
 
 
-def executable_flags(executable):
+def executable_flags(build_dir, executable):
+    executable = os.path.join(build_dir, executable)
     p = subprocess.Popen([executable, "-x", "c++", "-v", "-E", "/dev/null"],
                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     stdout, _ = p.communicate()
