@@ -235,7 +235,14 @@ command! -bang WQ :wqall<bang>
 command! ShowHideDoc :call ShowHideDoc()
 
 function! ShowHideDoc()
-python << EOF
+    if has('python')
+        let l:python = "python << EOF"
+    elseif has('python3')
+        let l:python = "python3 << EOF"
+    else
+        return
+    endif
+    exec l:python
 import ycm.vimsupport
 old = None
 if ycm.vimsupport.JumpToPreviewWindow():
@@ -251,7 +258,13 @@ if old == new:
 EOF
 endfunction
 
-python <<EOF
+if has('python') || has('python3')
+    if has('python3')
+        let s:python = "python3 << EOF"
+    else
+        let s:python = "python << EOF"
+    endif
+    exec s:python
 def InsertTab():
     if int(vim.eval("pumvisible()")):
         return r"\<C-N>"
@@ -301,6 +314,7 @@ def InsertTab():
     else:
         return (ins - col) * '\<Right>'
 EOF
+endif
 
 function! InsertTab()
 python vim.command('return "%s"' % InsertTab())
