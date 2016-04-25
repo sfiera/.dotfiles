@@ -247,7 +247,8 @@ class FlagReader(object):
         These are flags specific to the tool, like system includes
         and framework paths.
         """
-        executable = _normjoin(self.build_dir, executable)
+        if "/" in executable:
+            executable = _normjoin(self.build_dir, executable)
         p = subprocess.Popen(
                 [executable, "-x", "c++", "-v", "-E", "/dev/null"],
                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
