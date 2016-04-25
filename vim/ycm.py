@@ -69,11 +69,10 @@ class FlagReader(object):
         "-fno-tree-sra": [],
         "-mfloat-abi=softfp": [],
         "-mfpu=neon": [],
-        "-mthumb": [],
         "-mthumb-interwork": [],
 
         # ARMv7 means 32-bit, but otherwise blacklisted.
-        "-march=armv7-a": ["-m32"],
+        "-march=armv7-a": ["-target armv7-none-linux-androideabi", "-m32"],
     }
 
     def __init__(self, path):
