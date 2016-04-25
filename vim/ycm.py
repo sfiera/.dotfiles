@@ -330,14 +330,32 @@ def main(args):
 
     Useful for testing the flags on files."""
     import json
-    for i, a in enumerate(args[1:]):
+    import pipes
+
+    args.pop(0)
+    if args and args[0] == "-c":
+        run_clang = True
+        args = args[1:]
+    else:
+        run_clang = False
+
+    for i, a in enumerate(args):
         if (len(args) > 2) and (i > 0):
             print
         flags = FlagsForFile(a)
-        flags = json.dumps(flags, indent=2, separators=(",", ": "))
-        if len(args) > 2:
-            flags = "%s: %s" % (a, flags)
-        print flags
+        if run_clang:
+            flags = flags["flags"]
+            cmd = ["clang++-3.6"] + flags + ["-S", a, "-o", "/dev/null"]
+            print(" \\\n  ".join(pipes.quote(q) for q in cmd))
+            p = subprocess.Popen(cmd)
+            p.communicate()
+            if p.returncode != 0:
+                sys.exit(p.returncode)
+        else:
+            flags = json.dumps(flags, indent=2, separators=(",", ": "))
+            if len(args) > 2:
+                flags = "%s: %s" % (a, flags)
+            print flags
 
 
 if __name__ == "__main__":
