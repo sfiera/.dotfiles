@@ -63,16 +63,13 @@ class FlagReader(object):
     FLAG_MAP = {
         # Blacklisted flags. Not understood by YCM's libclang.
         "-Wno-psabi": [],
-        "-Wno-unused-local-typedefs": [],
         "-finline-limit=64": [],
         "-fno-caller-saves": [],
         "-fno-tree-sra": [],
-        "-mfloat-abi=softfp": [],
-        "-mfpu=neon": [],
         "-mthumb-interwork": [],
 
-        # ARMv7 means 32-bit, but otherwise blacklisted.
-        "-march=armv7-a": ["-target armv7-none-linux-androideabi", "-m32"],
+        # Clang-type compile target.
+        "-march=armv7-a": ["-target", "arm-none-linux-androideabi"],
     }
 
     def __init__(self, path):
