@@ -21,3 +21,7 @@ augroup chromium
     au BufRead,BufEnter */chrome/*.{cc,h}  set ts=2 tw=80 cinoptions=l1,g1,h1,N-s,(0,W2s
     au BufRead,BufEnter */chrome/*.java    set tw=100
 augroup END
+
+augroup antares
+    au BufRead,BufEnter */antares/*.{cpp,hpp,m,h} AutoFormatBuffer clang-format
+augroup END
