@@ -1,9 +1,10 @@
 #!/bin/zsh
 
-VUNDLE=~/.dotfiles/vim/vim.symlink/bundle/vundle
-if [[ ! -e $VUNDLE ]]; then
-    @ git clone https://github.com/gmarik/vundle.git $VUNDLE
-    @ bin/vundle install
+VIMPLUG=~/.vim/autoload/plug.vim
+if [[ ! -e $VIMPLUG ]]; then
+    URL=https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    @ curl -fLo $VIMPLUG --create-dirs $URL
+    @ bin/vim-plug install
 fi
 if [[ ! -e ~/.vimswp ]]; then
     @ mkdir ~/.vimswp

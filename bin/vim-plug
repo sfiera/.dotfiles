@@ -13,8 +13,9 @@ fi
 
 COMMAND=$1; shift
 case $COMMAND in
-    install)    vim +BundleInstall +qall ;;
-    update)     vim +BundleInstall! +qall ;;
-    clean)      vim +BundleClean +qall ;;
+    install)    vim +PlugInstall +qall ;;
+    update)     vim +PlugInstall! +qall ;;
+    clean)      vim +PlugClean +qall ;;
+    status)     vim +PlugStatus ;;
     *)          usage ;;
 esac

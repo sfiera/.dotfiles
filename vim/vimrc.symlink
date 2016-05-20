@@ -4,36 +4,33 @@
 " Brief: sfiera's vimrc
 " Maintainer: Chris Pickel <sfiera@sfzmail.com>
 "
-" Set up Vundle {{{
-filetype on   " Ensure that the following line doesn't cause an error.
-filetype off  " Ensure that pathogen is around when we turn it back on.
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
+" Set up vim-plug {{{
+call plug#begin('~/.vim/bundle')
 
-Plugin 'gmarik/vundle'
-
-Plugin 'kana/vim-altr'
-Plugin 'SWIG-syntax'
-Plugin 'sfiera/vim-emacsmodeline'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-markdown'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'google/vim-maktaba'
-Plugin 'google/vim-glaive'
-Plugin 'google/vim-codefmt'
-Plugin 'https://chromium.googlesource.com/chromium/src/tools/gn', {'rtp': 'misc/vim'}
-Plugin 'scrooloose/syntastic'
+Plug 'kana/vim-altr'
+Plug 'SWIG-syntax'
+Plug 'sfiera/vim-emacsmodeline'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'pangloss/vim-javascript'
+Plug 'tikhomirov/vim-glsl'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-glaive'
+Plug 'google/vim-codefmt'
+Plug 'https://chromium.googlesource.com/chromium/src/tools/gn', {'rtp': 'misc/vim'}
+Plug 'scrooloose/syntastic'
 
 if has('python')
     if v:version >= 704
-        Plugin 'Valloric/YouCompleteMe'
+        Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
     elseif (v:version >= 703) && has('patch584')
-        Plugin 'Valloric/YouCompleteMe'
+        Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
     endif
 endif
+
+call plug#end()
 " }}}
 " Options {{{
 syntax enable
