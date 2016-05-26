@@ -68,6 +68,7 @@ ALL   brew_cask_install macpass
 HOME  brew_cask_install makemkv
 HOME  brew_cask_install minecraft
 HOME  brew_cask_install mplayer-osx-extended
+ALL   brew_cask_install quicklook-json
 ALL   brew_cask_install seil
 ALL   brew_cask_install spectacle
 HOME  brew_cask_install steam
