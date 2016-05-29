@@ -31,6 +31,7 @@ if has('python')
 endif
 
 call plug#end()
+call glaive#Install()
 " }}}
 " Options {{{
 syntax enable
