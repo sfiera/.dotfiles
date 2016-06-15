@@ -47,6 +47,12 @@ bindkey -M vicmd M vi-set-mark
 bindkey -M vicmd -s G g
 bindkey -M vicmd gh vi-match-bracket
 
+bindkey "^[[200~" paste-mode
+bindkey -M vicmd "^[[200~" paste-mode
+bindkey -N paste
+bindkey -M paste -R "^@-^?" self-insert
+bindkey -M paste "^[[201~" vi-add-next
+
 # New ZLE widgets
 
 history-beginning-search-forward-inclusive() {
@@ -66,3 +72,8 @@ history-beginning-search-backward-inclusive() {
     SUPPRESS_ZLE_KEYMAP_SELECT=n
 }
 zle -N history-beginning-search-backward-inclusive
+
+paste-mode() {
+    zle -K paste
+}
+zle -N paste-mode
