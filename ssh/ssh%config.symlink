@@ -16,7 +16,7 @@ Host florence florence.sfiera.net
     ForwardAgent yes
 
 Host courtain courtain.b.sfiera.net b.sfiera.net
-    HostName b.sfiera.net
+    HostName c.sfiera.net
     ForwardAgent yes
 
 Host hauteclaire hauteclaire.b.sfiera.net
