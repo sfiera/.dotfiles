@@ -28,7 +28,7 @@ brew_linkapp() {
 
 brew_cask_install() {
     PKG=$1; shift
-    if [[ ! -d "/opt/homebrew-cask/Caskroom/$PKG" ]]; then
+    if [[ ! -d "/usr/local/Caskroom/$PKG" ]]; then
         @ brew cask install $PKG $*
     fi
 }
