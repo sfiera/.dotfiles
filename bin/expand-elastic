@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+
+import itertools
+import sys
+
+def expand(f):
+    buf = []
+    line = f.readline()
+    while line:
+        indent = [None] * (len(line) - len(line.lstrip("\t")))
+        cols = line.lstrip("\t").rstrip("\n").split("\t")
+        line = indent + cols
+        if len(line) == 1:
+            flush(buf)
+            print line[0]
+        else:
+            buf.append(line)
+        line = f.readline()
+    flush(buf)
+
+
+def flush(rows):
+    if not rows:
+        return
+    widths = [[len(s or "") for s in row[:-1]] for row in rows]
+
+    # Propagate cell widths downward.
+    for y in xrange(1, len(widths)):
+        width = widths[y]
+        for x in xrange(len(width)):
+            if ((len(widths[y - 1]) > x) and
+                    (widths[y][x] < widths[y - 1][x])):
+                widths[y][x] = widths[y - 1][x]
+
+    # Propagate cell widths upward, except indentation cells.
+    for y in xrange(len(widths) - 2, -1, -1):
+        width = widths[y]
+        for x in xrange(len(width)):
+            if ((rows[y][x] is not None) and
+                    (len(widths[y + 1]) > x) and
+                    (widths[y][x] < widths[y + 1][x])):
+                widths[y][x] = widths[y + 1][x]
+
+    for row, width in zip(rows, widths):
+        width += [-2]
+        print("".join((s or "").ljust(w + 2) for s, w in zip(row, width)))
+
+    rows[:] = []
+
+
+if __name__ == "__main__":
+    assert not sys.argv[1:]
+    expand(sys.stdin)

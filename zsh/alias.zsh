@@ -8,6 +8,8 @@ alias pk="pkill -fI"
 
 alias d="dirs -v"
 
+alias -g …="|expand-elastic|less"
+
 function $ { echo $ $*; $* }
 function @ { echo $*; $* }
 function lsn { ls $* | sort -n | column }
