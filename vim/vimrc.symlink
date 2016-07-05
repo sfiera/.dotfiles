@@ -23,6 +23,7 @@ Plug 'google/vim-codefmt'
 Plug 'https://chromium.googlesource.com/chromium/src/tools/gn', {'rtp': 'misc/vim'}
 Plug 'scrooloose/syntastic'
 Plug 'ConradIrwin/vim-bracketed-paste'
+Plug 'ap/vim-you-keep-using-that-word'
 
 if has('python')
     if v:version >= 704
@@ -125,12 +126,9 @@ noremap % <NOP>
 " }}}
 
 " Fix some vi inconsistencies {{{
-" TODO(sfiera): make cw/cW repeat properly with .
 noremap S ch
 noremap Y y$
 vnoremap Y yy
-nnoremap cw dwi
-nnoremap cW dWi
 " }}}
 
 " Rebind paired (capitals; adjacent keys) to match {{{
