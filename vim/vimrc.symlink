@@ -271,8 +271,10 @@ def InsertTab():
     elif not int(vim.eval("&expandtab")):
         return r"\<Tab>"
 
-    if not hasattr(__builtins__, "xrange"):
-        xrange = range
+    if hasattr(__builtins__, "xrange"):
+        xrange = __builtins__.xrange
+    else:
+        xrange = __builtins__.range
 
     row, col = vim.current.window.cursor
     line = vim.current.line
