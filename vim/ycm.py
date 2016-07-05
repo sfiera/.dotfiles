@@ -23,10 +23,9 @@ def FlagsForFile(path):
 
     If you don't like linking out/cur, see FlagReader and subclass it.
     """
-    return {
-        "flags": FlagReader(path).load(),
-        "do_cache": True,
-    }
+    result = {"do_cache": True}
+    result.update(FlagReader(path).load())
+    return result
 
 
 class FlagReader(object):
@@ -86,7 +85,11 @@ class FlagReader(object):
         flags = (self._rule_flags(command[1:]) +
                  self._executable_flags(command[0]))
         flags = (self.FLAG_MAP.get(f, [f]) for f in flags)
-        return list(itertools.chain(*flags))
+        return {
+            "flags": list(itertools.chain(*flags)),
+            "compiler": os.path.relpath(os.path.join(self.build_dir, command[0]), os.getcwd()),
+            "do_cache": True,
+        }
 
     def find_build(self):
         """Set self.root_dir and self.build_dir.
@@ -339,20 +342,19 @@ def main(args):
     for i, a in enumerate(args):
         if (len(args) > 2) and (i > 0):
             print
-        flags = FlagsForFile(a)
+        params = FlagsForFile(a)
         if run_clang:
-            flags = flags["flags"]
-            cmd = ["clang++-3.6"] + flags + ["-S", a, "-o", "/dev/null"]
+            cmd = [params["compiler"]] + params["flags"] + ["-S", a, "-o", "/dev/null"]
             print(" \\\n  ".join(pipes.quote(q) for q in cmd))
             p = subprocess.Popen(cmd)
             p.communicate()
             if p.returncode != 0:
                 sys.exit(p.returncode)
         else:
-            flags = json.dumps(flags, indent=2, separators=(",", ": "))
+            params = json.dumps(params, indent=2, separators=(",", ": "))
             if len(args) > 2:
-                flags = "%s: %s" % (a, flags)
-            print flags
+                params = "%s: %s" % (a, params)
+            print params
 
 
 if __name__ == "__main__":
