@@ -271,6 +271,9 @@ def InsertTab():
     elif not int(vim.eval("&expandtab")):
         return r"\<Tab>"
 
+    if not hasattr(__builtins__, "xrange"):
+        xrange = range
+
     row, col = vim.current.window.cursor
     line = vim.current.line
     ins = col + len(line[col:]) - len(line[col:].lstrip(" "))
@@ -317,7 +320,9 @@ EOF
 endif
 
 function! InsertTab()
-python vim.command('return "%s"' % InsertTab())
+exec s:python
+vim.command('return "%s"' % InsertTab())
+EOF
 endfunction
 " }}}
 " Plugin settings {{{
