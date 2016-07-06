@@ -126,7 +126,6 @@ noremap % <NOP>
 " }}}
 
 " Fix some vi inconsistencies {{{
-noremap S ch
 noremap Y y$
 vnoremap Y yy
 " }}}
