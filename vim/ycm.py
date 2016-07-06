@@ -80,7 +80,7 @@ class FlagReader(object):
         """Loads and returns completion flags for self.path."""
         command = self._get_command()
         if not command:
-            return []
+            return {"flags": []}
 
         flags = (self._rule_flags(command[1:]) +
                  self._executable_flags(command[0]))
