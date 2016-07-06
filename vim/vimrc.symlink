@@ -131,8 +131,8 @@ vnoremap Y yy
 " }}}
 
 " Rebind paired (capitals; adjacent keys) to match {{{
-nnoremap <silent> u :<C-U>call repeat#wrap("u",         v:count)<CR>
-nnoremap <silent> U :<C-U>call repeat#wrap("\<Lt>C-R>", v:count)<CR>
+nnoremap <silent> u <Plug>(RepeatUndo)
+nnoremap <silent> U <Plug>(RepeatRedo)
 
 noremap q @
 noremap Q q
@@ -148,7 +148,7 @@ noremap ' J
 " }}}
 
 " Make <Space> useful {{{
-nnoremap <silent> <Space> :<C-U>call repeat#run(v:count)<CR>
+nnoremap <silent> <Space> <Plug>(RepeatDot)
 
 nnoremap . <NOP>
 " }}}
