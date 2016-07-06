@@ -131,8 +131,8 @@ vnoremap Y yy
 " }}}
 
 " Rebind paired (capitals; adjacent keys) to match {{{
-nnoremap <silent> u <Plug>(RepeatUndo)
-nnoremap <silent> U <Plug>(RepeatRedo)
+nmap <silent> u <Plug>(RepeatUndo)
+nmap <silent> U <Plug>(RepeatRedo)
 
 noremap q @
 noremap Q q
@@ -148,7 +148,7 @@ noremap ' J
 " }}}
 
 " Make <Space> useful {{{
-nnoremap <silent> <Space> <Plug>(RepeatDot)
+nmap <silent> <Space> <Plug>(RepeatDot)
 
 nnoremap . <NOP>
 " }}}
