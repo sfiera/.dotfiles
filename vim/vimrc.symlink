@@ -24,6 +24,7 @@ Plug 'https://chromium.googlesource.com/chromium/src/tools/gn', {'rtp': 'misc/vi
 Plug 'scrooloose/syntastic'
 Plug 'ConradIrwin/vim-bracketed-paste'
 Plug 'ap/vim-you-keep-using-that-word'
+Plug 'ap/vim-buftabline'
 
 if has('python')
     if v:version >= 704
@@ -178,6 +179,17 @@ noremap # <NOP>
 
 noremap gg :ShowHideDoc<CR>
 noremap gz :YcmDiags<CR>
+
+nmap g1 <Plug>BufTabLine.Go(1)
+nmap g2 <Plug>BufTabLine.Go(2)
+nmap g3 <Plug>BufTabLine.Go(3)
+nmap g4 <Plug>BufTabLine.Go(4)
+nmap g5 <Plug>BufTabLine.Go(5)
+nmap g6 <Plug>BufTabLine.Go(6)
+nmap g7 <Plug>BufTabLine.Go(7)
+nmap g8 <Plug>BufTabLine.Go(8)
+nmap g9 <Plug>BufTabLine.Go(9)
+nmap g0 <Plug>BufTabLine.Go(10)
 " }}}
 
 " z* {{{
@@ -205,8 +217,8 @@ nnoremap zX <NOP>
 " }}}
 
 " Alternate quickly through tabs and files {{{
-nnoremap ` gt
-nnoremap ~ gT
+nnoremap ` :bnext<CR>
+nnoremap ~ :bprev<CR>
 noremap <Tab> :call altr#forward()<CR>
 noremap <S-Tab> :call altr#back()<CR>
 nnoremap , :call altr#back()<CR>
