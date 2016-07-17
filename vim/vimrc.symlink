@@ -268,11 +268,11 @@ if filereadable(expand("~/.vim/bundle/vim-altr/.git/HEAD"))
     call altr#remove_all()
 
     call altr#define([
-    \   'include/%.h',  'include/%.hh',  'include/%.hpp',
-    \   'src/%.h',      'src/%.hh',      'src/%.hpp',
-    \   'src/%.c',      'src/%.cc',      'src/%.cpp',      'src/%.m',      'src/%.mm',
-    \   'src/%_test.c', 'src/%_test.cc', 'src/%_test.cpp', 'src/%_test.m', 'src/%_test.mm',
-    \   'src/%.*.c',    'src/%.*.cc',    'src/%.*.cpp',    'src/%.*.m',    'src/%.*.mm',
+    \   '%/include/%.h',  '%/include/%.hh',  '%/include/%.hpp',
+    \   '%/src/%.h',      '%/src/%.hh',      '%/src/%.hpp',
+    \   '%/src/%.c',      '%/src/%.cc',      '%/src/%.cpp',      '%/src/%.m',      '%/src/%.mm',
+    \   '%/src/%_test.c', '%/src/%_test.cc', '%/src/%_test.cpp', '%/src/%_test.m', '%/src/%_test.mm',
+    \   '%/src/%.*.c',    '%/src/%.*.cc',    '%/src/%.*.cpp',    '%/src/%.*.m',    '%/src/%.*.mm',
     \   ])
 
     call altr#define([
