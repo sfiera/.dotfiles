@@ -293,6 +293,7 @@ let g:ycm_key_list_previous_completion = []
 let g:ycm_global_ycm_extra_conf = '~/.dotfiles/vim/ycm.py'
 let g:syntastic_c_compiler_options = '-fblocks'
 let g:syntastic_auto_loc_list = 0
+let g:buftabline_indicators = 1
 
 augroup autoformat_settings
     autocmd FileType bzl  AutoFormatBuffer  buildifier
