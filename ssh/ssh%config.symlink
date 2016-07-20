@@ -3,28 +3,20 @@ EscapeChar              ^^
 UserKnownHostsFile      ~/.ssh/known_hosts ~/.dotfiles/ssh/known_hosts
 StrictHostKeyChecking   ask
 
-Host durendal durendal.a.sfiera.net a.sfiera.net
-    HostName a.sfiera.net
-    ForwardAgent yes
-
-Host olifan olifan.b.sfiera.net
-    HostName olifan.b.sfiera.net
-    ForwardAgent yes
-
 Host florence florence.sfiera.net
     HostName florence.sfiera.net
     ForwardAgent yes
 
-Host courtain courtain.b.sfiera.net b.sfiera.net
+Host courtain courtain.c.sfiera.net c.sfiera.net
     HostName c.sfiera.net
     ForwardAgent yes
 
-Host hauteclaire hauteclaire.b.sfiera.net
-    HostName hauteclaire.b.sfiera.net
+Host olifan olifan.c.sfiera.net
+    HostName olifan.c.sfiera.net
     ForwardAgent yes
 
-Host joyeuse joyeuse.b.sfiera.net
-    HostName joyeuse.b.sfiera.net
+Host joyeuse joyeuse.c.sfiera.net
+    HostName joyeuse.c.sfiera.net
     ForwardAgent yes
 
 Host force force.stwing.org force.stwing.upenn.edu
