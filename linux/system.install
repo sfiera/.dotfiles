@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+MAC return
+
+pref() {
+    BIN=$1
+    NAME=$2
+    VALUE=$3
+    CURRENT=$(gsettings get $BIN $NAME)
+    if [[ $CURRENT != $VALUE ]]; then
+        @ gsettings set $BIN $NAME $VALUE
+    fi
+}
+
+pref org.cinnamon.desktop.media-handling automount-open false
