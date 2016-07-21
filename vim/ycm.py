@@ -285,7 +285,7 @@ class FlagReader(object):
         stdout, _ = p.communicate()
         if p.returncode != 0:
             return []
-        _, _, sources_text = stdout.partition("\nsources:\n")
+        _, _, sources_text = stdout.partition("\nsources\n")
         sources_text, _, _ = sources_text.partition("\n\n")
         return [x.strip() for x in sources_text.split("\n")]
 
