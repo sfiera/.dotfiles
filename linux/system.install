@@ -6,9 +6,10 @@ pref() {
     BIN=$1
     NAME=$2
     VALUE=$3
-    CURRENT=$(gsettings get $BIN $NAME)
-    if [[ $CURRENT != $VALUE ]]; then
-        @ gsettings set $BIN $NAME $VALUE
+    if CURRENT=$(gsettings get $BIN $NAME); then
+        if [[ $CURRENT != $VALUE ]]; then
+            @ gsettings set $BIN $NAME $VALUE
+        fi
     fi
 }
 
