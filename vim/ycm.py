@@ -181,7 +181,7 @@ class FlagReader(object):
         for ext in exts:
             for source in sources:
                 if ext == os.path.splitext(source)[1]:
-                    return os.path.relpath(source, self.build_dir)
+                    return os.path.relpath(os.path.join(directory, source), self.build_dir)
         return None
 
     def file_from_label(self, label):
