@@ -179,6 +179,7 @@ noremap # <NOP>
 
 noremap gg :ShowHideDoc<CR>
 noremap gz :YcmDiags<CR>
+noremap gx :lclose<CR>
 
 nmap g1 <Plug>BufTabLine.Go(1)
 nmap g2 <Plug>BufTabLine.Go(2)
