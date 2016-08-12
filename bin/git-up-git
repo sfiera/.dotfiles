@@ -28,7 +28,7 @@ elif git merge-base --is-ancestor $SOURCE $TARGET; then
     else
         git update-ref $SOURCE $TARGET
     fi
-    git diff --stat $FROM $TO || true
+    git diff --no-pager --stat $FROM $TO || true
 else
     echo >&2 "master and $REMOTE/master have diverged"
     exit 1
