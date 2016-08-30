@@ -95,14 +95,14 @@ function tint {
         esac
     done
     local COLOR=$1; shift
-    START="$START\e["
+    START="$START\e[0"
     if [[ $BOLD != 0 ]]; then
-        START="${START}1;"
+        START="${START};1"
     fi
     if [[ $REVERSE != 0 ]]; then
-        START="${START}7;"
+        START="${START};7"
     fi
-    START="${START}38;5;${COLOR}m"
+    START="${START}m\e[38;5;${COLOR}m"
     local RESET="\e[0m"
     echo "%{$START%}$*%{$RESET%}"
 }
