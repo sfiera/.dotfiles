@@ -1,0 +1,7 @@
+new-session
+set-window-option -g mouse on
+set -g history-limit 30000
+
+set prefix C-a
+unbind-key C-b
+bind-key C-a send-prefix
