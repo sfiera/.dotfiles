@@ -13,4 +13,4 @@ pref() {
     fi
 }
 
-pref org.cinnamon.desktop.media-handling automount-open false
+DESKTOP pref org.cinnamon.desktop.media-handling automount-open false
