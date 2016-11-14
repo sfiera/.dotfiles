@@ -35,32 +35,17 @@ function git_branch {
 }
 
 function git_ref {
-    GITREF=$(/usr/bin/git rev-parse HEAD)
-    echo "${GITREF[0,7]}"
+    /usr/bin/git rev-parse --short HEAD
 }
 
 function git_ahead {
     local GIT_BRANCH=$1
-    local GIT_REMOTE GIT_MERGE GIT_UPSTREAM
-    if ! GIT_REMOTE=$(/usr/bin/git config branch.$GIT_BRANCH.remote 2>/dev/null); then
+    local GIT_BEHIND GIT_AHEAD
+    if ! /usr/bin/git rev-list --count --left-right $GIT_BRANCH@{upstream}...$GIT_BRANCH \
+            2>/dev/null \
+            | read GIT_BEHIND GIT_AHEAD; then
         return
     fi
-    if ! GIT_MERGE=$(/usr/bin/git config branch.$GIT_BRANCH.merge 2>/dev/null); then
-        return
-    fi
-    if [[ $GIT_REMOTE == "." ]]; then
-        GIT_UPSTREAM=$GIT_MERGE
-    else
-        GIT_UPSTREAM=$GIT_REMOTE/${GIT_MERGE#refs/heads/}
-    fi
-    local GIT_AHEAD=0 GIT_BEHIND=0
-    /usr/bin/git rev-list --left-right $GIT_ORIGIN...$GIT_UPSTREAM | while read LINE; do
-        if [[ ${LINE[1]} == ">" ]]; then
-            ((GIT_BEHIND+=1))
-        else
-            ((GIT_AHEAD+=1))
-        fi
-    done
     if [[ $GIT_AHEAD > 0 ]]; then
         echo -n $(tint $CLEAN_COLOR +$GIT_AHEAD)
     fi
