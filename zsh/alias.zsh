@@ -78,7 +78,33 @@ b() {
     case $#action in
         0)
             if [[ $# == 0 ]]; then
-                git branch $verbose $all
+                local behind ahead color
+                local head=$(git symbolic-ref HEAD) ref short upstream
+                if g diff --quiet HEAD; then
+                    color=2
+                elif git diff --quiet; then
+                    color=142
+                else
+                    color=1
+                fi
+                g for-each-ref --format='%(refname) %(refname:short) %(upstream:short)' refs/heads \
+                        | while read ref short upstream; do
+                    if [[ $ref == $head ]]; then
+                        echo -n "\e[38;5;${color}m* \e[1m$short\e[0m"
+                    else
+                        echo -n "  $short"
+                    fi
+                    if [[ -n $upstream ]]; then
+                        git rev-list --left-right --count $upstream...$ref | read behind ahead
+                        if [[ $ahead > 0 ]]; then
+                            echo -n "\e[38;5;2m+$ahead\e[0m"
+                        fi
+                        if [[ $behind > 0 ]]; then
+                            echo -n "\e[38;5;1m-$behind\e[0m"
+                        fi
+                    fi
+                    echo
+                done
                 return 0
             fi
             action=(-a $1); shift
