@@ -78,34 +78,8 @@ b() {
     case $#action in
         0)
             if [[ $# == 0 ]]; then
-                local behind ahead color
-                local head=$(git symbolic-ref HEAD) ref short upstream
-                if g diff --quiet HEAD; then
-                    color=2
-                elif git diff --quiet; then
-                    color=142
-                else
-                    color=1
-                fi
-                g for-each-ref --format='%(refname) %(refname:short) %(upstream:short)' refs/heads \
-                        | while read ref short upstream; do
-                    if [[ $ref == $head ]]; then
-                        echo -n "\e[38;5;${color}m* \e[1m$short\e[0m"
-                    else
-                        echo -n "  $short"
-                    fi
-                    if [[ -n $upstream ]]; then
-                        git rev-list --left-right --count $upstream...$ref | read behind ahead
-                        if [[ $ahead > 0 ]]; then
-                            echo -n "\e[38;5;2m+$ahead\e[0m"
-                        fi
-                        if [[ $behind > 0 ]]; then
-                            echo -n "\e[38;5;1m-$behind\e[0m"
-                        fi
-                    fi
-                    echo
-                done
-                return 0
+                _b_list_branches $#verbose
+                return $?
             fi
             action=(-a $1); shift
             ;&
@@ -154,6 +128,63 @@ b() {
     echo "       $0 -d BRANCH..." >&2
     echo "       $0 -D BRANCH..." >&2
     return 64
+}
+
+_b_list_branches() {
+    local verbosity=$1
+    local head=$(git symbolic-ref HEAD 2>/dev/null)
+    local ref ref_short upstream upstream_short
+    local head_color behind ahead
+    local -A upstreams short behinds aheads
+
+    if ! git rev-parse --show-toplevel >/dev/null 2>/dev/null; then
+        git rev-parse --show-toplevel
+        return $?
+    fi
+
+    if g diff --quiet HEAD; then
+        head_color=2
+    elif git diff --quiet; then
+        head_color=142
+    else
+        head_color=1
+    fi
+
+    g for-each-ref --format='%(refname) %(refname:short) %(upstream) %(upstream:short)' refs/heads \
+            | while read ref ref_short upstream upstream_short; do
+        short[$ref]=$ref_short
+        upstreams[$ref]=$upstream
+        if [[ -n $upstream ]]; then
+            short[$upstream]=$upstream_short
+            git rev-list --left-right --count $upstream...$ref | read behind ahead
+            if [[ $behind > 0 ]]; then
+                behinds[$ref]="-$behind"
+            fi
+            if [[ $ahead > 0 ]]; then
+                aheads[$ref]="+$ahead"
+            fi
+        fi
+    done
+
+    recurse() {
+        local prefix=$1 upstream=$2 head=$3 head_color=$4
+
+        for ref in ${(k)short}; do
+            if [[ $upstreams[$ref] == $upstream ]]; then
+                if [[ $ref == $head ]]; then
+                    echo -n "$prefix\e[38;5;${head_color}m* \e[1m${short[$ref]}\e[0m"
+                else
+                    echo -n "$prefix  ${short[$ref]}"
+                fi
+                echo -n "\e[38;5;2m${aheads[$ref]}\e[0m"
+                echo -n "\e[38;5;1m${behinds[$ref]}\e[0m"
+                echo
+                recurse "$prefix  " $ref $head $head_color
+            fi
+        done
+    }
+
+    recurse "" "" $head $head_color
 }
 
 g() {
