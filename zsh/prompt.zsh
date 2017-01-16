@@ -27,8 +27,8 @@ if [[ "$terminfo[colors]" -ge 8 ]] colors
 
 function git_branch {
     local GITREF
-    if GITREF=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null); then
-        echo ${GITREF#refs/heads/}
+    if GITREF=$(/usr/bin/git symbolic-ref --short HEAD 2>/dev/null); then
+        echo $GITREF
     else
         return 1
     fi
