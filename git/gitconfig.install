@@ -18,6 +18,7 @@ gc pull.ff                    "only"
 gc push.default               "upstream"
 gc diff.algorithm             "patience"
 gc receive.denyCurrentBranch  "updateInstead"
+gc branch.autoSetupMerge      "always"
 
 gc alias.man                  "help"
 gc alias.st                   "status"
