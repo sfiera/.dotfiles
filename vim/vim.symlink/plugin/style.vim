@@ -23,5 +23,7 @@ augroup chromium
 augroup END
 
 augroup antares
-    au BufRead,BufEnter */antares/*.{cpp,hpp,m,c,h} AutoFormatBuffer clang-format
+    au BufRead,BufEnter */antares*/*.{cpp,hpp,m,c,h} AutoFormatBuffer clang-format
+    au BufRead,BufEnter */libsfz*/*.{cpp,hpp,m,c,h} AutoFormatBuffer clang-format
+    au BufRead,BufEnter */rezin*/*.{cpp,hpp,m,c,h} AutoFormatBuffer clang-format
 augroup END
