@@ -1,10 +1,21 @@
 #!/bin/zsh
 
 . ~/.dotfiles/zsh/prompt.zsh
-tmux set -g status-fg black
+
+tmux setw -g window-status-format          " #W "
+tmux setw -g window-status-current-format  " #W "
+tmux setw -g window-status-bell-attr default
+
 tmux set -g status-bg "${PS_COLORS[$MACHINE]-3}"
-tmux set -g status-left " "
-tmux set -g status-right "[$MACHINE #S] "
+tmux set -g status-left " §#S "
+tmux set -g status-right " $MACHINE "
+
+tmux set -g status-bg "brightgreen"
+tmux setw -g window-status-bg "brightblue"
+tmux setw -g window-status-fg "brightblack"
+tmux setw -g window-status-last-fg "brightblack"
+tmux setw -g window-status-current-bg "brightblack"
+tmux setw -g window-status-current-fg "${PS_COLORS[$MACHINE]-3}"
 
 if [[ "$(tmux -V)" == "tmux 1.8" ]]; then
     setw -g mode-mouse on

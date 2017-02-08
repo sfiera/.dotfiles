@@ -7,7 +7,4 @@ set -g default-terminal "screen-256color"
 
 setw -g aggressive-resize on
 
-setw -g window-status-current-attr reverse
-setw -g window-status-bell-attr default
-
 run-shell "~/.tmux.sh"
