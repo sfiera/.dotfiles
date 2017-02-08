@@ -1,9 +1,14 @@
-new-session
-set-window-option -g mode-mouse on
-set -g history-limit 30000
-
-set prefix C-a
-unbind-key C-b
+set -g prefix C-a
 bind-key C-a send-prefix
 
+set -g base-index 1
+set -g history-limit 30000
 set -g default-terminal "screen-256color"
+
+setw -g mode-mouse on
+setw -g aggressive-resize on
+
+setw -g window-status-current-attr reverse
+setw -g window-status-bell-attr default
+
+run-shell "~/.tmux.sh"
