@@ -5,3 +5,9 @@ tmux set -g status-fg black
 tmux set -g status-bg "${PS_COLORS[$MACHINE]-3}"
 tmux set -g status-left " "
 tmux set -g status-right "[$MACHINE #S] "
+
+if [[ "$(tmux -V)" == "tmux 1.8" ]]; then
+    setw -g mode-mouse on
+else
+    set -g mouse on
+fi
