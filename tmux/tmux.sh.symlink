@@ -2,6 +2,27 @@
 
 . ~/.dotfiles/zsh/prompt.zsh
 
+typeset -A COLORMAP
+COLORMAP=(
+    0 black
+    8 brightblack
+    1 red
+    9 brightred
+    2 green
+    10 brightgreen
+    3 yellow
+    11 brightyellow
+    4 blue
+    12 brightblue
+    5 magenta
+    13 brightmagenta
+    6 cyan
+    14 brightcyan
+    7 white
+    15 brightwhite
+)
+COLOR="$COLORMAP[${PS_COLORS[$MACHINE]-3}]"
+
 tmux setw -g window-status-format          " #W "
 tmux setw -g window-status-current-format  " #W "
 tmux setw -g window-status-bell-attr       default
@@ -17,7 +38,7 @@ tmux setw -g window-status-bg              brightblue
 tmux setw -g window-status-fg              brightblack
 tmux setw -g window-status-last-fg         brightblack
 tmux setw -g window-status-current-bg      brightblack
-tmux setw -g window-status-current-fg      "${PS_COLORS[$MACHINE]-3}"
+tmux setw -g window-status-current-fg      $COLOR
 tmux setw -g window-status-current-attr    bold
 
 if [[ "$(tmux -V)" == "tmux 1.8" ]]; then
