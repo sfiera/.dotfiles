@@ -4,18 +4,21 @@
 
 tmux setw -g window-status-format          " #W "
 tmux setw -g window-status-current-format  " #W "
-tmux setw -g window-status-bell-attr default
+tmux setw -g window-status-bell-attr       default
 
-tmux set -g status-bg "${PS_COLORS[$MACHINE]-3}"
-tmux set -g status-left " §#S "
-tmux set -g status-right " $MACHINE "
+tmux set -g status-fg                      brightblack
+tmux set -g status-bg                      brightgreen
+tmux set -g status-left                    " §#S "
+tmux set -g status-left-attr               bold
+tmux set -g status-right                   " $MACHINE "
+tmux set -g status-right-attr              bold
 
-tmux set -g status-bg "brightgreen"
-tmux setw -g window-status-bg "brightblue"
-tmux setw -g window-status-fg "brightblack"
-tmux setw -g window-status-last-fg "brightblack"
-tmux setw -g window-status-current-bg "brightblack"
-tmux setw -g window-status-current-fg "${PS_COLORS[$MACHINE]-3}"
+tmux setw -g window-status-bg              brightblue
+tmux setw -g window-status-fg              brightblack
+tmux setw -g window-status-last-fg         brightblack
+tmux setw -g window-status-current-bg      brightblack
+tmux setw -g window-status-current-fg      "${PS_COLORS[$MACHINE]-3}"
+tmux setw -g window-status-current-attr    bold
 
 if [[ "$(tmux -V)" == "tmux 1.8" ]]; then
     setw -g mode-mouse on
