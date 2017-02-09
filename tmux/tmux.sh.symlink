@@ -42,7 +42,7 @@ tmux setw -g window-status-current-fg      $COLOR
 tmux setw -g window-status-current-attr    bold
 
 if [[ "$(tmux -V)" == "tmux 1.8" ]]; then
-    setw -g mode-mouse on
+    tmux setw -g mode-mouse on
 else
-    set -g mouse on
+    tmux set -g mouse on
 fi
