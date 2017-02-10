@@ -21,25 +21,24 @@ COLORMAP=(
     7 white
     15 brightwhite
 )
-COLOR="$COLORMAP[${PS_COLORS[$MACHINE]-3}]"
 
 tmux setw -g window-status-format          " #W "
 tmux setw -g window-status-current-format  " #W "
-tmux setw -g window-status-bell-attr       default
-
-tmux set -g status-fg                      brightblack
-tmux set -g status-bg                      brightgreen
 tmux set -g status-left                    " §#S "
-tmux set -g status-left-attr               bold
 tmux set -g status-right                   " $MACHINE "
-tmux set -g status-right-attr              bold
 
-tmux setw -g window-status-bg              brightblue
-tmux setw -g window-status-fg              brightblack
-tmux setw -g window-status-last-fg         brightblack
-tmux setw -g window-status-current-bg      brightblack
-tmux setw -g window-status-current-fg      $COLOR
-tmux setw -g window-status-current-attr    bold
+tmux set -g status-fg                      colour8
+tmux set -g status-bg                      colour10
+
+tmux setw -g window-status-bg              colour12
+tmux setw -g window-status-current-bg      colour${PS_COLORS[$MACHINE]-3}  # reversed
+tmux setw -g window-status-fg              colour8
+
+tmux set -g status-left-attr               bold
+tmux set -g status-right-attr              bold
+tmux setw -g window-status-current-attr    bold,reverse
+tmux setw -g window-status-bell-attr       none
+tmux setw -g window-status-activity-attr   none
 
 if [[ "$(tmux -V)" == "tmux 1.8" ]]; then
     tmux setw -g mode-mouse on
