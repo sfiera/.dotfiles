@@ -20,8 +20,7 @@ tmux setw -g window-status-current-attr    bold,reverse
 tmux setw -g window-status-bell-attr       none
 tmux setw -g window-status-activity-attr   none
 
-if [[ "$(tmux -V)" == "tmux 1.8" ]]; then
-    tmux setw -g mode-mouse on
-else
-    tmux set -g mouse on
-fi
+case "$(tmux -V)" in
+    tmux\ 1.*) tmux setw -g mode-mouse on ;;
+    tmux\ 2.*) tmux set -g mouse on ;;
+esac
