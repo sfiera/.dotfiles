@@ -19,6 +19,9 @@ fpath=($ZSH/zsh/fpath $fpath)
 
 export MANPATH=""
 
+export DEBFULLNAME="Chris Pickel"
+export DEBEMAIL="sfiera@sfzmail.com"
+
 if [[ -f ~/.zshenv.local ]]; then
     source ~/.zshenv.local
 fi
