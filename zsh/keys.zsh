@@ -9,21 +9,21 @@ bindkey -M viins -rp '^['
 bindkey -M viins '^[' vi-cmd-mode
 
 for MAP in viins vicmd; do
-    bindkey -M $MAP -r '^[[A'
-    bindkey -M $MAP -r '^[[B'
-    bindkey -M $MAP -r '^[[C'
-    bindkey -M $MAP -r '^[[D'
+    bindkey -M $MAP '^[[A' noop
+    bindkey -M $MAP '^[[B' noop
+    bindkey -M $MAP '^[[C' noop
+    bindkey -M $MAP '^[[D' noop
 done
 
 bindkey -M vicmd '^[' update-prompt
-bindkey -M vicmd -r '^[OA'
-bindkey -M vicmd -r '^[OB'
-bindkey -M vicmd -r '^[OC'
-bindkey -M vicmd -r '^[OD'
-bindkey -M vicmd -r '^[OF'
-bindkey -M vicmd -r '^[OH'
-bindkey -M vicmd -r '^[[2~'
-bindkey -M vicmd -r '^[[3~'
+bindkey -M vicmd '^[OA' noop
+bindkey -M vicmd '^[OB' noop
+bindkey -M vicmd '^[OC' noop
+bindkey -M vicmd '^[OD' noop
+bindkey -M vicmd '^[OF' noop
+bindkey -M vicmd '^[OH' noop
+bindkey -M vicmd '^[[2~' noop
+bindkey -M vicmd '^[[3~' noop
 
 bindkey -M vicmd j backward-char
 bindkey -M vicmd k down-line-or-history
@@ -54,6 +54,9 @@ bindkey -M paste -R "^@-^?" self-insert
 bindkey -M paste "^[[201~" vi-add-next
 
 # New ZLE widgets
+
+noop() {}
+zle -N noop
 
 history-beginning-search-forward-inclusive() {
     SUPPRESS_ZLE_KEYMAP_SELECT=y
