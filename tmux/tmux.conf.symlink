@@ -1,3 +1,5 @@
+#!/usr/bin/env tmux source
+
 set -g prefix C-a
 bind-key C-a send-prefix
 
