@@ -72,6 +72,5 @@ ALL   brew_cask_install quicklook-json
 ALL   brew_cask_install seil
 ALL   brew_cask_install spectacle
 HOME  brew_cask_install steam
-ALL   brew_cask_install theremin
 ALL   brew_cask_install wmail
 ALL   brew_cask_install zoom
