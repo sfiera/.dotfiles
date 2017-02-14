@@ -271,18 +271,20 @@ if filereadable(expand("~/.vim/bundle/vim-altr/.git/HEAD"))
     call altr#remove_all()
 
     call altr#define([
-    \   '%/include/%.h',  '%/include/%.hh',  '%/include/%.hpp',
-    \   '%/src/%.h',      '%/src/%.hh',      '%/src/%.hpp',
-    \   '%/src/%.c',      '%/src/%.cc',      '%/src/%.cpp',      '%/src/%.m',      '%/src/%.mm',
-    \   '%/src/%_test.c', '%/src/%_test.cc', '%/src/%_test.cpp', '%/src/%_test.m', '%/src/%_test.mm',
-    \   '%/src/%.*.c',    '%/src/%.*.cc',    '%/src/%.*.cpp',    '%/src/%.*.m',    '%/src/%.*.mm',
+    \   '%/include/%.h',       '%/include/%.hh',       '%/include/%.hpp',
+    \   '%/src/%.h',           '%/src/%.hh',           '%/src/%.hpp',
+    \   '%/src/%.c',           '%/src/%.cc',           '%/src/%.cpp',           '%/src/%.m',           '%/src/%.mm',
+    \   '%/src/%_test.c',      '%/src/%_test.cc',      '%/src/%_test.cpp',      '%/src/%_test.m',      '%/src/%_test.mm',
+    \   '%/src/%_unittest.c',  '%/src/%_unittest.cc',  '%/src/%_unittest.cpp',  '%/src/%_unittest.m',  '%/src/%_unittest.mm',
+    \   '%/src/%.*.c',         '%/src/%.*.cc',         '%/src/%.*.cpp',         '%/src/%.*.m',         '%/src/%.*.mm',
     \   ])
 
     call altr#define([
-    \   '%.h',      '%.hh',      '%.hpp',
-    \   '%.c',      '%.cc',      '%.cpp',      '%.m',      '%.mm',
-    \   '%_test.c', '%_test.cc', '%_test.cpp', '%_test.m', '%_test.mm',
-    \   '%.*.c',    '%.*.cc',    '%.*.cpp',    '%.*.m',    '%.test.mm',
+    \   '%.h',           '%.hh',           '%.hpp',
+    \   '%.c',           '%.cc',           '%.cpp',           '%.m',           '%.mm',
+    \   '%_test.c',      '%_test.cc',      '%_test.cpp',      '%_test.m',      '%_test.mm',
+    \   '%_unittest.c',  '%_unittest.cc',  '%_unittest.cpp',  '%_unittest.m',  '%_unittest.mm',
+    \   '%.*.c',         '%.*.cc',         '%.*.cpp',         '%.*.m',         '%.test.mm',
     \   ])
 
     call altr#define('%.py', '%_test.py', '%.*.py')
