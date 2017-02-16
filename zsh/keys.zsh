@@ -15,7 +15,6 @@ for MAP in viins vicmd; do
     bindkey -M $MAP '^[[D' noop
 done
 
-bindkey -M vicmd '^[' update-prompt
 bindkey -M vicmd '^[OA' noop
 bindkey -M vicmd '^[OB' noop
 bindkey -M vicmd '^[OC' noop

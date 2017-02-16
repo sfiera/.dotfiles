@@ -144,6 +144,7 @@ zle-keymap-select() {
         set_prompt fast
         zle reset-prompt
     fi
+    zle -R
 }
 zle -N zle-keymap-select
 
