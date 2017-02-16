@@ -30,12 +30,9 @@ function git_branch {
     if GITREF=$(/usr/bin/git symbolic-ref --short HEAD 2>/dev/null); then
         echo $GITREF
     else
+        echo "($(/usr/bin/git rev-parse --short HEAD))"
         return 1
     fi
-}
-
-function git_ref {
-    /usr/bin/git rev-parse --short HEAD
 }
 
 function git_ahead {
@@ -92,21 +89,35 @@ function tint {
     echo "%{$START%}$*%{$RESET%}"
 }
 
+ASYNC_PROC=0
 PS1_PATH=
+PS1_BRANCH=
+PS1_FILE=~/.local/tmp/zsh/gitdata/$$
 function set_prompt {
-    local PS_COLOR="${PS_COLORS[$MACHINE]-3}"
     local NEWLINE=$'\n'
+    local PS1_HOST=""
+    local PS1_CHAR=""
+    local PS_COLOR="${PS_COLORS[$MACHINE]-3}"
     local HERE="%~"
     HERE="${(%)HERE}"
 
+    # PS1_HOST
     case $USER in
         root|sfiera|chpickel)   local LOCATION="$MACHINE" ;;
         *)                      local LOCATION="$USER@$MACHINE" ;;
     esac
-    PS1="$(tint -b $PS_COLOR $LOCATION)"
+    PS1_HOST="$(tint -b $PS_COLOR $LOCATION)"
 
+    # PS1_CHAR
+    if [[ $KEYMAP == vicmd ]]; then
+        PS1_CHAR="$(tint -r -b $PS_COLOR %#) "
+    else
+        PS1_CHAR="$(tint -b $PS_COLOR %#) "
+    fi
+
+    # PS1_PATH
     if [[ $1 == fast ]]; then
-        # Reuse PS1_PATH
+        # Reuse PS1_PATH and PS1_BRANCH
     elif /usr/bin/git rev-parse --show-toplevel >/dev/null 2>/dev/null; then
         local GIT_PREFIX=$(/usr/bin/git rev-parse --show-prefix)
         GIT_PREFIX=${GIT_PREFIX%/}
@@ -116,22 +127,37 @@ function set_prompt {
         else
             PS1_PATH="$HERE"
         fi
-        local GIT_BRANCH
-        if GIT_BRANCH=$(git_branch); then
-            PS1_PATH="$PS1_PATH:$(tint $(git_color) $GIT_BRANCH)$(git_ahead $GIT_BRANCH)"
-        else
-            PS1_PATH="$PS1_PATH:$(tint $(git_color) \($(git_ref)\))"
+        PS1_BRANCH=:$(git_branch)
+
+        async() {
+            local GIT_BRANCH
+            mkdir -p $(dirname $PS1_FILE)
+            if GIT_BRANCH=$(git_branch); then
+                echo -n ":$(tint $(git_color) $GIT_BRANCH)$(git_ahead $GIT_BRANCH)" >$PS1_FILE
+            else
+                echo -n ":$(tint $(git_color) $GIT_BRANCH)" >$PS1_FILE
+            fi
+            kill -s USR1 $$
+        }
+        if [[ $ASYNC_PROC != 0 ]]; then
+            kill -s HUP $ASYNC_PROC >/dev/null 2>&1
         fi
+        async &!
+        ASYNC_PROC=$!
     else
+        PS1_BRANCH=
         PS1_PATH="$HERE"
     fi
-    PS1="$PS1:$PS1_PATH"
 
-    if [[ $KEYMAP == vicmd ]]; then
-        PS1="$PS1$NEWLINE$(tint -r -b $PS_COLOR %#) "
-    else
-        PS1="$PS1$NEWLINE$(tint -b $PS_COLOR %#) "
-    fi
+    PS1="$PS1_HOST:$PS1_PATH$PS1_BRANCH$NEWLINE$PS1_CHAR"
+}
+
+TRAPUSR1() {
+    PS1_BRANCH=$(cat $PS1_FILE)
+    rm $PS1_FILE
+    set_prompt fast
+    ASYNC_PROC=0
+    zle && zle reset-prompt
 }
 
 precmd() {
