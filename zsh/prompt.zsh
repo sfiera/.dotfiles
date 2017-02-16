@@ -95,8 +95,7 @@ function tint {
 PS1_PATH=
 function set_prompt {
     local PS_COLOR="${PS_COLORS[$MACHINE]-3}"
-    local NEWLINE="
-"
+    local NEWLINE=$'\n'
     local HERE="%~"
     HERE="${(%)HERE}"
 
