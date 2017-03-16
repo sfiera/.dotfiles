@@ -44,7 +44,7 @@ ALL   brew_install macvim
 ALL   brew_install moreutils
 ALL   brew_install mpc
 ALL   brew_install ninja
-HOME  brew_install optipng
+ALL   brew_install optipng
 ALL   brew_install python
 HOME  brew_install sassc
 HOME  brew_install youtube-dl
@@ -55,22 +55,17 @@ ALL   brew_install homebrew/dupes/rsync
 ALL   brew_linkapp macvim MacVim.app
 
 ALL   brew_cask_install bartender
-ALL   brew_cask_install bonjour-browser
-ALL   brew_cask_install brogue
-ALL   brew_cask_install cakebrew
-HOME  brew_cask_install cloak
-ALL   brew_cask_install flux
+HOME  brew_cask_install bonjour-browser
+HOME  brew_cask_install brogue
 HOME  brew_cask_install google-chrome
 HOME  brew_cask_install google-drive
 HOME  brew_cask_install handbrake
-HOME  brew_cask_install iterm2
+ALL   brew_cask_install iterm2
 ALL   brew_cask_install macpass
 HOME  brew_cask_install makemkv
 HOME  brew_cask_install minecraft
 HOME  brew_cask_install mplayer-osx-extended
-ALL   brew_cask_install quicklook-json
-ALL   brew_cask_install seil
 ALL   brew_cask_install spectacle
 HOME  brew_cask_install steam
-ALL   brew_cask_install wmail
-ALL   brew_cask_install zoom
+HOME  brew_cask_install wmail
+HOME  brew_cask_install zoom
