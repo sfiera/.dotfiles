@@ -163,6 +163,7 @@ TRAPUSR1() {
 preexec() {
     if [[ $ASYNC_PROC != 0 ]]; then
         kill -s HUP $ASYNC_PROC >/dev/null 2>&1
+        wait $ASYNC_PROC
         ASYNC_PROC=0
     fi
 }
