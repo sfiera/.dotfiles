@@ -160,6 +160,13 @@ TRAPUSR1() {
     zle && zle reset-prompt
 }
 
+preexec() {
+    if [[ $ASYNC_PROC != 0 ]]; then
+        kill -s HUP $ASYNC_PROC >/dev/null 2>&1
+        ASYNC_PROC=0
+    fi
+}
+
 precmd() {
     echo
     set_prompt full
