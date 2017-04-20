@@ -1,7 +1,9 @@
 #!/bin/zsh
 
-for config_file ($ZSH/**/*.zsh) source $config_file
+for config_file ($ZSH/zsh/**/*.zsh) source $config_file
 
 if [[ -f ~/.zshrc.local ]]; then
     source ~/.zshrc.local
 fi
+
+source $ZSH/ext/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
