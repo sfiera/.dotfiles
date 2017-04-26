@@ -49,7 +49,15 @@ function git_ahead {
     if [[ $GIT_BEHIND > 0 ]]; then
         echo -n $(tint $DIRTY_COLOR -$GIT_BEHIND)
     fi
-    echo
+
+    if GIT_UPLOAD_HASH=$(/usr/bin/git config --get "branch.$GIT_BRANCH.last-upload-hash"); then
+        GIT_BRANCH_HASH=$(/usr/bin/git rev-parse $GIT_BRANCH)
+        if [[ $GIT_UPLOAD_HASH == $GIT_BRANCH_HASH ]]; then
+            echo -n $(tint $CLEAN_COLOR '^')
+        else
+            echo -n $(tint $STAGE_COLOR '*')
+        fi
+    fi
 }
 
 function git_color {
