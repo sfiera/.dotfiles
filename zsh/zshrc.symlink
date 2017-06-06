@@ -7,5 +7,5 @@ if [[ -f ~/.zshrc.local ]]; then
 fi
 
 if [[ $ZSH_VERSION != 5.0.5 ]]; then  # Crashing bug
-    source $ZSH/ext/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    source $ZSH/ext/zsh-users/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
