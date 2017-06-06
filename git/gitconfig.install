@@ -23,6 +23,7 @@ gc branch.autoSetupMerge      "always"
 gc alias.ci                   "commit"
 gc alias.co                   "checkout"
 gc alias.up                   "up-git"
+gc alias.sup                  "submodule foreach git up"
 
 gc alias.fu                   "commit --fixup HEAD"
 gc alias.fold                 "commit --amend -CHEAD --reset-author"
