@@ -1,1 +1,1 @@
-../bundle/vim-repeat/autoload/repeat.vim
+../../../ext/tpope/vim-repeat/autoload/repeat.vim

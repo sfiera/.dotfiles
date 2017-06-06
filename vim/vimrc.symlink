@@ -5,7 +5,6 @@
 " Maintainer: Chris Pickel <sfiera@sfzmail.com>
 "
 " Set up pathogen {{{
-runtime bundle/pathogen/autoload/pathogen.vim
 execute pathogen#infect()
 
 "if has('python')
