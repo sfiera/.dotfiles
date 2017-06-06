@@ -4,38 +4,18 @@
 " Brief: sfiera's vimrc
 " Maintainer: Chris Pickel <sfiera@sfzmail.com>
 "
-" Set up vim-plug {{{
-call plug#begin('~/.vim/bundle')
+" Set up pathogen {{{
+runtime bundle/pathogen/autoload/pathogen.vim
+execute pathogen#infect()
 
-Plug 'kana/vim-altr'
-Plug 'SWIG-syntax'
-Plug 'sfiera/vim-emacsmodeline'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'pangloss/vim-javascript'
-Plug 'b4winckler/vim-angry'
-Plug 'tikhomirov/vim-glsl'
-Plug 'isobit/vim-caddyfile'
-Plug 'google/vim-maktaba'
-Plug 'google/vim-glaive'
-Plug 'google/vim-codefmt'
-Plug 'https://chromium.googlesource.com/chromium/src/tools/gn', {'rtp': 'misc/vim'}
-Plug 'scrooloose/syntastic'
-Plug 'ConradIrwin/vim-bracketed-paste'
-Plug 'ap/vim-you-keep-using-that-word'
-Plug 'ap/vim-buftabline'
+"if has('python')
+"    if v:version >= 704
+"        Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+"    elseif (v:version >= 703) && has('patch584')
+"        Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
+"    endif
+"endif
 
-if has('python')
-    if v:version >= 704
-        Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
-    elseif (v:version >= 703) && has('patch584')
-        Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer'}
-    endif
-endif
-
-call plug#end()
 call glaive#Install()
 " }}}
 " Options {{{
