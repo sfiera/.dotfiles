@@ -33,7 +33,7 @@ gc alias.ff                   "merge --ff-only"
 gc alias.mm                   "merge --no-ff"
 
 gc alias.lg                   "log --format=oneline --abbrev-commit"
-gc alias.lgu                  "lg @{u}.."
+gc alias.lgu                  "log --format=oneline --abbrev-commit @{u}.."
 gc alias.logu                 "log @{u}.."
 gc alias.d                    "diff"
 gc alias.du                   "diff @{u}"
