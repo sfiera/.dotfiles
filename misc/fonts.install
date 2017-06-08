@@ -11,39 +11,60 @@ esac
 
 local ANY_FONTS_INSTALLED=
 font() {
-    local GOOGLEFONTS=https://googlefontdirectory.googlecode.com/hg/ofl
-    local FONT=$1
+    local GOOGLEFONTS=https://github.com/google/fonts/raw/master/ofl
+    local GROUP=$1
+    local FONT=$2
     mkdir -p $FONTS
     if [[ -f $FONTS/$FONT ]]; then
         return 0
     fi
-    case $1 in
-        SourceCodePro*)
-            URL=$GOOGLEFONTS/sourcecodepro/$FONT ;;
-        Inconsolata.otf)
-            URL=http://levien.com/type/myfonts/$FONT ;;
-        Montserrat-*)
-            URL=$GOOGLEFONTS/montserrat/$FONT
-    esac
-    @ curl $URL -o $FONTS/$FONT
+    @ curl -sL $GOOGLEFONTS/$GROUP/$FONT -o $FONTS/$FONT
     ANY_FONTS_INSTALLED=1
 }
 
-font Inconsolata.otf
+font notosans NotoSans-Regular.ttf
+font notosans NotoSans-Italic.ttf
+font notosans NotoSans-Bold.ttf
+font notosans NotoSans-BoldItalic.ttf
 
-font SourceCodePro-Black.ttf
-font SourceCodePro-Bold.ttf
-font SourceCodePro-ExtraLight.ttf
-font SourceCodePro-Light.ttf
-font SourceCodePro-Medium.ttf
-font SourceCodePro-Regular.ttf
-font SourceCodePro-Semibold.ttf
+font notoserif NotoSerif-Regular.ttf
+font notoserif NotoSerif-Italic.ttf
+font notoserif NotoSerif-Bold.ttf
+font notoserif NotoSerif-BoldItalic.ttf
 
-font Montserrat-Regular.ttf
-font Montserrat-Bold.ttf
+font inconsolata Inconsolata-Regular.ttf
+font inconsolata Inconsolata-Bold.ttf
+
+font sourcecodepro SourceCodePro-ExtraLight.ttf
+font sourcecodepro SourceCodePro-Light.ttf
+font sourcecodepro SourceCodePro-Regular.ttf
+font sourcecodepro SourceCodePro-Medium.ttf
+font sourcecodepro SourceCodePro-SemiBold.ttf
+font sourcecodepro SourceCodePro-Bold.ttf
+font sourcecodepro SourceCodePro-Black.ttf
+
+font montserrat Montserrat-Thin.ttf
+font montserrat Montserrat-ThinItalic.ttf
+font montserrat Montserrat-ExtraLight.ttf
+font montserrat Montserrat-ExtraLightItalic.ttf
+font montserrat Montserrat-Light.ttf
+font montserrat Montserrat-LightItalic.ttf
+font montserrat Montserrat-Regular.ttf
+font montserrat Montserrat-Italic.ttf
+font montserrat Montserrat-Medium.ttf
+font montserrat Montserrat-MediumItalic.ttf
+font montserrat Montserrat-SemiBold.ttf
+font montserrat Montserrat-SemiBoldItalic.ttf
+font montserrat Montserrat-Bold.ttf
+font montserrat Montserrat-BoldItalic.ttf
+font montserrat Montserrat-ExtraBold.ttf
+font montserrat Montserrat-ExtraBoldItalic.ttf
+font montserrat Montserrat-Black.ttf
+font montserrat Montserrat-BlackItalic.ttf
+
+font yesteryear Yesteryear-Regular.ttf
 
 if [[ -n $ANY_FONTS_INSTALLED ]]; then
-    local FONTS
     case $(uname) in
         Darwin) ;;
         Linux) fc-cache -fv || true ;;
