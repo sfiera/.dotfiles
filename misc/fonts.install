@@ -10,59 +10,13 @@ case $(uname) in
 esac
 
 local ANY_FONTS_INSTALLED=
-font() {
-    local GOOGLEFONTS=https://github.com/google/fonts/raw/master/ofl
-    local GROUP=$1
-    local FONT=$2
-    mkdir -p $FONTS
-    if [[ -f $FONTS/$FONT ]]; then
-        return 0
-    fi
-    @ curl -sL $GOOGLEFONTS/$GROUP/$FONT -o $FONTS/$FONT
+if [[ ! -d $FONTS/.git ]]; then
+    GIT=(git --git-dir=$FONTS/.git --work-tree=$FONTS)
+    @ $GIT init
+    @ $GIT remote add origin florence:.fonts
+    @ $GIT pull origin master
     ANY_FONTS_INSTALLED=1
-}
-
-font notosans NotoSans-Regular.ttf
-font notosans NotoSans-Italic.ttf
-font notosans NotoSans-Bold.ttf
-font notosans NotoSans-BoldItalic.ttf
-
-font notoserif NotoSerif-Regular.ttf
-font notoserif NotoSerif-Italic.ttf
-font notoserif NotoSerif-Bold.ttf
-font notoserif NotoSerif-BoldItalic.ttf
-
-font inconsolata Inconsolata-Regular.ttf
-font inconsolata Inconsolata-Bold.ttf
-
-font sourcecodepro SourceCodePro-ExtraLight.ttf
-font sourcecodepro SourceCodePro-Light.ttf
-font sourcecodepro SourceCodePro-Regular.ttf
-font sourcecodepro SourceCodePro-Medium.ttf
-font sourcecodepro SourceCodePro-SemiBold.ttf
-font sourcecodepro SourceCodePro-Bold.ttf
-font sourcecodepro SourceCodePro-Black.ttf
-
-font montserrat Montserrat-Thin.ttf
-font montserrat Montserrat-ThinItalic.ttf
-font montserrat Montserrat-ExtraLight.ttf
-font montserrat Montserrat-ExtraLightItalic.ttf
-font montserrat Montserrat-Light.ttf
-font montserrat Montserrat-LightItalic.ttf
-font montserrat Montserrat-Regular.ttf
-font montserrat Montserrat-Italic.ttf
-font montserrat Montserrat-Medium.ttf
-font montserrat Montserrat-MediumItalic.ttf
-font montserrat Montserrat-SemiBold.ttf
-font montserrat Montserrat-SemiBoldItalic.ttf
-font montserrat Montserrat-Bold.ttf
-font montserrat Montserrat-BoldItalic.ttf
-font montserrat Montserrat-ExtraBold.ttf
-font montserrat Montserrat-ExtraBoldItalic.ttf
-font montserrat Montserrat-Black.ttf
-font montserrat Montserrat-BlackItalic.ttf
-
-font yesteryear Yesteryear-Regular.ttf
+fi
 
 if [[ -n $ANY_FONTS_INSTALLED ]]; then
     case $(uname) in
