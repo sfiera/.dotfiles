@@ -20,7 +20,7 @@ gc diff.algorithm             "patience"
 gc receive.denyCurrentBranch  "updateInstead"
 gc branch.autoSetupMerge      "always"
 
-gc format.pretty              "format:%C(yellow)┏━━ %C(bold)%h%Creset%n%C(yellow)┃ %C(blue)A=%aE%Creset, %ar %C(10)(%ai)%n%C(yellow)┃ %C(green)C=%cE%Creset, %cr %C(10)(%ci)%Creset%n%n%w(0,2,2)%B"
+gc format.pretty              "format:%C(auto,yellow)┏━━ %C(auto,bold)%h%C(auto)%d%n%C(auto,yellow)┃ %C(auto,blue)A=%aE%C(auto), %ar %C(auto,10)(%ai)%n%C(auto,yellow)┃ %C(auto,green)C=%cE%C(auto), %cr %C(auto,10)(%ci)%C(auto)%n%n%w(0,2,2)%B%-%n"
 
 gc alias.ci                   "commit"
 gc alias.co                   "checkout"
