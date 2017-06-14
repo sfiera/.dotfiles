@@ -162,6 +162,7 @@ noremap # <NOP>
 noremap gg :ShowHideDoc<CR>
 noremap gz :YcmDiags<CR>
 noremap gx :lclose<CR>
+noremap gy :echo SyntaxItem()<CR>
 
 nmap g1 <Plug>BufTabLine.Go(1)
 nmap g2 <Plug>BufTabLine.Go(2)
@@ -244,6 +245,10 @@ if ycm.vimsupport.JumpToPreviewWindow():
 if old == new:
     vim.command("pclose")
 EOF
+endfunction
+
+function! SyntaxItem()
+  return synIDattr(synID(line("."),col("."),1),"name")
 endfunction
 " }}}
 " Plugin settings {{{
