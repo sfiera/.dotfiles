@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+import subprocess
+
+RESET_TYPES = {
+    "FREEZE.indexed\n\n": "--soft",
+    "FREEZE.unindexed\n\n": "--mixed",
+}
+
+
+def freeze():
+    while True:
+        msg = subprocess.check_output("git show --format=%B -s HEAD".split())
+        if msg not in RESET_TYPES:
+            break
+        subprocess.check_call("git reset HEAD^ --quiet".split() +
+                              [RESET_TYPES[msg]])
+
+
+if __name__ == "__main__":
+    freeze()

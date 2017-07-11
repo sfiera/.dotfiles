@@ -1,0 +1,91 @@
+#!/usr/bin/env python
+
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+import collections
+import subprocess
+import sys
+
+ChangedFile = collections.namedtuple("ChangedFile",
+                                     "type xy sub mh mi mw hh hi path".split())
+RenamedFile = collections.namedtuple(
+    "RenamedFile", "type xy sub mh mi mw hh hi xscore paths".split())
+UnmergedFile = collections.namedtuple(
+    "UnmergedFile", "type xy sub m1 m2 m3 mw h1 h2 h3 path".split())
+UntrackedFile = collections.namedtuple("UntrackedFile", "type path".split())
+IgnoredFile = collections.namedtuple("IgnoredFile", "type path".split())
+
+CHANGED_FILE = "1"
+RENAMED_FILE = "2"
+UNMERGED_FILE = "u"
+UNTRACKED_FILE = "?"
+IGNORED_FILE = "!"
+
+status_entry_types = {
+    CHANGED_FILE: ChangedFile,
+    RENAMED_FILE: RenamedFile,
+    UNMERGED_FILE: UnmergedFile,
+    UNTRACKED_FILE: UntrackedFile,
+    IGNORED_FILE: IgnoredFile,
+}
+
+
+def freeze():
+    st = status()
+
+    unmerged = sorted(f for f in st if is_unmerged(f))
+    if unmerged:
+        sys.stderr.write("cannot freeze; the following files are unmerged:\n")
+        for f in unmerged:
+            sys.stderr.write("  %s\n" % f.path)
+        sys.exit(1)
+
+    if any(has_changes_in_index(f) for f in st):
+        subprocess.check_call(
+            "git commit --quiet --no-verify -m FREEZE.indexed".split())
+
+    if any(has_unstaged_changes(f) for f in st):
+        subprocess.check_call("git add -A --ignore-errors".split())
+        subprocess.check_call(
+            "git commit --quiet --no-verify -m FREEZE.unindexed".split())
+
+
+def status():
+    out = subprocess.check_output("git status -z --porcelain=v2".split())
+    entries = []
+    was_rename = False
+    for line in out.split("\0"):
+        if was_rename:
+            entries[-1] = RenamedFile(
+                *(list(entries[-1][:-1]) + [(entries[-1].paths, line)]))
+            was_rename = False
+        if line and (line[0] in status_entry_types):
+            entry_type = status_entry_types[line[0]]
+            item_count = len(entry_type._fields)
+            entries.append(entry_type(*line.split(" ", item_count - 1)))
+            was_rename = (line[0] == RENAMED_FILE)
+    return entries
+
+
+def is_unmerged(f):
+    return f.type == UNMERGED_FILE
+
+
+def has_changes_in_index(f):
+    if f.type in [CHANGED_FILE, RENAMED_FILE]:
+        return f.xy[0] != "."
+    return False
+
+
+def has_unstaged_changes(f):
+    if f.type == UNTRACKED_FILE:
+        return True
+    elif f.type in [CHANGED_FILE, RENAMED_FILE]:
+        return f.xy[1] != "."
+    else:
+        return False
+
+
+if __name__ == "__main__":
+    freeze()
