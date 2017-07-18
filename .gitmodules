@@ -61,3 +61,6 @@
 [submodule "ext/gn"]
 	path = ext/gn
 	url = https://chromium.googlesource.com/chromium/src/tools/gn
+[submodule "ext/mafredri/zsh-async"]
+	path = ext/mafredri/zsh-async
+	url = https://github.com/mafredri/zsh-async

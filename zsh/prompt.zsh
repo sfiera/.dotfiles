@@ -97,10 +97,11 @@ function tint {
     echo "%{$START%}$*%{$RESET%}"
 }
 
-ASYNC_PROC=0
+source $ZSH/ext/mafredri/zsh-async/async.zsh
+async_init
+
 PS1_PATH=
 PS1_BRANCH=
-PS1_FILE=~/.local/tmp/zsh/gitdata/$$
 function set_prompt {
     local NEWLINE=$'\n'
     local PS1_HOST=""
@@ -137,21 +138,10 @@ function set_prompt {
         fi
         PS1_BRANCH=:$(git_branch)
 
-        async() {
-            local GIT_BRANCH
-            mkdir -p $(dirname $PS1_FILE)
-            if GIT_BRANCH=$(git_branch); then
-                echo -n ":$(tint $(git_color) $GIT_BRANCH)$(git_ahead $GIT_BRANCH)" >$PS1_FILE
-            else
-                echo -n ":$(tint $(git_color) $GIT_BRANCH)" >$PS1_FILE
-            fi
-            kill -s USR1 $$
-        }
-        if [[ $ASYNC_PROC != 0 ]]; then
-            kill -s HUP $ASYNC_PROC >/dev/null 2>&1
-        fi
-        async &!
-        ASYNC_PROC=$!
+        async_stop_worker git
+        async_start_worker git -n
+        async_register_callback git git-prompt-traits-done
+        async_job git git-prompt-traits
     else
         PS1_BRANCH=
         PS1_PATH="$HERE"
@@ -160,20 +150,14 @@ function set_prompt {
     PS1="$PS1_HOST:$PS1_PATH$PS1_BRANCH$NEWLINE$PS1_CHAR"
 }
 
-TRAPUSR1() {
-    PS1_BRANCH=$(cat $PS1_FILE)
-    rm $PS1_FILE
+git-prompt-traits-done() {
+    PS1_BRANCH=$3
     set_prompt fast
-    ASYNC_PROC=0
     zle && zle reset-prompt
 }
 
 preexec() {
-    if [[ $ASYNC_PROC != 0 ]]; then
-        kill -s HUP $ASYNC_PROC >/dev/null 2>&1
-        wait $ASYNC_PROC >/dev/null 2>&1
-        ASYNC_PROC=0
-    fi
+    async_stop_worker git
 }
 
 precmd() {
