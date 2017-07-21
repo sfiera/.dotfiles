@@ -5,31 +5,14 @@ function @ {
     $@
 }
 
-alias ALL=
-
-is_osx()      { [[ $OS == osx ]] }
-is_linux()    { [[ $OS == linux ]] }
-is_home()     { [[ $ENV == home ]] }
-is_work()     { [[ $ENV == work ]] }
-is_laptop()   { [[ $FORM == laptop ]] }
-is_desktop()  { [[ $FORM == desktop ]] }
-is_server()   { [[ $FORM == server ]] }
-
-for prop in osx linux home work laptop desktop server; do
-    if is_$prop; then
-        alias if_$prop= if_not_$prop=true
-    else
-        alias if_$prop=true if_not_$prop=
-    fi
-done
-
-if [[ ! -f ~/.defs.sh ]]; then
+DEFS=~/.defs.sh
+if [[ ! -f $DEFS ]]; then
     case $(uname) in
         Darwin) DEFAULT_OS=osx DEFAULT_FORM=laptop ;;
         Linux) DEFAULT_OS=linux DEFAULT_FORM=server ;;
     esac
     case $(hostname) in
-        *.corp.*) DEFAULT_ENV=work ;;
+        *.corp.*) DEFAULT_ENV=corp ;;
         *) DEFAULT_ENV=home ;;
     esac
 
@@ -43,7 +26,23 @@ if [[ ! -f ~/.defs.sh ]]; then
     read FORM
     echo FORM=${FORM:-$DEFAULT_FORM} >> ~/.defs.sh
 fi
-source ~/.defs.sh
+source $DEFS
+
+is_osx()      { [[ $OS == osx ]] }
+is_linux()    { [[ $OS == linux ]] }
+is_home()     { [[ $ENV == home ]] }
+is_corp()     { [[ $ENV == corp ]] }
+is_laptop()   { [[ $FORM == laptop ]] }
+is_desktop()  { [[ $FORM == desktop ]] }
+is_server()   { [[ $FORM == server ]] }
+
+for prop in osx linux home corp laptop desktop server; do
+    if is_$prop; then
+        alias if_$prop= if_not_$prop=true
+    else
+        alias if_$prop=true if_not_$prop=
+    fi
+done
 
 setopt ERR_EXIT
 export ZSH=$(dirname $0)
