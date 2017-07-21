@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-SERVER return
+if_server return
 
 local FONTS
 case $(uname) in

@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-LINUX return
+if_not_osx return
 
 #/usr/bin/osascript $(dirname "$0")/system.applescript
 

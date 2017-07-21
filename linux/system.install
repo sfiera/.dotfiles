@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-MAC return
+if_not_linux return
 
 pref() {
     BIN=$1

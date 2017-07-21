@@ -6,36 +6,44 @@ function @ {
 }
 
 alias ALL=
-alias LINUX=true
-alias HOME=true
-alias MAC=true
-alias WORK=true
-alias DESKTOP=true
-alias SERVER=true
 
-if [[ ! -f self ]]; then
-    if [[ $(uname) == "Darwin" ]]; then
-        DPLATFORM=MAC
-        DPLACE=HOME
-        DTYPE=DESKTOP
+is_osx()      { [[ $OS == osx ]] }
+is_linux()    { [[ $OS == linux ]] }
+is_home()     { [[ $ENV == home ]] }
+is_work()     { [[ $ENV == work ]] }
+is_laptop()   { [[ $FORM == laptop ]] }
+is_desktop()  { [[ $FORM == desktop ]] }
+is_server()   { [[ $FORM == server ]] }
+
+for prop in osx linux home work laptop desktop server; do
+    if is_$prop; then
+        alias if_$prop= if_not_$prop=true
     else
-        DPLATFORM=LINUX
-        DPLACE=HOME
-        DTYPE=SERVER
+        alias if_$prop=true if_not_$prop=
     fi
-    echo -n "platform [$DPLATFORM]: "
-    read PLATFORM
-    echo ${PLATFORM:-$DPLATFORM} >> self
-    echo -n "place [$DPLACE]: "
-    read PLACE
-    echo ${PLACE:-$DPLACE} >> self
-    echo -n "type [$DTYPE]: "
-    read TYPE
-    echo ${TYPE:-$DTYPE} >> self
-fi
-cat self | while read LINE; do
-    alias $LINE=
 done
+
+if [[ ! -f ~/.defs.sh ]]; then
+    case $(uname) in
+        Darwin) DEFAULT_OS=osx DEFAULT_FORM=laptop ;;
+        Linux) DEFAULT_OS=linux DEFAULT_FORM=server ;;
+    esac
+    case $(hostname) in
+        *.corp.*) DEFAULT_ENV=work ;;
+        *) DEFAULT_ENV=home ;;
+    esac
+
+    echo -n "os [$DEFAULT_OS]: "
+    read OS
+    echo OS=${OS:-$DEFAULT_OS} >> ~/.defs.sh
+    echo -n "env [$DEFAULT_ENV]: "
+    read ENV
+    echo ENV=${ENV:-$DEFAULT_ENV} >> ~/.defs.sh
+    echo -n "form [$DEFAULT_FORM]: "
+    read FORM
+    echo FORM=${FORM:-$DEFAULT_FORM} >> ~/.defs.sh
+fi
+source ~/.defs.sh
 
 setopt ERR_EXIT
 export ZSH=$(dirname $0)
