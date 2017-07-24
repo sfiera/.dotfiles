@@ -4,13 +4,14 @@ if [[ ! -e ~/.vimswp ]]; then
     @ mkdir ~/.vimswp
 fi
 
-local YCMD_DIR=vim/vim.symlink/bundle/you-complete-me/third_party/ycmd
-local CHECK_YCM_CORE=(python -c '
+local YCMD_DIR CHECK_YCM_CORE INSTALL
+YCMD_DIR=vim/vim.symlink/bundle/you-complete-me/third_party/ycmd
+CHECK_YCM_CORE=(python -c '
 import sys, ycmd.server_utils
 sys.exit(ycmd.server_utils.CompatibleWithCurrentCore())')
 
 if ! (cd $YCMD_DIR && $CHECK_YCM_CORE); then
-    local INSTALL=(./install.py --clang-completer)
+    INSTALL=(./install.py --clang-completer)
     if where go >/dev/null; then
         INSTALL=($INSTALL --gocode-completer)
     fi
