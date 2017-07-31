@@ -12,6 +12,7 @@ esac
 local ANY_FONTS_INSTALLED GIT
 if [[ ! -d $FONTS/.git ]]; then
     GIT=(git --git-dir=$FONTS/.git --work-tree=$FONTS)
+    @ mkdir -p $FONTS
     @ $GIT init
     @ $GIT remote add origin florence.sfiera.net:.fonts
     @ $GIT pull origin master
