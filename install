@@ -46,4 +46,5 @@ done
 
 setopt ERR_EXIT
 export ZSH=$(dirname $0)
+git submodule update --init --recursive
 for config_file ($ZSH/**/*.install) source $config_file
