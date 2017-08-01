@@ -2,18 +2,22 @@
 
 if_not_osx return
 
-if [[ ! -f "/usr/local/bin/brew" ]]; then
+local BREW
+BREW=/usr/local
+
+if [[ ! -f "$BREW/bin/brew" ]]; then
     echo -n "Install Homebrew? [n] "
     read ANSWER
     if [[ $ANSWER =~ ^[Yy]$ ]]; then
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
+    if_corp brew analytics off
 fi
 
 brew_install() {
     PKG=$1; shift
     NAME=${PKG/*\//}
-    if [[ ! -d "/usr/local/Cellar/$NAME" ]]; then
+    if [[ ! -d "$BREW/Cellar/$NAME" ]]; then
         @ brew install $PKG $*
     fi
 }
@@ -28,44 +32,45 @@ brew_linkapp() {
 
 brew_cask_install() {
     PKG=$1; shift
-    if [[ ! -d "/usr/local/Caskroom/$PKG" ]]; then
+    if [[ ! -d "$BREW/Caskroom/$PKG" ]]; then
         @ brew cask install $PKG $*
     fi
 }
 
-if [[ ! -f "/usr/local/bin/brew" ]]; then
+if [[ ! -f "$BREW/bin/brew" ]]; then
     return
 fi
 
-ALL   brew_install dict
-HOME  brew_install imagemagick
-HOME  brew_install librsvg --without-gtk+ --without-x11
-ALL   brew_install macvim
-ALL   brew_install moreutils
-ALL   brew_install mpc
-ALL   brew_install ninja
-ALL   brew_install optipng
-ALL   brew_install python
-HOME  brew_install sassc
-HOME  brew_install youtube-dl
-ALL   brew_install zsh
+         brew_install cmake
+         brew_install dict
+if_home  brew_install imagemagick
+if_home  brew_install librsvg --without-gtk+ --without-x11
+         brew_install macvim
+         brew_install moreutils
+         brew_install mpc
+         brew_install ninja
+         brew_install optipng
+         brew_install python
+if_home  brew_install sassc
+if_home  brew_install youtube-dl
+         brew_install zsh
 
-ALL   brew_install homebrew/dupes/rsync
+         brew_install homebrew/dupes/rsync
 
-ALL   brew_linkapp macvim MacVim.app
+         brew_linkapp macvim MacVim.app
 
-ALL   brew_cask_install bartender
-HOME  brew_cask_install bonjour-browser
-HOME  brew_cask_install brogue
-HOME  brew_cask_install google-chrome
-HOME  brew_cask_install google-drive
-HOME  brew_cask_install handbrake
-ALL   brew_cask_install iterm2
-ALL   brew_cask_install macpass
-HOME  brew_cask_install makemkv
-HOME  brew_cask_install minecraft
-HOME  brew_cask_install mplayer-osx-extended
-ALL   brew_cask_install spectacle
-HOME  brew_cask_install steam
-HOME  brew_cask_install wmail
-HOME  brew_cask_install zoom
+         brew_cask_install bartender
+if_home  brew_cask_install bonjour-browser
+if_home  brew_cask_install brogue
+if_home  brew_cask_install google-chrome
+if_home  brew_cask_install google-drive
+if_home  brew_cask_install handbrake
+         brew_cask_install iterm2
+         brew_cask_install macpass
+if_home  brew_cask_install makemkv
+if_home  brew_cask_install minecraft
+if_home  brew_cask_install mplayer-osx-extended
+         brew_cask_install spectacle
+if_home  brew_cask_install steam
+if_home  brew_cask_install wmail
+if_home  brew_cask_install zoom
