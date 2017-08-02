@@ -4,60 +4,45 @@ if_not_osx return
 
 #/usr/bin/osascript $(dirname "$0")/system.applescript
 
-pref_usage() {
-    echo "usage: pref DOMAIN KEY [-string] STRVAL"
-    echo "       pref DOMAIN KEY -bool true|false"
-    echo "       pref DOMAIN KEY -int INTVAL"
-    return 64
-}
-
 pref() {
-    local DOMAIN=$1; shift
-    local KEY=$1; shift
-    local NARG
-    local TYPE
-    local VALUE
+    local DOMAIN KEY NARG TYPE VALUE FILE CURR
+    DOMAIN=$1; shift
+    KEY=$1; shift
+    TYPE=$1; shift
+    VALUE=$1; shift
 
-    case $1 in
-        -bool|-int|-string)  NARG=1; TYPE=$1; shift ;;
-        -*)                  NARG=-1 ;;
-        *)                   NARG=1; TYPE=-string ;;
-    esac
-
-    if [[ $# != $NARG ]]; then
-        pref_usage
-        return 64
+    FILE=~/Library/Preferences/$DOMAIN.plist
+    if [[ $DOMAIN == -g ]]; then
+        FILE=~/Library/Preferences/.GlobalPreferences.plist
     fi
-    VALUE=($@)
 
-    if defaults read $DOMAIN $KEY >/dev/null 2>&1; then
-        local CURR="$(defaults read $DOMAIN $KEY)"
-        if [[ $TYPE == -bool ]]; then
-            case $CURR in
-                0) CURR=false ;;
-                1) CURR=true ;;
-                *) ;;
-            esac
-        fi
-        if [[ $CURR == ${VALUE[-1]} ]]; then
+    if CURR="$(PlistBuddy -c "Print \"$KEY\"" $FILE 2>/dev/null)"; then
+        if [[ $CURR == $VALUE ]]; then
             return
         fi
     fi
 
-    @ defaults write $DOMAIN $KEY $TYPE $VALUE
+    CMD=(defaults write $DOMAIN)
+    case $KEY in
+        *:*:*) return 1 ;;
+        *:*) CMD=($CMD ${KEY%:*} -dict-add ${KEY#*:}) ;;
+        *) CMD=($CMD $KEY) ;;
+    esac
+    CMD=($CMD $TYPE $VALUE)
+    @ $CMD
 }
 
 pref -g AppleAquaColorVariant -int 1
 pref -g AppleEnableMenuBarTransparency -bool false
-pref -g AppleHighlightColor "0.968627 0.831373 1.000000"  # purple
+pref -g AppleHighlightColor -string "0.968627 0.831373 1.000000"  # purple
 pref -g AppleShowAllExtensions -bool true
-pref -g AppleShowScrollBars Always
+pref -g AppleShowScrollBars -string Always
 
-pref -g AppleLocale en_US
-pref -g AppleMeasurementUnits Centimeters
+pref -g AppleLocale -string en_US
+pref -g AppleMeasurementUnits -string Centimeters
 pref -g AppleMetricUnits -bool true
 pref -g AppleICUForce24HourTime -bool true
-#pref -g AppleICUDateFormatStrings -dict-add 1 -string "y-MM-dd"
+pref -g AppleICUDateFormatStrings:1 -string "y-MM-dd"
 
 pref -g NSAutomaticCapitalizationEnabled -bool false
 pref -g NSAutomaticDashSubstitutionEnabled -bool false
@@ -66,12 +51,18 @@ pref -g NSAutomaticQuoteSubstitutionEnabled -bool false
 pref -g NSAutomaticSpellingCorrectionEnabled -bool false
 pref -g NSAutomaticTextCompletionEnabled -bool false
 
-#pref -g NSUserKeyEquivalents -dict-add 'Select Next Tab' -string '@$]'
-#pref -g NSUserKeyEquivalents -dict-add 'Select Previous Tab' -string '@$['
+pref -g NSUserKeyEquivalents:'Select Next Tab' -string '@$]'
+pref -g NSUserKeyEquivalents:'Select Previous Tab' -string '@$['
+
+for CHROME in Chrome Chrome.beta Chrome.dev Chrome.canary; do
+    pref com.google.$CHROME NSUserKeyEquivalents:'Add to Pinboard' -string '^D'
+done
+
+pref com.codeux.irc.textual5 NSUserKeyEquivalents:'Delete Server…' -string '@~^$?'
 
 pref com.apple.dock autohide -bool true
 pref com.apple.dock magnification -bool false
-pref com.apple.dock orientation left
+pref com.apple.dock orientation -string left
 pref com.apple.dock tilesize -int 128
 
 pref com.apple.screensaver askForPassword -int 1
@@ -84,5 +75,5 @@ pref com.apple.universalaccess stickyKeyBeepOnModifier -bool false
 
 pref com.apple.menuextra.clock IsAnalog -bool true
 
-pref com.googlecode.iterm2 PrefsCustomFolder /Users/sfiera/.dotfiles/osx/prefs
+pref com.googlecode.iterm2 PrefsCustomFolder -string /Users/sfiera/.dotfiles/osx/prefs
 pref com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
