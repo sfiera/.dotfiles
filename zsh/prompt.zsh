@@ -5,16 +5,16 @@ MACHINE=${(%)MACHINE}
 
 typeset -A PS_COLORS
 PS_COLORS=(
-    durendal 2
-    courtain 4
-    florence 5
-    hauteclaire 13
+    flamberge 9
+    baligant 1
+    baptism 5
+
     joyeuse 13
-    misericorde 6
-    olifan 2
-    baptism 6
-    flamberge 1
-    sauvagine 3
+    courtain 4
+    olifan 6
+    florence 2
+
+    default 3
 )
 
 DIRTY_COLOR=${DIRTY_COLOR-1}
