@@ -4,21 +4,34 @@ if_not_osx return
 
 #/usr/bin/osascript $(dirname "$0")/system.applescript
 
+pref_usage() {
+    echo "usage: pref DOMAIN KEY [-string] STRVAL"
+    echo "       pref DOMAIN KEY -bool true|false"
+    echo "       pref DOMAIN KEY -int INTVAL"
+    return 64
+}
+
 pref() {
-    if [[ $# == 4 ]]; then
-        TYPE=$3
-        VALUE=$4
-    elif [[ $# == 3 ]]; then
-        TYPE=-string
-        VALUE=$3
-    else
+    local DOMAIN=$1; shift
+    local KEY=$1; shift
+    local NARG
+    local TYPE
+    local VALUE
+
+    case $1 in
+        -bool|-int|-string)  NARG=1; TYPE=$1; shift ;;
+        -*)                  NARG=-1 ;;
+        *)                   NARG=1; TYPE=-string ;;
+    esac
+
+    if [[ $# != $NARG ]]; then
+        pref_usage
         return 64
     fi
-    DOMAIN=$1
-    KEY=$2
+    VALUE=($@)
 
     if defaults read $DOMAIN $KEY >/dev/null 2>&1; then
-        CURR="$(defaults read $DOMAIN $KEY)"
+        local CURR="$(defaults read $DOMAIN $KEY)"
         if [[ $TYPE == -bool ]]; then
             case $CURR in
                 0) CURR=false ;;
@@ -26,7 +39,7 @@ pref() {
                 *) ;;
             esac
         fi
-        if [[ $CURR == $VALUE ]]; then
+        if [[ $CURR == ${VALUE[-1]} ]]; then
             return
         fi
     fi
@@ -34,9 +47,27 @@ pref() {
     @ defaults write $DOMAIN $KEY $TYPE $VALUE
 }
 
+pref -g AppleAquaColorVariant -int 1
 pref -g AppleEnableMenuBarTransparency -bool false
+pref -g AppleHighlightColor "0.968627 0.831373 1.000000"  # purple
 pref -g AppleShowAllExtensions -bool true
 pref -g AppleShowScrollBars Always
+
+pref -g AppleLocale en_US
+pref -g AppleMeasurementUnits Centimeters
+pref -g AppleMetricUnits -bool true
+pref -g AppleICUForce24HourTime -bool true
+#pref -g AppleICUDateFormatStrings -dict-add 1 -string "y-MM-dd"
+
+pref -g NSAutomaticCapitalizationEnabled -bool false
+pref -g NSAutomaticDashSubstitutionEnabled -bool false
+pref -g NSAutomaticPeriodSubstitutionEnabled -bool false
+pref -g NSAutomaticQuoteSubstitutionEnabled -bool false
+pref -g NSAutomaticSpellingCorrectionEnabled -bool false
+pref -g NSAutomaticTextCompletionEnabled -bool false
+
+#pref -g NSUserKeyEquivalents -dict-add 'Select Next Tab' -string '@$]'
+#pref -g NSUserKeyEquivalents -dict-add 'Select Previous Tab' -string '@$['
 
 pref com.apple.dock autohide -bool true
 pref com.apple.dock magnification -bool false
