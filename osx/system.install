@@ -47,6 +47,8 @@ pref com.apple.screensaver askForPassword -int 1
 pref com.apple.screensaver askForPasswordDelay -int 5
 
 pref com.apple.universalaccess stickyKey -bool true
+pref com.apple.universalaccess stickyKeyShowWindow -bool true
+pref com.apple.universalaccess stickyKeysLocation -int 0
 pref com.apple.universalaccess stickyKeyBeepOnModifier -bool false
 
 pref com.apple.menuextra.clock IsAnalog -bool true
