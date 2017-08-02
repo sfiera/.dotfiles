@@ -12,6 +12,7 @@ gc user.name                  "Chris Pickel"
 gc user.email                 "sfiera@sfzmail.com"
 
 gc core.excludesfile          "~/.dotfiles/git/exclude"
+gc http.cookieFile            "~/.gitcookies"
 gc core.whitespace            "trailing-space,space-before-tab"
 gc color.ui                   "auto"
 gc pull.ff                    "only"
