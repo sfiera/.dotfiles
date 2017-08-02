@@ -54,3 +54,4 @@ pref com.apple.universalaccess stickyKeyBeepOnModifier -bool false
 pref com.apple.menuextra.clock IsAnalog -bool true
 
 pref com.googlecode.iterm2 PrefsCustomFolder /Users/sfiera/.dotfiles/osx/prefs
+pref com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
