@@ -5,16 +5,16 @@ MACHINE=${(%)MACHINE}
 
 typeset -A PS_COLORS
 PS_COLORS=(
-    flamberge 9
-    baligant 1
-    baptism 5
+    flamberge 3
+    baligant 9
+    baptism 1
 
+    florence 5
     joyeuse 13
     courtain 4
     olifan 6
-    florence 2
 
-    default 3
+    default 2
 )
 
 DIRTY_COLOR=${DIRTY_COLOR-1}
@@ -106,7 +106,7 @@ function set_prompt {
     local NEWLINE=$'\n'
     local PS1_HOST=""
     local PS1_CHAR=""
-    local PS_COLOR="${PS_COLORS[$MACHINE]-3}"
+    local PS_COLOR="${PS_COLORS[$MACHINE]-$PS_COLORS[default]}"
     local HERE="%~"
     HERE="${(%)HERE}"
 
