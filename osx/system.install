@@ -17,6 +17,8 @@ pref() {
     FILE=~/Library/Preferences/$DOMAIN.plist
     if [[ $DOMAIN == -g ]]; then
         FILE=~/Library/Preferences/.GlobalPreferences.plist
+    elif [[ -d ~/Library/Containers/$DOMAIN ]]; then
+        FILE=~/Library/Containers/$DOMAIN/Data/Library/Preferences/$DOMAIN.plist
     fi
 
     if CURR="$(PlistBuddy -c "Print \"$KEY\"" $FILE 2>/dev/null)"; then
