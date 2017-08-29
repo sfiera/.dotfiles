@@ -46,6 +46,10 @@ bindkey -M vicmd M vi-set-mark
 bindkey -M vicmd -s G g
 bindkey -M vicmd gh vi-match-bracket
 
+# Mimic tmux clear screen
+bindkey -M vicmd '^Ak' clear-screen
+bindkey -M viins '^Ak' clear-screen
+
 bindkey "^[[200~" paste-mode
 bindkey -M vicmd "^[[200~" paste-mode
 bindkey -N paste
