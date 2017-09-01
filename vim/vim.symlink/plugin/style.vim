@@ -20,6 +20,7 @@ set termencoding=utf-8
 augroup chromium
     au BufRead,BufEnter */chrome/*.{cc,h}  set ts=2 tw=80 cinoptions=l1,g1,h1,N-s,(0,W2s
     au BufRead,BufEnter */chrome/*.java    set tw=100
+    au BufRead,BufEnter */chrome/*/*ntp*/*.{cc,c,mm,m,h} AutoFormatBuffer clang-format
 augroup END
 
 augroup antares
