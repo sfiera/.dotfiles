@@ -8,12 +8,14 @@ bindkey -v
 bindkey -M viins -rp '^['
 bindkey -M viins '^[' vi-cmd-mode
 
-for MAP in viins vicmd; do
-    bindkey -M $MAP '^[[A' noop
-    bindkey -M $MAP '^[[B' noop
-    bindkey -M $MAP '^[[C' noop
-    bindkey -M $MAP '^[[D' noop
-done
+bindkey -M viins '^[[A' insert-up
+bindkey -M viins '^[[B' insert-down
+bindkey -M viins '^[[C' insert-right
+bindkey -M viins '^[[D' insert-left
+bindkey -M vicmd '^[[A' noop
+bindkey -M vicmd '^[[B' noop
+bindkey -M vicmd '^[[C' noop
+bindkey -M vicmd '^[[D' noop
 
 bindkey -M vicmd '^[OA' noop
 bindkey -M vicmd '^[OB' noop
@@ -60,6 +62,15 @@ bindkey -M paste "^[[201~" vi-add-next
 
 noop() {}
 zle -N noop
+
+insert-up() { LBUFFER=$LBUFFER"↑" }
+insert-down() { LBUFFER=$LBUFFER"↓" }
+insert-right() { LBUFFER=$LBUFFER"→" }
+insert-left() { LBUFFER=$LBUFFER"←" }
+zle -N insert-up
+zle -N insert-down
+zle -N insert-right
+zle -N insert-left
 
 history-beginning-search-forward-inclusive() {
     SUPPRESS_ZLE_KEYMAP_SELECT=y
