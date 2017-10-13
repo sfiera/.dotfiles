@@ -285,10 +285,15 @@ let g:syntastic_c_compiler_options = '-fblocks'
 let g:syntastic_auto_loc_list = 0
 let g:buftabline_indicators = 1
 
+if filereadable(expand("~/.vim/bundle/procyon/autoload/procyon.vim"))
+    call procyon#InstallCodeFormatter()
+endif
+
 augroup autoformat_settings
-    autocmd FileType bzl  AutoFormatBuffer  buildifier
-    autocmd FileType go   AutoFormatBuffer  gofmt
-    autocmd FileType gn   AutoFormatBuffer  gn
+    autocmd FileType bzl      AutoFormatBuffer  buildifier
+    autocmd FileType go       AutoFormatBuffer  gofmt
+    autocmd FileType gn       AutoFormatBuffer  gn
+    autocmd FileType procyon  AutoFormatBuffer  procyon
 augroup END
 " }}}
 " Other files {{{
