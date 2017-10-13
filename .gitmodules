@@ -1,61 +1,61 @@
-[submodule "zsh/highlight"]
+[submodule "ext/zsh-users/zsh-syntax-highlighting"]
 	path = ext/zsh-users/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
-[submodule "vim/vim.symlink/bundle/pathogen"]
+[submodule "ext/tpope/vim-pathogen"]
 	path = ext/tpope/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen
-[submodule "vim/vim.symlink/bundle/fugitive"]
+[submodule "ext/tpope/vim-fugitive"]
 	path = ext/tpope/vim-fugitive
 	url = https://github.com/tpope/vim-fugitive
-[submodule "vim/vim.symlink/bundle/markdown"]
+[submodule "ext/tpope/vim-markdown"]
 	path = ext/tpope/vim-markdown
 	url = https://github.com/tpope/vim-markdown
-[submodule "vim/vim.symlink/bundle/surround"]
+[submodule "ext/tpope/vim-surround"]
 	path = ext/tpope/vim-surround
 	url = https://github.com/tpope/vim-surround
-[submodule "vim/vim.symlink/bundle/repeat"]
+[submodule "ext/tpope/vim-repeat"]
 	path = ext/tpope/vim-repeat
 	url = https://github.com/tpope/vim-repeat
-[submodule "vim/vim.symlink/bundle/javascript"]
+[submodule "ext/pangloss/vim-javascript"]
 	path = ext/pangloss/vim-javascript
 	url = https://github.com/pangloss/vim-javascript
-[submodule "vim/vim.symlink/bundle/emacsmodeline"]
+[submodule "ext/sfiera/vim-emacsmodeline"]
 	path = ext/sfiera/vim-emacsmodeline
 	url = https://github.com/sfiera/vim-emacsmodeline
-[submodule "vim/vim.symlink/bundle/altr"]
+[submodule "ext/kana/vim-altr"]
 	path = ext/kana/vim-altr
 	url = https://github.com/kana/vim-altr
-[submodule "vim/vim.symlink/bundle/maktaba"]
+[submodule "ext/google/vim-maktaba"]
 	path = ext/google/vim-maktaba
 	url = https://github.com/google/vim-maktaba
-[submodule "vim/vim.symlink/bundle/glaive"]
+[submodule "ext/google/vim-glaive"]
 	path = ext/google/vim-glaive
 	url = https://github.com/google/vim-glaive
-[submodule "vim/vim.symlink/bundle/codefmt"]
+[submodule "ext/google/vim-codefmt"]
 	path = ext/google/vim-codefmt
 	url = https://github.com/google/vim-codefmt
-[submodule "vim/vim.symlink/bundle/buftabline"]
+[submodule "ext/ap/vim-buftabline"]
 	path = ext/ap/vim-buftabline
 	url = https://github.com/ap/vim-buftabline
-[submodule "vim/vim.symlink/bundle/you-keep-using-that-word"]
+[submodule "ext/ap/vim-you-keep-using-that-word"]
 	path = ext/ap/vim-you-keep-using-that-word
 	url = https://github.com/ap/vim-you-keep-using-that-word
-[submodule "vim/vim.symlink/bundle/angry"]
+[submodule "ext/b4winckler/vim-angry"]
 	path = ext/b4winckler/vim-angry
 	url = https://github.com/b4winckler/vim-angry
-[submodule "vim/vim.symlink/bundle/glsl"]
+[submodule "ext/tikhomirov/vim-glsl"]
 	path = ext/tikhomirov/vim-glsl
 	url = https://github.com/tikhomirov/vim-glsl
-[submodule "vim/vim.symlink/bundle/caddyfile"]
+[submodule "ext/isobit/vim-caddyfile"]
 	path = ext/isobit/vim-caddyfile
 	url = https://github.com/isobit/vim-caddyfile
-[submodule "vim/vim.symlink/bundle/syntastic"]
+[submodule "ext/scrooloose/syntastic"]
 	path = ext/scrooloose/syntastic
 	url = https://github.com/scrooloose/syntastic
-[submodule "vim/vim.symlink/bundle/you-complete-me"]
+[submodule "ext/Valloric/YouCompleteMe"]
 	path = ext/Valloric/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe
-[submodule "vim/vim.symlink/bundle/bracketed-paste"]
+[submodule "ext/ConradIrwin/vim-bracketed-paste"]
 	path = ext/ConradIrwin/vim-bracketed-paste
 	url = https://github.com/ConradIrwin/vim-bracketed-paste
 [submodule "ext/gn"]
