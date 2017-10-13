@@ -73,6 +73,9 @@ cnoremap <silent> <Esc> <C-F>
 
 nnoremap <silent> g/ :nohlsearch<CR>
 nnoremap <silent> g? :nohlsearch<CR>
+
+nnoremap <expr> n  'Nn'[v:searchforward]
+nnoremap <expr> N  'nN'[v:searchforward]
 " }}}
 
 " Use hjkl; in place of :hjkl {{{
