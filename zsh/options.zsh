@@ -30,3 +30,5 @@ setopt PROMPT_SP
 # URL quote magic
 autoload -U url-quote-magic
 zle -N self-insert url-quote-magic
+
+type direnv >/dev/null && eval "$(direnv hook zsh)"
