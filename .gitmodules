@@ -64,3 +64,6 @@
 [submodule "ext/mafredri/zsh-async"]
 	path = ext/mafredri/zsh-async
 	url = https://github.com/mafredri/zsh-async
+[submodule "ext/leafgarland/typescript-vim"]
+	path = ext/leafgarland/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim
