@@ -9,7 +9,7 @@ gc() {
 }
 
 gc user.name                  "Chris Pickel"
-gc user.email                 "sfiera@sfzmail.com"
+gc user.email                 "sfiera@twotaled.com"
 
 gc core.excludesfile          "~/.dotfiles/git/exclude"
 gc http.cookieFile            "~/.gitcookies"
