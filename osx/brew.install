@@ -46,7 +46,6 @@ fi
 if_home  brew_install imagemagick
 if_home  brew_install librsvg --without-gtk+ --without-x11
          brew_install mobile-shell
-         brew_install macvim
          brew_install moreutils
          brew_install mpc
          brew_install ninja
@@ -69,6 +68,7 @@ if_home  brew_cask_install google-drive-file-stream
 if_home  brew_cask_install handbrake
          brew_cask_install iterm2
          brew_cask_install macpass
+         brew_cask_install macvim
 if_home  brew_cask_install makemkv
 if_home  brew_cask_install minecraft
 if_home  brew_cask_install mplayer-osx-extended
