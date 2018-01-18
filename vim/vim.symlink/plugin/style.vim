@@ -32,6 +32,7 @@ augroup antares
     au BufRead,BufEnter */libsfz*/*.{cpp,hpp,m,c,h} AutoFormatBuffer clang-format
     au BufRead,BufEnter */rezin*/*.{cpp,hpp,m,c,h} AutoFormatBuffer clang-format
     au BufRead,BufEnter */procyon*/*.{cpp,hpp,m,c,h} AutoFormatBuffer clang-format
+    au BufRead,BufEnter */antares*/*.py AutoFormatBuffer yapf
     au BufRead,BufEnter */procyon*/*.py AutoFormatBuffer yapf
     au BufRead,BufEnter */procyon*/include/pn/* AutoFormatBuffer clang-format
 augroup END
