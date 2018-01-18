@@ -255,7 +255,7 @@ function! SyntaxItem()
 endfunction
 " }}}
 " Plugin settings {{{
-if filereadable(expand("~/.vim/bundle/vim-altr/.git/HEAD"))
+if filereadable(expand("~/.vim/bundle/altr/autoload/altr.vim"))
     call altr#remove_all()
 
     call altr#define([
