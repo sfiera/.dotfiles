@@ -1,0 +1,62 @@
+[user]
+	name = Chris Pickel
+	email = sfiera@twotaled.com
+
+[core]
+	excludesfile = ~/.dotfiles/git/exclude
+	whitespace = trailing-space,space-before-tab
+
+[http]
+	cookieFile = ~/.gitcookies
+
+[color]
+	ui = auto
+
+[pull]
+	ff = only
+
+[push]
+	default = upstream
+
+[diff]
+	algorithm = patience
+
+[receive]
+	denyCurrentBranch = updateInstead
+
+[branch]
+	autoSetupMerge = always
+
+[format]
+	pretty = format:%C(auto,yellow)┏━━ %C(auto,bold)%h%C(auto)%d%n%C(auto,yellow)┃ %C(auto,blue)A=%aE%C(auto), %ar %C(auto,10)(%ai)%n%C(auto,yellow)┃ %C(auto,green)C=%cE%C(auto), %cr %C(auto,10)(%ci)%C(auto)%n%n%w(0,2,2)%B%-%n
+
+[alias]
+	ci = commit
+	co = checkout
+	br = branch
+	up = up-git
+
+	sup = submodule foreach git up
+
+	fu = commit --fixup HEAD
+	fold = commit --amend -CHEAD --reset-author
+	tmp = commit -mTemporary.
+
+	ff = merge --ff-only
+	mm = merge --no-ff
+
+	lg = log --format=oneline --abbrev-commit
+	lgu = log --format=oneline --abbrev-commit @{u}..
+	ulg = log --format=oneline --abbrev-commit ..@{u}
+	logu = log @{u}..
+	ulog = log ..@{u}
+
+	d = diff
+	du = diff @{u}
+	ds = diff --stat
+	dsu = diff --stat @{u}
+	dw = diff --word-diff
+	dwu = diff --word-diff @{u}
+
+	rb = rebase
+	rbu = rebase --onto @{u}
