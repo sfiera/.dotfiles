@@ -62,6 +62,7 @@ if_home  brew_cask_install handbrake
 if_home  brew_cask_install makemkv
 if_home  brew_cask_install minecraft
 if_home  brew_cask_install mplayer-osx-extended
+         brew_cask_install osxfuse
          brew_cask_install spectacle
 if_home  brew_cask_install steam
 if_home  brew_cask_install wmail
