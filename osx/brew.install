@@ -22,14 +22,6 @@ brew_install() {
     fi
 }
 
-brew_linkapp() {
-    PKG=$1; shift
-    APP=$1; shift
-    if [[ ! -d "/Applications/$APP" ]]; then
-        @ brew linkapps $PKG
-    fi
-}
-
 brew_cask_install() {
     PKG=$1; shift
     if [[ ! -d "$BREW/Caskroom/$PKG" ]]; then
@@ -45,7 +37,7 @@ fi
          brew_install dict
 if_home  brew_install imagemagick
 if_home  brew_install librsvg --without-gtk+ --without-x11
-         brew_install mobile-shell
+         brew_install mosh
          brew_install moreutils
          brew_install mpc
          brew_install ninja
@@ -56,9 +48,7 @@ if_home  brew_install sassc
 if_home  brew_install youtube-dl
          brew_install zsh
 
-         brew_install homebrew/dupes/rsync
-
-         brew_linkapp macvim MacVim.app
+         brew_install rsync
 
          brew_cask_install bartender
 if_home  brew_cask_install bonjour-browser
