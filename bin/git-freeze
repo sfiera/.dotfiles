@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
@@ -41,18 +41,20 @@ def freeze():
             sys.stderr.write("  %s\n" % f.path)
         sys.exit(1)
 
-    if any(has_changes_in_index(f) for f in st):
+    index = [f for f in st if has_changes_in_index(f)]
+    if index:
         subprocess.check_call(
-            "git commit --quiet --no-verify -m FREEZE.indexed".split())
+            "git commit --quiet --no-verify -m FREEZE.indexed".split() + paths(index))
 
-    if any(has_unstaged_changes(f) for f in st):
-        subprocess.check_call("git add -A --ignore-errors".split())
+    unstaged = [f for f in st if has_unstaged_changes(f)]
+    if unstaged:
+        subprocess.check_call("git add --ignore-errors".split() + paths(unstaged))
         subprocess.check_call(
-            "git commit --quiet --no-verify -m FREEZE.unindexed".split())
+            "git commit --quiet --no-verify -m FREEZE.unindexed".split() + paths(unstaged))
 
 
 def status():
-    out = subprocess.check_output("git status -z --porcelain=v2".split())
+    out = subprocess.check_output("git status -z --porcelain=v2".split()).decode("utf-8")
     entries = []
     was_rename = False
     for line in out.split("\0"):
@@ -79,12 +81,24 @@ def has_changes_in_index(f):
 
 
 def has_unstaged_changes(f):
-    if f.type == UNTRACKED_FILE:
+    if f.type in [UNTRACKED_FILE, UNMERGED_FILE]:
         return True
-    elif f.type in [CHANGED_FILE, RENAMED_FILE]:
-        return f.xy[1] != "."
-    else:
+    elif f.type == IGNORED_FILE:
         return False
+    elif f.sub != "N...":  # is a submodule
+        return False
+    else:
+        return f.xy[1] != "."
+
+
+def paths(st):
+    result = []
+    for f in st:
+        if f.type == RENAMED_FILE:
+            result += f.paths
+        else:
+            result.append(f.path)
+    return result
 
 
 if __name__ == "__main__":
