@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+set -o errexit
+set -o nounset
+
+BRANCH=$(/usr/bin/git symbolic-ref --short HEAD)
+GITHUB=$(/usr/bin/git config user.github)
+git push -f $GITHUB $BRANCH:$BRANCH

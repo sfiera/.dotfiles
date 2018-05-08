@@ -1,6 +1,7 @@
 [user]
 	name = Chris Pickel
 	email = sfiera@twotaled.com
+	github = sfiera
 
 [core]
 	excludesfile = ~/.dotfiles/git/exclude
@@ -35,6 +36,8 @@
 	co = checkout
 	br = branch
 	up = up-git
+
+	export = export-github
 
 	sup = submodule foreach git up
 
