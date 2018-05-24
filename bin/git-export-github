@@ -3,6 +3,13 @@
 set -o errexit
 set -o nounset
 
-BRANCH=$(/usr/bin/git symbolic-ref --short HEAD)
+case $# in
+    0) BRANCH=$(/usr/bin/git symbolic-ref --short HEAD) ;;
+    1) BRANCH=$1 ;;
+    *) echo "usage: $(basename $0) [BRANCH]" ; exit 64;;
+esac
+
+HASH=$(/usr/bin/git rev-parse $BRANCH)
 GITHUB=$(/usr/bin/git config user.github)
 git push -f $GITHUB $BRANCH:$BRANCH
+git config branch.$BRANCH.last-upload-hash $HASH
