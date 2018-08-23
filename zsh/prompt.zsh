@@ -16,10 +16,13 @@ PS_COLORS=(
     default 2
 )
 
-DIRTY_COLOR=${DIRTY_COLOR-1}
-STAGE_COLOR=${STAGE_COLOR-142}
-CLEAN_COLOR=${CLEAN_COLOR-2}
-DIM_COLOR=${DIM_COLOR-10}
+local DIRTY_COLOR=1
+local STAGE_COLOR=142
+local CLEAN_COLOR=2
+local DIM_COLOR=10
+local SEPARATOR=' › '
+local UPLOADED=' ✓'
+local CHANGED=' x'
 
 autoload colors zsh/terminfo
 if [[ "$terminfo[colors]" -ge 8 ]] colors
@@ -36,6 +39,16 @@ function git_branch {
 
 function git_ahead {
     local GIT_BRANCH=$1
+
+    if GIT_UPLOAD_HASH=$(/usr/bin/git config --get "branch.$GIT_BRANCH.last-upload-hash"); then
+        GIT_BRANCH_HASH=$(/usr/bin/git rev-parse $GIT_BRANCH)
+        if [[ $GIT_UPLOAD_HASH == $GIT_BRANCH_HASH ]]; then
+            echo -n $(tint $CLEAN_COLOR $UPLOADED)
+        else
+            echo -n $(tint $DIRTY_COLOR $CHANGED)
+        fi
+    fi
+
     local GIT_BEHIND GIT_AHEAD
     if ! /usr/bin/git rev-list --count --left-right $GIT_BRANCH@{upstream}...$GIT_BRANCH \
             2>/dev/null \
@@ -43,19 +56,10 @@ function git_ahead {
         return
     fi
     if [[ $GIT_AHEAD > 0 ]]; then
-        echo -n $(tint $CLEAN_COLOR +$GIT_AHEAD)
+        echo -n " $(tint $CLEAN_COLOR +$GIT_AHEAD)"
     fi
     if [[ $GIT_BEHIND > 0 ]]; then
-        echo -n $(tint $DIRTY_COLOR -$GIT_BEHIND)
-    fi
-
-    if GIT_UPLOAD_HASH=$(/usr/bin/git config --get "branch.$GIT_BRANCH.last-upload-hash"); then
-        GIT_BRANCH_HASH=$(/usr/bin/git rev-parse $GIT_BRANCH)
-        if [[ $GIT_UPLOAD_HASH == $GIT_BRANCH_HASH ]]; then
-            echo -n $(tint $CLEAN_COLOR '^')
-        else
-            echo -n $(tint $STAGE_COLOR '*')
-        fi
+        echo -n " $(tint $DIRTY_COLOR -$GIT_BEHIND)"
     fi
 }
 
@@ -135,7 +139,7 @@ function set_prompt {
         else
             PS1_PATH="$HERE"
         fi
-        PS1_BRANCH=:$(git_branch)
+        PS1_BRANCH=$SEPARATOR$(git_branch)
 
         async_stop_worker git
         async_start_worker git -n
@@ -146,11 +150,11 @@ function set_prompt {
         PS1_PATH="$HERE"
     fi
 
-    PS1="$PS1_HOST:$PS1_PATH$PS1_BRANCH$NEWLINE$PS1_CHAR"
+    PS1="$PS1_HOST$SEPARATOR$PS1_PATH$PS1_BRANCH$NEWLINE$PS1_CHAR"
 }
 
 git-prompt-traits-done() {
-    PS1_BRANCH=$3
+    PS1_BRANCH=$SEPARATOR$3
     set_prompt fast
     zle && zle reset-prompt
 }

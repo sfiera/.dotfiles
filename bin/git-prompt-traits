@@ -3,7 +3,7 @@
 source $ZSH/zsh/prompt.zsh
 
 if GIT_BRANCH=$(git_branch); then
-    echo -n ":$(tint $(git_color) $GIT_BRANCH)$(git_ahead $GIT_BRANCH)"
+    echo -n "$(tint $(git_color) $GIT_BRANCH)$(git_ahead $GIT_BRANCH)"
 else
-    echo -n ":$(tint $(git_color) $GIT_BRANCH)"
+    echo -n "$(tint $(git_color) $GIT_BRANCH)"
 fi
