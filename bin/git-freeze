@@ -4,6 +4,7 @@ from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
 import collections
+import os
 import subprocess
 import sys
 
@@ -32,6 +33,7 @@ status_entry_types = {
 
 
 def freeze():
+    os.chdir(subprocess.check_output("git rev-parse --show-toplevel".split()).strip())
     st = status()
 
     unmerged = sorted(f for f in st if is_unmerged(f))
