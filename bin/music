@@ -32,8 +32,8 @@ if [[ $#transcode > 0 ]]; then
     @ $TRANSCODE
 fi
 if [[ -e ~/Music/Library/ ]]; then
-    @ $RSYNC courtain::mp3-192k ~/Music/Library/
+    @ $RSYNC courtain:/srv/audio/mp3/192k/ ~/Music/Library/
 fi
 if [[ -e ~/Music/Mobile/ ]]; then
-    @ $RSYNC courtain::mp3-96k ~/Music/Mobile/
+    @ $RSYNC courtain:/srv/audio/mp3/96k/ ~/Music/Mobile/
 fi
