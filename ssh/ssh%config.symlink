@@ -7,12 +7,12 @@ Host florence florence.sfiera.net
     HostName florence.sfiera.net
     ForwardAgent yes
 
-Host courtain courtain.c.sfiera.net c.sfiera.net
-    HostName c.sfiera.net
+Host courtain courtain.c.sfiera.net
+    HostName courtain.c.sfiera.net
     ForwardAgent yes
 
-Host olifan olifan.c.sfiera.net
-    HostName olifan.c.sfiera.net
+Host olifan olifan.c.sfiera.net c.sfiera.net
+    HostName c.sfiera.net
     ForwardAgent yes
 
 Host joyeuse joyeuse.c.sfiera.net
