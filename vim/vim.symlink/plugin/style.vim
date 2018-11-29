@@ -37,4 +37,5 @@ augroup antares
     au BufRead,BufEnter */procyon*/*.py AutoFormatBuffer yapf
     au BufRead,BufEnter */.dotfiles*/*.py AutoFormatBuffer yapf
     au BufRead,BufEnter */procyon*/include/pn/* AutoFormatBuffer clang-format
+    au BufRead,BufEnter */acrux/*.py AutoFormatBuffer yapf
 augroup END
