@@ -286,6 +286,7 @@ let g:ycm_key_list_previous_completion = []
 let g:ycm_global_ycm_extra_conf = '~/.dotfiles/vim/ycm.py'
 let g:syntastic_c_compiler_options = '-fblocks'
 let g:syntastic_auto_loc_list = 0
+let g:syntastic_python_flake8_post_args='--ignore=E501'
 let g:buftabline_indicators = 1
 
 if filereadable(expand("~/.vim/bundle/procyon/autoload/procyon.vim"))
