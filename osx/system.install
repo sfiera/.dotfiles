@@ -98,7 +98,7 @@ pref com.apple.universalaccess stickyKeyBeepOnModifier -bool false
 APPS[com.apple.menuextra.clock]=SystemUIServer
 pref com.apple.menuextra.clock IsAnalog -bool true
 
-pref com.googlecode.iterm2 PrefsCustomFolder -string /Users/sfiera/.dotfiles/osx/prefs
+pref com.googlecode.iterm2 PrefsCustomFolder -string ~/.dotfiles/osx/prefs
 pref com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
 for NAME in $KILL; do
