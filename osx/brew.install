@@ -36,8 +36,8 @@ fi
          brew_install cmake
          brew_install dict
          brew_install direnv
-if_home  brew_install imagemagick
 if_home  brew_install librsvg --without-gtk+ --without-x11
+if_home  brew_install imagemagick --with-rsvg
          brew_install mosh
          brew_install moreutils
          brew_install mpc
