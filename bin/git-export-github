@@ -4,11 +4,12 @@ set -o errexit
 set -o nounset
 
 case $# in
-    0) BRANCH=$(/usr/bin/git symbolic-ref --short HEAD) ;;
-    1) BRANCH=$1 ;;
-    *) echo "usage: $(basename $0) [BRANCH]" ; exit 64;;
+    0) BRANCHES=($(/usr/bin/git symbolic-ref --short HEAD)) ;;
+    *) BRANCHES=($@) ;;
 esac
 
-HASH=$(/usr/bin/git rev-parse $BRANCH)
-git push -f github $BRANCH:$BRANCH
-git config branch.$BRANCH.last-upload-hash $HASH
+for BRANCH in $BRANCHES; do
+    HASH=$(/usr/bin/git rev-parse $BRANCH)
+    git push -f github $BRANCH:$BRANCH
+    git config branch.$BRANCH.last-upload-hash $HASH
+done
