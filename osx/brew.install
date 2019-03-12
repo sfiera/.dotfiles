@@ -54,6 +54,7 @@ if_home  brew_install youtube-dl
          brew_cask_install bartender
 if_home  brew_cask_install bonjour-browser
 if_home  brew_cask_install brogue
+         brew_cask_install docker
 if_home  brew_cask_install google-chrome
 if_home  brew_cask_install google-drive-file-stream
 if_home  brew_cask_install handbrake
