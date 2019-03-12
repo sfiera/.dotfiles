@@ -52,9 +52,6 @@
 [submodule "ext/scrooloose/syntastic"]
 	path = ext/scrooloose/syntastic
 	url = https://github.com/scrooloose/syntastic
-[submodule "ext/Valloric/YouCompleteMe"]
-	path = ext/Valloric/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe
 [submodule "ext/ConradIrwin/vim-bracketed-paste"]
 	path = ext/ConradIrwin/vim-bracketed-paste
 	url = https://github.com/ConradIrwin/vim-bracketed-paste
@@ -70,3 +67,15 @@
 [submodule "ext/arescentral/procyon"]
 	path = ext/arescentral/procyon
 	url = https://github.com/arescentral/procyon.git
+[submodule "ext/prabirshrestha/vim-lsp"]
+	path = ext/prabirshrestha/vim-lsp
+	url = https://github.com/prabirshrestha/vim-lsp
+[submodule "ext/prabirshrestha/async.vim"]
+	path = ext/prabirshrestha/async.vim
+	url = https://github.com/prabirshrestha/async.vim
+[submodule "ext/prabirshrestha/asyncomplete.vim"]
+	path = ext/prabirshrestha/asyncomplete.vim
+	url = https://github.com/prabirshrestha/asyncomplete.vim
+[submodule "ext/prabirshrestha/asyncomplete-lsp.vim"]
+	path = ext/prabirshrestha/asyncomplete-lsp.vim
+	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim

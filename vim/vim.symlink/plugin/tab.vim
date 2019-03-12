@@ -14,6 +14,8 @@ else
     let s:python = "python << EOF"
 endif
 exec s:python
+import vim
+
 def InsertTab():
     if int(vim.eval("pumvisible()")):
         return r"\<C-N>"

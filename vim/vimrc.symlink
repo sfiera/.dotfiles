@@ -162,8 +162,9 @@ noremap gV <C-V>
 noremap * <NOP>
 noremap # <NOP>
 
-noremap gg :ShowHideDoc<CR>
-noremap gz :YcmDiags<CR>
+noremap gg :pclose<CR>:LspHover<CR>
+noremap gd :LspDefinition<CR>
+noremap gz :LspDocumentDiagnostics<CR>
 noremap gx :lclose<CR>
 noremap gy :echo SyntaxItem()<CR>
 
@@ -299,6 +300,60 @@ augroup autoformat_settings
     autocmd FileType gn       AutoFormatBuffer  gn
     autocmd FileType procyon  AutoFormatBuffer  procyon
 augroup END
+
+if executable('pyls')
+    " pip install python-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ })
+endif
+
+if executable('clangd')
+    " brew install llvm
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'clangd',
+        \ 'cmd': {server_info->['clangd']},
+        \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+        \ })
+endif
+
+if executable('css-languageserver')
+    " npm install -g vscode-css-languageserver-bin
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'css-languageserver',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+        \ 'whitelist': ['css', 'less', 'sass'],
+        \ })
+endif
+
+if executable('html-languageserver')
+    " npm install -g vscode-html-languageserver-bin
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'html-languageserver',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'html-languageserver --stdio']},
+        \ 'whitelist': ['html'],
+        \ })
+endif
+
+if executable('typescript-language-server')
+    " npm install -g typescript-language-server
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'typescript-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+        \ 'whitelist': ['typescript', 'typescript.tsx'],
+        \ })
+endif
+
+if executable('kotlin-language-server')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'kotlin-language-server',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'kotlin-language-server']},
+        \ 'whitelist': ['kotlin'],
+        \ })
+endif
 " }}}
 " Other files {{{
 if glob(expand("~/.vimrc.local")) != ""
