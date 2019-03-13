@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 . ~/.dotfiles/zsh/prompt.zsh
+. ~/.zshrc.local
 
 tmux setw -g window-status-format          " #W "
 tmux setw -g window-status-current-format  " #W "
@@ -11,7 +12,7 @@ tmux set -g status-fg                      colour8
 tmux set -g status-bg                      colour10
 
 tmux setw -g window-status-bg              colour12
-tmux setw -g window-status-current-bg      colour${PS_COLORS[$MACHINE]-3}  # reversed
+tmux setw -g window-status-current-bg      colour"${PS_COLORS[$MACHINE]-$PS_COLORS[default]}"
 tmux setw -g window-status-fg              colour8
 
 tmux set -g status-left-attr               bold
