@@ -134,7 +134,6 @@ def get_head_color():
     files = subprocess.check_output("git status --porcelain".split()).decode("utf-8")
     for line in files.splitlines():
         color = yellow
-        print(repr(line))
         if line[1] != " ":
             color = red
             break
