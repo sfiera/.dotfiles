@@ -165,7 +165,7 @@ noremap # <NOP>
 noremap gg :pclose<CR>:LspHover<CR>
 noremap gd :LspDefinition<CR>
 noremap gz :LspDocumentDiagnostics<CR>
-noremap gx :lclose<CR>
+noremap gx :cclose<CR>
 noremap gy :echo SyntaxItem()<CR>
 
 nmap g1 <Plug>BufTabLine.Go(1)
