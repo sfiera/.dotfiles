@@ -354,6 +354,15 @@ if executable('kotlin-language-server')
         \ 'whitelist': ['kotlin'],
         \ })
 endif
+
+if executable('gopls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'gopls',
+        \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+        \ 'whitelist': ['go'],
+        \ })
+endif
+
 " }}}
 " Other files {{{
 if glob(expand("~/.vimrc.local")) != ""
