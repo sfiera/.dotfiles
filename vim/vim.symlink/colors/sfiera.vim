@@ -62,7 +62,7 @@ hi TablineSel   ctermbg=0       ctermfg=3       cterm=none
 hi TablineFill  ctermbg=232     ctermfg=10      cterm=none
 hi Tabline      ctermbg=232     ctermfg=10      cterm=none
 
-hi Visual       ctermbg=10
+hi Visual       ctermbg=none    ctermfg=none    cterm=reverse
 hi IncSearch    ctermbg=none    ctermfg=none    cterm=underline
 hi Search       ctermbg=none    ctermfg=none    cterm=underline
 hi Cursor       ctermfg=black   ctermbg=white
