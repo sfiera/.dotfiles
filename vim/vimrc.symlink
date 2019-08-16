@@ -260,23 +260,23 @@ if filereadable(expand("~/.vim/bundle/altr/autoload/altr.vim"))
     call altr#remove_all()
 
     call altr#define([
-    \   '%/include/%.h',       '%/include/%.hh',       '%/include/%.hpp',
-    \   '%/src/%.h',           '%/src/%.hh',           '%/src/%.hpp',
-    \   '%/src/%.c',           '%/src/%.cc',           '%/src/%.cpp',           '%/src/%.m',           '%/src/%.mm',
-    \   '%/src/%_test.c',      '%/src/%_test.cc',      '%/src/%_test.cpp',      '%/src/%_test.m',      '%/src/%_test.mm',
-    \   '%/src/%_unittest.c',  '%/src/%_unittest.cc',  '%/src/%_unittest.cpp',  '%/src/%_unittest.m',  '%/src/%_unittest.mm',
-    \   '%/src/%.*.c',         '%/src/%.*.cc',         '%/src/%.*.cpp',         '%/src/%.*.m',         '%/src/%.*.mm',
+    \   '%/include/%.h',  '%/include/%.hh',  '%/include/%.hpp',
+    \   '%/src/%.h',      '%/src/%.hh',      '%/src/%.hpp',
+    \   '%/src/%.c',      '%/src/%.cc',      '%/src/%.cpp',      '%/src/%.m',    '%/src/%.mm',
+    \   '%/src/%_*.c',    '%/src/%_*.cc',    '%/src/%_*.cpp',    '%/src/%_*.m',  '%/src/%_.mm',
+    \   '%/src/%.*.c',    '%/src/%.*.cc',    '%/src/%.*.cpp',    '%/src/%.*.m',  '%/src/%.*.mm',
     \   ])
 
     call altr#define([
-    \   '%.h',           '%.hh',           '%.hpp',
-    \   '%.c',           '%.cc',           '%.cpp',           '%.m',           '%.mm',
-    \   '%_test.c',      '%_test.cc',      '%_test.cpp',      '%_test.m',      '%_test.mm',
-    \   '%_unittest.c',  '%_unittest.cc',  '%_unittest.cpp',  '%_unittest.m',  '%_unittest.mm',
-    \   '%.*.c',         '%.*.cc',         '%.*.cpp',         '%.*.m',         '%.test.mm',
+    \   '%.h',    '%.hh',    '%.hpp',
+    \   '%.c',    '%.cc',    '%.cpp',    '%.m',    '%.mm',
+    \   '%_*.c',  '%_*.cc',  '%_*.cpp',  '%_*.m',  '%_*.mm',
+    \   '%.*.c',  '%.*.cc',  '%.*.cpp',  '%.*.m',  '%.*.mm',
     \   ])
 
-    call altr#define('%.py', '%_test.py', '%.*.py')
+    call altr#define('%.go', 'test_%.go', '%_test.go')
+
+    call altr#define('%.py', 'test_%.py', '%_test.py', '%.*.py')
 
     call altr#define('%.html', '%.css', '%.js')
 endif
