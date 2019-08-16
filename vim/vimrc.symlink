@@ -281,10 +281,6 @@ if filereadable(expand("~/.vim/bundle/altr/autoload/altr.vim"))
     call altr#define('%.html', '%.css', '%.js')
 endif
 
-let g:ycm_check_if_ycm_core_present = 0
-let g:ycm_key_list_select_completion = []
-let g:ycm_key_list_previous_completion = []
-let g:ycm_global_ycm_extra_conf = '~/.dotfiles/vim/ycm.py'
 let g:syntastic_c_compiler_options = '-fblocks'
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_python_flake8_post_args='--ignore=E501'
