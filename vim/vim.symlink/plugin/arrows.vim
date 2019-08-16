@@ -20,8 +20,8 @@ noremap! <silent> <Right>    →
 
 noremap! <silent> <S-Up>     ▲
 noremap! <silent> <S-Down>   ▼
-noremap! <silent> <S-Left>   ◀︎
-noremap! <silent> <S-Right>  ▶︎
+noremap! <silent> <S-Left>   ◀
+noremap! <silent> <S-Right>  ▶
 
 noremap! <silent> <C-Up>     △
 noremap! <silent> <C-Down>   ▽
