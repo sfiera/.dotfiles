@@ -56,7 +56,7 @@ def main():
     except ornithopter.UsageError as e:
         sys.stderr.write("%s: %s\n" % (progname, e))
         sys.stderr.write("".join([
-            "usage: {progname}\n",
+            "usage: {progname} [-A]\n",
             "       {progname} [-a] BRANCH\n",
             "       {progname} -c NEW [OLD]\n",
             "       {progname} -n NEW [OLD]\n",
