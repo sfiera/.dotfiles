@@ -4,9 +4,6 @@ if_not_osx return
 
 #/usr/bin/osascript $(dirname "$0")/system.applescript
 
-local -A APPS
-local -U KILL
-
 pref() {
     local DOMAIN KEY NARG TYPE VALUE FILE CURR
     DOMAIN=$1; shift
@@ -21,7 +18,7 @@ pref() {
         FILE=~/Library/Containers/$DOMAIN/Data/Library/Preferences/$DOMAIN.plist
     fi
 
-    if CURR="$(PlistBuddy -c "Print \"$KEY\"" $FILE 2>/dev/null)"; then
+    if CURR="$(/usr/libexec/PlistBuddy -c "Print \"$KEY\"" $FILE 2>/dev/null)"; then
         if [[ $CURR == $VALUE ]]; then
             return
         fi
@@ -34,11 +31,9 @@ pref() {
         *) CMD=($CMD $KEY) ;;
     esac
     CMD=($CMD $TYPE $VALUE)
-    KILL=($KILL ${APPS[$DOMAIN]})
     @ $CMD
 }
 
-APPS[-g]=SystemUIServer
 pref -g AppleAquaColorVariant -int 1
 pref -g AppleEnableMenuBarTransparency -bool false
 pref -g AppleHighlightColor -string "0.968627 0.831373 1.000000"  # purple
@@ -67,13 +62,11 @@ done
 
 pref com.codeux.irc.textual5 NSUserKeyEquivalents:'Delete Server…' -string '@~^$?'
 
-APPS[com.apple.dock]=Dock
 pref com.apple.dock autohide -bool true
 pref com.apple.dock magnification -bool false
 pref com.apple.dock orientation -string left
 pref com.apple.dock tilesize -int 128
 
-APPS[com.apple.finder]=Finder
 pref com.apple.finder FXPreferredViewStyle -string clmv
 pref com.apple.finder NewWindowTarget -string PfHm
 pref com.apple.finder NewWindowTargetPath -string "file:///Users/sfiera/"
@@ -89,18 +82,12 @@ pref com.apple.finder ShowStatusBar -bool true
 pref com.apple.screensaver askForPassword -int 1
 pref com.apple.screensaver askForPasswordDelay -int 5
 
-APPS[com.apple.universalaccess]=SystemUIServer
 pref com.apple.universalaccess stickyKey -bool true
 pref com.apple.universalaccess stickyKeyShowWindow -bool true
 pref com.apple.universalaccess stickyKeysLocation -int 0
 pref com.apple.universalaccess stickyKeyBeepOnModifier -bool false
 
-APPS[com.apple.menuextra.clock]=SystemUIServer
 pref com.apple.menuextra.clock IsAnalog -bool true
 
 pref com.googlecode.iterm2 PrefsCustomFolder -string ~/.dotfiles/osx/prefs
 pref com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
-
-for NAME in $KILL; do
-    @ killall $NAME
-done
