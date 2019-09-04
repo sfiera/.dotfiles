@@ -68,5 +68,4 @@ if_home  brew_cask_install mplayer-osx-extended
          brew_cask_install osxfuse
          brew_cask_install spectacle
 if_home  brew_cask_install steam
-if_home  brew_cask_install wmail
 if_home  brew_cask_install zoom
