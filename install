@@ -13,6 +13,10 @@ if ! [[ -d ~/.dotfiles ]]; then
 fi
 cd ~/.dotfiles
 
+if [[ "${SHELL##*/}" != zsh ]]; then
+    chsh -s "$(which zsh)"
+fi
+
 DEFS=~/.defs.sh
 if [[ ! -f $DEFS ]]; then
     case $(uname) in
