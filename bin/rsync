@@ -1,7 +1,0 @@
-#!/bin/zsh
-
-RSYNC=$(where rsync | grep -v ^$HOME | head -n1)
-case $(uname) in
-    Darwin) exec $RSYNC --iconv=UTF-8-MAC,UTF-8 "$@" ;;
-    *) exec $RSYNC --iconv=UTF-8,UTF-8 "$@" ;;
-esac

@@ -3,4 +3,4 @@ Install
 
 .. code:: sh
 
-   curl -L http://sfiera.net/setup.sh | zsh
+   zsh -c "$(curl -sL https://sfiera.net/setup.sh)"
