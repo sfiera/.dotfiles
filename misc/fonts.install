@@ -10,13 +10,14 @@ case $(uname) in
 esac
 
 local ANY_FONTS_INSTALLED GIT
-if [[ ! -d $FONTS/.git ]]; then
+if [[ ! -f $FONTS/.gitignore ]]; then
     GIT=(git --git-dir=$FONTS/.git --work-tree=$FONTS)
     @ mkdir -p $FONTS
     @ $GIT init
     @ $GIT remote add origin florence.sfiera.net:.fonts
-    @ $GIT pull origin master
-    ANY_FONTS_INSTALLED=1
+    if @ $GIT pull origin master; then
+        ANY_FONTS_INSTALLED=1
+    fi
 fi
 
 if [[ -n $ANY_FONTS_INSTALLED ]]; then
