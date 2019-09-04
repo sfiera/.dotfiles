@@ -1,9 +1,17 @@
 #!/bin/zsh
 
+set -o errexit
+set -o nounset
+
 function @ {
     echo "$@"
     $@
 }
+
+if ! [[ -d ~/.dotfiles ]]; then
+    git clone https://github.com/sfiera/.dotfiles ~/.dotfiles
+    cd ~/.dotfiles
+fi
 
 DEFS=~/.defs.sh
 if [[ ! -f $DEFS ]]; then
@@ -44,7 +52,6 @@ for prop in osx linux home corp laptop desktop server; do
     fi
 done
 
-setopt ERR_EXIT
 export ZSH=$(dirname $0)
 git submodule update --init --recursive
 for config_file ($ZSH/**/*.install) source $config_file
