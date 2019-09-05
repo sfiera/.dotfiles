@@ -65,6 +65,10 @@ set ttimeoutlen=133
 set completeopt=menuone
 
 set mouse=a
+
+if has("python3")
+    " testing python3 prevents python2 from loading
+endif
 " }}}
 " Key bindings {{{
 
