@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+exec docker run --rm --tty --interactive \
+    --volume="$HOME/src:/root/src" \
+    --workdir=/root/src \
+    $@ \
+    sfiera/dev zsh
