@@ -8,6 +8,8 @@ RUN apt-get update \
         curl \
         git \
         make \
+        python3 \
+        python3-pip \
         vim-nox \
         zsh \
  && rm -rf /var/lib/apt/lists/*
