@@ -12,7 +12,7 @@ export DIFF="git diff --no-index"
 export LC_ALL="en_US.UTF-8"
 
 declare -U path
-path=(~/bin ~/.local/bin $ZSH/bin /opt/local/bin /opt/local/sbin $path)
+path=(~/bin ~/.local/bin $ZSH/bin /opt/local/bin /usr/local/bin $path)
 export PATH
 
 fpath=($ZSH/zsh/fpath $fpath)
