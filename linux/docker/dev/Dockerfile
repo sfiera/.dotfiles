@@ -1,12 +1,13 @@
 ARG UBUNTU
 FROM ubuntu:$UBUNTU
 
+RUN echo "APT::Install-Recommends \"0\";\nAPT::Install-Suggests \"0\";" \
+    > /etc/apt/apt.conf.d/99no-recommends
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y \
         curl \
         git \
-        ssh \
-        sudo \
+        make \
         vim-nox \
         zsh \
  && rm -rf /var/lib/apt/lists/*
