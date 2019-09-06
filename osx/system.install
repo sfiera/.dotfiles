@@ -36,6 +36,7 @@ pref() {
 
 pref -g AppleAquaColorVariant -int 1
 pref -g AppleEnableMenuBarTransparency -bool false
+pref -g AppleAccentColor -int 6 # pink
 pref -g AppleHighlightColor -string "0.968627 0.831373 1.000000"  # purple
 pref -g AppleShowAllExtensions -bool true
 pref -g AppleShowScrollBars -string Always
