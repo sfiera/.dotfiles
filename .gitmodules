@@ -79,3 +79,9 @@
 [submodule "ext/prabirshrestha/asyncomplete-lsp.vim"]
 	path = ext/prabirshrestha/asyncomplete-lsp.vim
 	url = https://github.com/prabirshrestha/asyncomplete-lsp.vim
+[submodule "ext/ekalinin/Dockerfile"]
+	path = ext/ekalinin/Dockerfile
+	url = https://github.com/ekalinin/Dockerfile.vim.git
+[submodule "ext/google/vim-jsonnet"]
+	path = ext/google/vim-jsonnet
+	url = https://github.com/google/vim-jsonnet.git
