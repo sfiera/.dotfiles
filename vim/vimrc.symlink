@@ -295,11 +295,65 @@ if filereadable(expand("~/.vim/bundle/procyon/autoload/procyon.vim"))
     call procyon#InstallCodeFormatter()
 endif
 
+function! JsonnetGetFormatter() abort
+    let l:url = 'https://jsonnet.org/'
+    let l:formatter = {
+                \ 'name': 'jsonnet',
+                \ 'setup_instructions': 'install Jsonnet (' . l:url . ')'}
+
+    function l:formatter.IsAvailable() abort
+        return executable('jsonnet')
+    endfunction
+
+    function l:formatter.AppliesToBuffer() abort
+        return &filetype is# 'jsonnet'
+    endfunction
+
+    function l:formatter.Format() abort
+        let l:cmd = [ 'jsonnet', 'fmt', '-' ]
+        let l:input = join(getline(1, line('$')), "\n")
+
+        try
+            let l:result = maktaba#syscall#Create(l:cmd).WithStdin(l:input).Call(0)
+            let l:formatted = split(l:result.stdout, "\n")
+            call maktaba#buffer#Overwrite(1, line('$'), l:formatted)
+        catch /ERROR(ShellError):/
+            let l:errors = []
+            for line in split(l:result.stderr, "\n")
+                let l:tokens = matchlist(line, '^-:(\d+):(\d+):\s*(.*)')
+                if !empty(l:tokens)
+                    call add(l:errors, {
+                                \ "filename": @%,
+                                \ "lnum": l:tokens[1],
+                                \ "col": l:tokens[2],
+                                \ "text": l:tokens[3]})
+                endif
+            endfor
+
+            if empty(l:errors)
+                " Couldn't parse errors; display the whole error message.
+                call maktaba#error#Shout('Error formatting file: %s', l:result.stderr)
+            else
+                call setqflist(l:errors, 'r')
+                cc 1
+            endif
+        endtry
+    endfunction
+
+    return l:formatter
+endfunction
+function! JsonnetInstallCodeFormatter() abort
+    let l:codefmt_registry = maktaba#extension#GetRegistry('codefmt')
+    call l:codefmt_registry.AddExtension(JsonnetGetFormatter())
+endfunction
+call JsonnetInstallCodeFormatter()
+
 augroup autoformat_settings
     autocmd FileType bzl      AutoFormatBuffer  buildifier
     autocmd FileType go       AutoFormatBuffer  gofmt
     autocmd FileType gn       AutoFormatBuffer  gn
     autocmd FileType procyon  AutoFormatBuffer  procyon
+    autocmd FileType jsonnet  AutoFormatBuffer  jsonnet
 augroup END
 
 if executable('pyls')
