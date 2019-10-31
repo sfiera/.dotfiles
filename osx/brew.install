@@ -29,6 +29,13 @@ brew_cask_install() {
     fi
 }
 
+start_service() {
+    APP=$1; shift
+    if ! pgrep $APP >/dev/null; then
+        @ open "/Applications/$APP.app"
+    fi
+}
+
 if [[ ! -f "$BREW/bin/brew" ]]; then
     return
 fi
@@ -52,8 +59,8 @@ if_home  brew_install youtube-dl
 
          brew_install rsync
 
+if_home  brew_cask_install adobe-creative-cloud
          brew_cask_install bartender
-if_home  brew_cask_install bonjour-browser
 if_home  brew_cask_install brogue
          brew_cask_install docker
 if_home  brew_cask_install google-chrome
@@ -64,8 +71,11 @@ if_home  brew_cask_install handbrake
          brew_cask_install macvim
 if_home  brew_cask_install makemkv
 if_home  brew_cask_install minecraft
-if_home  brew_cask_install mplayer-osx-extended
          brew_cask_install osxfuse
          brew_cask_install spectacle
 if_home  brew_cask_install steam
-if_home  brew_cask_install zoom
+
+start_service "Bartender 3"
+start_service "Docker"
+start_service "Google Drive File Stream"
+start_service "Spectacle"
