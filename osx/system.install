@@ -43,6 +43,7 @@ pref -g AppleShowScrollBars -string Always
 
 pref -g AppleLocale -string en_US
 pref -g AppleMeasurementUnits -string Centimeters
+pref -g AppleTemperatureUnit -string Celsius
 pref -g AppleMetricUnits -bool true
 pref -g AppleICUForce24HourTime -bool true
 pref -g AppleICUDateFormatStrings:1 -string "y-MM-dd"
@@ -57,6 +58,7 @@ pref -g NSAutomaticQuoteSubstitutionEnabled -bool false
 pref -g NSAutomaticSpellingCorrectionEnabled -bool false
 pref -g NSAutomaticTextCompletionEnabled -bool false
 
+pref -g com.apple.keyboard.fnState -bool true
 pref -g NSUserKeyEquivalents:'Select Next Tab' -string '@$]'
 pref -g NSUserKeyEquivalents:'Select Previous Tab' -string '@$['
 
@@ -70,6 +72,7 @@ pref com.apple.dock autohide -bool true
 pref com.apple.dock magnification -bool false
 pref com.apple.dock orientation -string left
 pref com.apple.dock tilesize -int 128
+pref com.apple.dock show-recents -bool false
 
 pref com.apple.finder FXPreferredViewStyle -string clmv
 pref com.apple.finder NewWindowTarget -string PfHm
@@ -95,3 +98,5 @@ pref com.apple.menuextra.clock IsAnalog -bool true
 
 pref com.googlecode.iterm2 PrefsCustomFolder -string ~/.dotfiles/osx/prefs
 pref com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
+
+pref com.surteesstudios.Bartender statusBarImageNamed -string Star
