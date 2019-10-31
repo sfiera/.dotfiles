@@ -47,6 +47,9 @@ pref -g AppleMetricUnits -bool true
 pref -g AppleICUForce24HourTime -bool true
 pref -g AppleICUDateFormatStrings:1 -string "y-MM-dd"
 
+pref -g com.apple.sound.beep.flash -bool false
+pref -g com.apple.sound.beep.sound -string /System/Library/Sounds/Sosumi.aiff
+
 pref -g NSAutomaticCapitalizationEnabled -bool false
 pref -g NSAutomaticDashSubstitutionEnabled -bool false
 pref -g NSAutomaticPeriodSubstitutionEnabled -bool false
