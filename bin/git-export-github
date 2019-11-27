@@ -11,5 +11,4 @@ esac
 for BRANCH in $BRANCHES; do
     HASH=$(/usr/bin/git rev-parse $BRANCH)
     git push -f github $BRANCH:$BRANCH
-    git config branch.$BRANCH.last-upload-hash $HASH
 done

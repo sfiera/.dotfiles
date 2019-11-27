@@ -115,8 +115,9 @@ def append_branch_lines(branches, branch, prefix, head_color):
 
     try:
         upload = subprocess.check_output(
-            ["git", "config",
-             "branch.%s.last-upload-hash" % branch.short]).decode("utf-8").strip()
+            ["git", "rev-parse",
+             "github/%s" % branch.short],
+            stderr=subprocess.DEVNULL).decode("utf-8").strip()
     except subprocess.CalledProcessError:
         upload = ""
     if upload == branch.hash:

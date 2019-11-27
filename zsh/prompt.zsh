@@ -40,7 +40,7 @@ function git_branch {
 function git_ahead {
     local GIT_BRANCH=$1
 
-    if GIT_UPLOAD_HASH=$(/usr/bin/git config --get "branch.$GIT_BRANCH.last-upload-hash"); then
+    if GIT_UPLOAD_HASH=$(/usr/bin/git rev-parse "github/$GIT_BRANCH" 2>/dev/null); then
         GIT_BRANCH_HASH=$(/usr/bin/git rev-parse $GIT_BRANCH)
         if [[ $GIT_UPLOAD_HASH == $GIT_BRANCH_HASH ]]; then
             echo -n $(tint $CLEAN_COLOR $UPLOADED)
