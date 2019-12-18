@@ -1,0 +1,25 @@
+#!/bin/zsh
+
+if_not_osx return
+
+if ! where mas >/dev/null; then
+    echo >&2 "mas not installed; skipping"
+    return
+elif ! mas account > /dev/null; then
+    echo >&2 "mas not signed in; skipping"
+    return
+fi
+
+mas_install() {
+    ID=$1
+    if ! mas list |grep -w $ID >/dev/null; then
+        mas install $ID
+    fi
+}
+
+mas_install 803453959   # Slack
+mas_install 539883307   # LINE
+mas_install 1449412482  # Reeder 4
+mas_install 1262957439  # Textual 7
+mas_install 1004514425  # Quick Calendar
+mas_install 836505650   # Battery Monitor

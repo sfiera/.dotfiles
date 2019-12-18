@@ -46,6 +46,7 @@ fi
          brew_install hub
 if_home  brew_install librsvg
 if_home  brew_install imagemagick
+         brew_install mas
          brew_install mosh
          brew_install moreutils
          brew_install mpc
