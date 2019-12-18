@@ -63,7 +63,7 @@ if_home  brew_cask_install adobe-creative-cloud
          brew_cask_install bartender
 if_home  brew_cask_install brogue
          brew_cask_install docker
-if_home  brew_cask_install google-chrome
+         brew_cask_install google-chrome
 if_home  brew_cask_install google-drive-file-stream
 if_home  brew_cask_install handbrake
          brew_cask_install iterm2
