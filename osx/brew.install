@@ -75,7 +75,7 @@ if_home  brew_cask_install minecraft
          brew_cask_install spectacle
 if_home  brew_cask_install steam
 
-start_service "Bartender 3"
-start_service "Docker"
-start_service "Google Drive File Stream"
-start_service "Spectacle"
+         start_service "Bartender 3"
+         start_service "Docker"
+if_home  start_service "Google Drive File Stream"
+         start_service "Spectacle"
