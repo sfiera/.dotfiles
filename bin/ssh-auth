@@ -23,6 +23,6 @@ for machine in $@; do
             ssh -o PasswordAuthentication=yes \
                 -o KbdInteractiveAuthentication=yes \
                 $machine \
-                sh -c "cat >> ~/.ssh/authorized_keys"
+                sh -c '"mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"'
     fi
 done
