@@ -310,7 +310,7 @@ function! JsonnetGetFormatter() abort
     endfunction
 
     function l:formatter.Format() abort
-        let l:cmd = [ 'jsonnet', 'fmt', '-' ]
+        let l:cmd = [ 'jsonnetfmt', '-' ]
         let l:input = join(getline(1, line('$')), "\n")
 
         try
