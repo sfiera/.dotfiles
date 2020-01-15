@@ -13,7 +13,12 @@ Host courtain courtain.c.sfiera.net
     User sfiera
     ForwardAgent yes
 
-Host olifan olifan.c.sfiera.net c.sfiera.net
+Host olifan olifan.c.sfiera.net
+    HostName olifan.c.sfiera.net
+    User sfiera
+    ForwardAgent yes
+
+Host montjoie montjoie.c.sfiera.net c.sfiera.net
     HostName c.sfiera.net
     User sfiera
     ForwardAgent yes
