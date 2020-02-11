@@ -55,9 +55,6 @@
 [submodule "ext/ConradIrwin/vim-bracketed-paste"]
 	path = ext/ConradIrwin/vim-bracketed-paste
 	url = https://github.com/ConradIrwin/vim-bracketed-paste
-[submodule "ext/gn"]
-	path = ext/gn
-	url = https://chromium.googlesource.com/chromium/src/tools/gn
 [submodule "ext/mafredri/zsh-async"]
 	path = ext/mafredri/zsh-async
 	url = https://github.com/mafredri/zsh-async
@@ -85,3 +82,6 @@
 [submodule "ext/google/vim-jsonnet"]
 	path = ext/google/vim-jsonnet
 	url = https://github.com/google/vim-jsonnet.git
+[submodule "ext/gn"]
+	path = ext/gn
+	url = https://gn.googlesource.com/gn
