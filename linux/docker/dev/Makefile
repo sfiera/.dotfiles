@@ -1,4 +1,4 @@
-UBUNTU=disco
+UBUNTU=eoan
 BUILD_DATE=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 VERSION=$(shell date -u +'%Y.%m.%d')-$(UBUNTU)
 
