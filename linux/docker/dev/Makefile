@@ -1,4 +1,4 @@
-UBUNTU=eoan
+UBUNTU=focal
 BUILD_DATE=$(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 VERSION=$(shell date -u +'%Y.%m.%d')-$(UBUNTU)
 
