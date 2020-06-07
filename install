@@ -1,4 +1,6 @@
 #!/bin/zsh
+#
+# zsh -c "$(curl -sL https://sfiera.net/setup.sh)"
 
 set -o errexit
 set -o nounset
