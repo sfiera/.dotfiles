@@ -169,8 +169,11 @@ def overview(refs="refs/heads"):
             up.children[ref_short] = branch
             branch.root = False
 
-            ahead, behind = re.match(r"^(?:ahead (\d*))?[, ]*(?:behind (\d*))?$",
-                                     up_track).groups()
+            m = re.match(r"^(?:ahead (\d*))?[, ]*(?:behind (\d*))?$", up_track)
+            if m is None:
+                ahead, behind = 0, 0
+            else:
+                ahead, behind = m.groups()
             branch.ahead = int(ahead or 0)
             branch.behind = int(behind or 0)
 
