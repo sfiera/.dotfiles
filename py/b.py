@@ -115,8 +115,7 @@ def append_branch_lines(branches, branch, prefix, head_color):
 
     try:
         upload = subprocess.check_output(
-            ["git", "rev-parse",
-             "github/%s" % branch.short],
+            ["git", "rev-parse", "github/%s" % branch.short],
             stderr=subprocess.DEVNULL).decode("utf-8").strip()
     except subprocess.CalledProcessError:
         upload = ""
@@ -169,13 +168,13 @@ def overview(refs="refs/heads"):
             up.children[ref_short] = branch
             branch.root = False
 
-            m = re.match(r"^(?:ahead (\d*))?[, ]*(?:behind (\d*))?$", up_track)
-            if m is None:
-                ahead, behind = 0, 0
+            ahead_behind = re.match(r"^(?:ahead (\d*))?[, ]*(?:behind (\d*))?$", up_track)
+            if ahead_behind:
+                ahead, behind = ahead_behind.groups()
+                branch.ahead = int(ahead or 0)
+                branch.behind = int(behind or 0)
             else:
-                ahead, behind = m.groups()
-            branch.ahead = int(ahead or 0)
-            branch.behind = int(behind or 0)
+                branch.ahead, branch.behind = 0, 0
 
     lines = []
     for _, branch in sorted(branches.items()):
