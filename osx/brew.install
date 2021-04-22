@@ -9,7 +9,7 @@ if [[ ! -f "$BREW/bin/brew" ]]; then
     echo -n "Install Homebrew? [n] "
     read ANSWER
     if [[ $ANSWER =~ ^[Yy]$ ]]; then
-        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
     if_corp brew analytics off
 fi
@@ -25,7 +25,7 @@ brew_install() {
 brew_cask_install() {
     PKG=$1; shift
     if [[ ! -d "$BREW/Caskroom/$PKG" ]]; then
-        @ brew cask install $PKG $*
+        @ brew install --cask $PKG $*
     fi
 }
 
@@ -40,10 +40,11 @@ if [[ ! -f "$BREW/bin/brew" ]]; then
     return
 fi
 
+if_home  brew_install brogue
          brew_install cmake
          brew_install dict
          brew_install direnv
-         brew_install golang
+         brew_install go
          brew_install hub
 if_home  brew_install librsvg
 if_home  brew_install imagemagick
@@ -53,7 +54,7 @@ if_home  brew_install imagemagick
          brew_install mpc
          brew_install ninja
          brew_install optipng
-         brew_install python
+         brew_install python@3.9
 if_home  brew_install sassc
          brew_install tmux
 if_home  brew_install youtube-dl
@@ -63,10 +64,9 @@ if_home  brew_install youtube-dl
 
 if_home  brew_cask_install adobe-creative-cloud
          brew_cask_install bartender
-if_home  brew_cask_install brogue
          brew_cask_install docker
          brew_cask_install google-chrome
-if_home  brew_cask_install google-drive-file-stream
+if_home  brew_cask_install google-drive
 if_home  brew_cask_install handbrake
          brew_cask_install iterm2
          brew_cask_install macpass
@@ -74,10 +74,10 @@ if_home  brew_cask_install handbrake
 if_home  brew_cask_install makemkv
 if_home  brew_cask_install minecraft
          brew_cask_install osxfuse
-         brew_cask_install spectacle
+         brew_cask_install rectangle
 if_home  brew_cask_install steam
 
-         start_service "Bartender 3"
+         start_service "Bartender 4"
          start_service "Docker"
-if_home  start_service "Google Drive File Stream"
-         start_service "Spectacle"
+if_home  start_service "Google Drive"
+         start_service "Rectangle"
