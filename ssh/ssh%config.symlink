@@ -3,32 +3,32 @@ EscapeChar              ^^
 UserKnownHostsFile      ~/.ssh/known_hosts ~/.dotfiles/ssh/known_hosts
 StrictHostKeyChecking   ask
 
-Host florence florence.sfiera.net
+Host florence florence.sfiera.net florence.v.sfiera.net arescentral.org staging.arescentral.org
     HostName florence.v.sfiera.net
     User sfiera
     ForwardAgent yes
 
-Host courtain courtain.c.sfiera.net
+Host courtain courtain.v.sfiera.net
     HostName courtain.v.sfiera.net
     User sfiera
     ForwardAgent yes
 
-Host olifan olifan.c.sfiera.net
+Host olifan olifan.v.sfiera.net
     HostName olifan.v.sfiera.net
     User sfiera
     ForwardAgent yes
 
-Host montjoie montjoie.c.sfiera.net c.sfiera.net
+Host montjoie montjoie.v.sfiera.net
     HostName montjoie.v.sfiera.net
     User sfiera
     ForwardAgent yes
 
-Host joyeuse joyeuse.c.sfiera.net
+Host joyeuse joyeuse.v.sfiera.net
     HostName joyeuse.v.sfiera.net
     User sfiera
     ForwardAgent yes
 
-Host hauteclaire hauteclaire.c.sfiera.net
+Host hauteclaire hauteclaire.v.sfiera.net
     HostName hauteclaire.v.sfiera.net
     User sfiera
     ForwardAgent yes
