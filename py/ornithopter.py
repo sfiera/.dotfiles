@@ -55,14 +55,14 @@ class _Ornithopter(object):
         self.narg = 1
         while self.narg < len(self.args):
             arg = self.args[self.narg]
+            self.value = None
             if arg == "--":
                 break  # -- stops option parsing
             if arg[:2] == "--":
                 split = arg.split("=", 1)
                 if len(split) == 2:  # --option=value
                     option, value = split
-                    self.value = None
-                    yield option, lambda: self.use_long_value(value)
+                    yield option, self.use_long_value
                     if self.value is None:
                         raise UsageError("option %s: no argument permitted" % option)
                 else:  # --option; --option value
@@ -71,41 +71,64 @@ class _Ornithopter(object):
             elif (arg[:1] == "-") and arg[1:]:  # -abco; -abcovalue; -abco value
                 self.nch = 1
                 while self.nch < len(arg):
-                    self.value = None
                     yield "-" + arg[self.nch], self.find_short_value
                     self.nch += 1
             else:  # -, argument
-                yield None, lambda: arg
+                yield None, self.use_arg
             self.narg += 1
 
         # arguments after --
         for narg in range(self.narg + 1, len(self.args)):
-            yield None, lambda: self.args[narg]
+            self.value = None
+            self.narg = narg
+            yield None, self.use_arg
 
-    def use_long_value(self, value):
-        self.value = value
-        return value
-
-    def find_long_value(self):
-        if self.value is None:
-            if self.narg + 1 >= len(self.args):
-                raise UsageError("option %s: argument required" % self.args[self.narg])
-            self.narg += 1
-            self.value = self.args[self.narg]
-        return self.value
-
-    def find_short_value(self):
+    def use_long_value(self, conv=None):
         if self.value is None:
             arg = self.args[self.narg]
+            option, value = arg.split("=", 1)
+            name = f"option {option}"
+            self.value = self._convert(name, value, conv)
+        return self.value
+
+    def use_arg(self, conv=None):
+        if self.value is None:
+            value = self.args[self.narg]
+            name = "arg"
+            self.value = self._convert(name, value, conv)
+        return self.value
+
+    def find_long_value(self, conv=None):
+        if self.value is None:
+            name = f"option {self.args[self.narg]}"
+            if self.narg + 1 >= len(self.args):
+                raise UsageError(f"{name}: argument required")
+            self.narg += 1
+            self.value = self._convert(name, self.args[self.narg], conv)
+        return self.value
+
+    def find_short_value(self, conv=None):
+        if self.value is None:
+            arg = self.args[self.narg]
+            name = f"option -{arg[self.nch]}"
             if self.nch + 1 < len(arg):  # chars remain in arg
-                self.value = arg[self.nch + 1:]
+                self.value = self._convert(name, arg[self.nch + 1:], conv)
                 self.nch += len(self.value)
             elif self.narg + 1 < len(self.args):  # args remain in args
                 self.narg += 1
-                self.value = self.args[self.narg]
+                self.value = self._convert(name, self.args[self.narg], conv)
             else:
-                raise UsageError("option -%s: argument required" % arg[self.nch])
+                raise UsageError(f"{name}: argument required")
         return self.value
+
+    @staticmethod
+    def _convert(name, value, conv):
+        if conv is None:
+            return value
+        try:
+            return conv(value)
+        except Exception as e:
+            raise UsageError(f"{name}: {e}")
 
 
 class UsageError(Exception):
@@ -130,3 +153,28 @@ class ExtraArgument(UsageError):
 class MissingArgument(UsageError):
     def __str__(self):
         return "missing argument: %s" % self.args
+
+
+def main():
+    progname, opts = parse()
+    try:
+        integers = []
+        accumulate = max
+        for opt, value in opts:
+            if opt == "--sum":
+                accumulate = sum
+            elif opt:
+                raise InvalidOption(opt)
+            else:
+                integers.append(value(int))
+        if not integers:
+            raise MissingArgument("integers")
+        print(accumulate(integers))
+    except UsageError as e:
+        print(f"usage: {progname} [--sum] N [N ...]", file=sys.stderr)
+        print(f"{progname}: {e}", file=sys.stderr)
+        sys.exit(64)
+
+
+if __name__ == "__main__":
+    main()
