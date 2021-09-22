@@ -1,5 +1,6 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
+import base64
 import subprocess
 import sys
 
@@ -10,12 +11,12 @@ elif len(sys.argv) == 2:
     progname, path = sys.argv
     sub = subprocess.Popen(["file", "-b", "--mime-type", path],
                            stdout=subprocess.PIPE)
-    mime = sub.communicate()[0].strip()
-    f = open(path)
+    mime = sub.communicate()[0].strip().decode("utf-8")
+    f = open(path, "rb")
 
 sys.stdout.write("data:%s;base64," % mime)
 data = f.read(1023)
 while data:
-    sys.stdout.write(data.encode("base64").replace("\n", ""))
+    sys.stdout.write(base64.b64encode(data).decode("ascii"))
     data = f.read(1023)
 print
