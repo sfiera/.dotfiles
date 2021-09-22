@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+
+import argparse
+import base64
+import sys
+
+
+def show_image(*, data, **fields):
+    fields["inline"] = 1
+    fields = {k: field_string(v) for k, v in fields.items()}
+    fields = ";".join("%s=%s" % kv for kv in fields.items())
+    data = base64.b64encode(data).decode("ascii")
+    sys.stdout.write("\033]1337;File=%s:%s\007\n" % (fields, data))
+
+
+def field_string(value):
+    if isinstance(value, int):
+        return "%d" % value
+    if isinstance(value, str):
+        value = value.encode("utf-8")
+    if isinstance(value, bytes):
+        return base64.b64encode(value).decode("ascii")
+    raise TypeError(value)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("name", nargs="?")
+    args = parser.parse_args()
+
+    fields = {}
+    if args.name is not None:
+        fields["name"] = args.name
+        with open(args.name, "rb") as f:
+            data = f.read()
+            fields["size"] = len(data)
+    else:
+        assert False
+
+    show_image(data=data, **fields)
+
+
+if __name__ == "__main__":
+    main()
