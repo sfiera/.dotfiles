@@ -17,9 +17,10 @@ mas_install() {
     fi
 }
 
-mas_install 803453959   # Slack
-mas_install 539883307   # LINE
-mas_install 1449412482  # Reeder 4
-mas_install 1262957439  # Textual 7
-mas_install 1004514425  # Quick Calendar
 mas_install 836505650   # Battery Monitor
+mas_install 539883307   # LINE
+mas_install 1004514425  # Quick Calendar
+mas_install 1449412482  # Reeder 4
+mas_install 803453959   # Slack
+mas_install 1475387142  # Tailscale
+mas_install 1262957439  # Textual 7
