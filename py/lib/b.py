@@ -3,12 +3,12 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import collections
+import ornithopter
 import os
 import re
 import shlex
 import subprocess
 import sys
-from . import ornithopter
 
 
 class CommandError(Exception):
