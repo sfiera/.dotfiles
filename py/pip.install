@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+pip_install() {
+    PKG=$1
+    if ! pip3 -qqq show $PKG; then
+        pip3 install $PKG
+    fi
+}
+
+pip_install docutils
+pip_install see
+pip_install yapf
