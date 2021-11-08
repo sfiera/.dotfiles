@@ -8,7 +8,7 @@ remoterepository    = sfz
 
 [Repository local]
 type                = Maildir
-localfolders        = ~/.mail
+localfolders        = /mnt/media/correo
 sep                 = /
 
 [Repository sfz]
