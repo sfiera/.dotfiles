@@ -13,6 +13,7 @@ PS_COLORS=(
     hauteclaire 13
     courtain 4
     olifan 6
+    montjoie 6
 
     default 2
 )
