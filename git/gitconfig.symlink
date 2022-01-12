@@ -46,7 +46,7 @@
 
 	fu = commit --fixup HEAD
 	fold = commit --amend -CHEAD --reset-author
-	tmp = commit -mTemporary.
+	tmp = commit -mTemporary
 
 	ff = merge --ff-only
 	mm = merge --no-ff
