@@ -7,6 +7,9 @@
 	excludesfile = ~/.dotfiles/git/exclude
 	whitespace = trailing-space,space-before-tab
 
+[init]
+	defaultBranch = main
+
 [http]
 	cookieFile = ~/.gitcookies
 
