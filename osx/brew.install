@@ -44,6 +44,7 @@ if_home  brew_install brogue
          brew_install cmake
          brew_install dict
          brew_install direnv
+         brew_install dockutil
          brew_install go
          brew_install hub
 if_home  brew_install librsvg
