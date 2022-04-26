@@ -1,0 +1,12 @@
+#!/bin/zsh
+
+if [[ ! -f "/usr/local/bin/dockutil" ]]; then
+    return
+fi
+
+@ dockutil --remove all
+@ dockutil --add /Applications/Google\ Chrome.app --section apps
+@ dockutil --add /Applications/iTerm.app --section apps
+@ dockutil --add /Applications/Slack.app --section apps
+@ dockutil --add /Applications/Reeder.app --section apps
+@ dockutil --add ~/Downloads --section others --view grid --display stack --sort dateadded
