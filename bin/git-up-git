@@ -3,26 +3,30 @@
 set -o errexit
 set -o nounset
 
-if ! REMOTE=$(git config --get branch.master.remote); then
-    echo >&2 "master has no remote"
+if REMOTE=$(git config --get branch.main.remote); then
+    BRANCH=main
+elif REMOTE=$(git config --get branch.master.remote); then
+    BRANCH=master
+else
+    echo >&2 "main/master has no remote"
     exit 1
 fi
 
-SOURCE=refs/heads/master
-TARGET=refs/remotes/$REMOTE/master
+SOURCE=refs/heads/$BRANCH
+TARGET=refs/remotes/$REMOTE/$BRANCH
 
 git fetch $REMOTE
 if git merge-base --is-ancestor $TARGET $SOURCE; then
     if git merge-base --is-ancestor $SOURCE $TARGET; then
-        echo >&2 "master is up-to-date"
+        echo >&2 "$BRANCH is up-to-date"
     else
-        echo >&2 "master is ahead of $REMOTE/master"
+        echo >&2 "$BRANCH is ahead of $REMOTE/$BRANCH"
     fi
 elif git merge-base --is-ancestor $SOURCE $TARGET; then
     FROM=$(git show-ref $SOURCE -s)
     TO=$(git show-ref $TARGET -s)
 
-    echo >&2 "updating master to $REMOTE/master ${FROM[1,7]}..${TO[1,7]}"
+    echo >&2 "updating $BRANCH to $REMOTE/$BRANCH ${FROM[1,7]}..${TO[1,7]}"
     if [[ $(git symbolic-ref HEAD) == $SOURCE ]]; then
         git merge --ff-only --no-stat --quiet $TARGET
     else
@@ -30,6 +34,6 @@ elif git merge-base --is-ancestor $SOURCE $TARGET; then
     fi
     git --no-pager diff --stat $FROM $TO || true
 else
-    echo >&2 "master and $REMOTE/master have diverged"
+    echo >&2 "$BRANCH and $REMOTE/$BRANCH have diverged"
     exit 1
 fi
