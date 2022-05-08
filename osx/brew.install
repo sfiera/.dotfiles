@@ -70,11 +70,11 @@ if_home  brew_cask_install adobe-creative-cloud
 if_home  brew_cask_install google-drive
 if_home  brew_cask_install handbrake
          brew_cask_install iterm2
+         brew_cask_install macfuse
          brew_cask_install macpass
          brew_cask_install macvim
 if_home  brew_cask_install makemkv
 if_home  brew_cask_install minecraft
-         brew_cask_install osxfuse
          brew_cask_install rectangle
 if_home  brew_cask_install steam
 
