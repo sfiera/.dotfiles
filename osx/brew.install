@@ -79,6 +79,4 @@ if_home  brew_cask_install minecraft
 if_home  brew_cask_install steam
 
          start_service "Bartender 4"
-         start_service "Docker"
-if_home  start_service "Google Drive"
          start_service "Rectangle"
