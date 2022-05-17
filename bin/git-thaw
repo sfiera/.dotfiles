@@ -13,7 +13,7 @@ RESET_TYPES = {
 
 def freeze():
     while True:
-        msg = subprocess.check_output("git show --format=%B -s HEAD".split())
+        msg = subprocess.check_output("git show --format=%B -s HEAD".split(), encoding="utf-8")
         if msg not in RESET_TYPES:
             break
         subprocess.check_call("git reset HEAD^ --quiet".split() +
