@@ -3,7 +3,7 @@
 " TODO: make repetition work, if that's actually possible
 "
 if !(has('python') || has('python3'))
-    exit
+    finish
 endif
 
 inoremap <expr> <Tab> InsertTab()
