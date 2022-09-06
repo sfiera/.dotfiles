@@ -27,12 +27,12 @@ augroup antares
     au BufRead,BufEnter */rezin*/*.{cpp,hpp,m,c,h} AutoFormatBuffer clang-format
     au BufRead,BufEnter */procyon*/*.{cpp,hpp,m,c,h} AutoFormatBuffer clang-format
 
-    au BufRead,BufEnter */antares*/*.py AutoFormatBuffer yapf
-    au BufRead,BufEnter */qalb*/*.py AutoFormatBuffer yapf
-    au BufRead,BufEnter */procyon*/*.py AutoFormatBuffer yapf
+    au BufRead,BufEnter */antares*/*.py AutoFormatBuffer black
+    au BufRead,BufEnter */qalb*/*.py AutoFormatBuffer black
+    au BufRead,BufEnter */procyon*/*.py AutoFormatBuffer black
 augroup END
 
 augroup python
-    au BufRead,BufEnter */.dotfiles*/*.py AutoFormatBuffer yapf
-    au BufRead,BufEnter */acrux/*.py AutoFormatBuffer yapf
+    au BufRead,BufEnter */.dotfiles*/*.py AutoFormatBuffer black
+    au BufRead,BufEnter */acrux/*.py AutoFormatBuffer black
 augroup END
