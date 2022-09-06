@@ -55,15 +55,19 @@ def main():
         sys.exit(1)
     except ornithopter.UsageError as e:
         sys.stderr.write("%s: %s\n" % (progname, e))
-        sys.stderr.write("".join([
-            "usage: {progname} [-A]\n",
-            "       {progname} [-a] BRANCH\n",
-            "       {progname} -c NEW [OLD]\n",
-            "       {progname} -n NEW [OLD]\n",
-            "       {progname} -m NEW [OLD]\n",
-            "       {progname} -d BRANCH…\n",
-            "       {progname} -D BRANCH…\n",
-        ]).format(progname=progname))
+        sys.stderr.write(
+            "".join(
+                [
+                    "usage: {progname} [-A]\n",
+                    "       {progname} [-a] BRANCH\n",
+                    "       {progname} -c NEW [OLD]\n",
+                    "       {progname} -n NEW [OLD]\n",
+                    "       {progname} -m NEW [OLD]\n",
+                    "       {progname} -d BRANCH…\n",
+                    "       {progname} -D BRANCH…\n",
+                ]
+            ).format(progname=progname)
+        )
         sys.exit(64)
     except subprocess.CalledProcessError as e:
         sys.exit(e.returncode)
@@ -114,9 +118,14 @@ def append_branch_lines(branches, branch, prefix, head_color):
     behind = red("-%d" % branch.behind) if branch.behind else ""
 
     try:
-        upload = subprocess.check_output(
-            ["git", "rev-parse", "github/%s" % branch.short],
-            stderr=subprocess.DEVNULL).decode("utf-8").strip()
+        upload = (
+            subprocess.check_output(
+                ["git", "rev-parse", "github/%s" % branch.short],
+                stderr=subprocess.DEVNULL,
+            )
+            .decode("utf-8")
+            .strip()
+        )
     except subprocess.CalledProcessError:
         upload = ""
     if upload == branch.hash:
@@ -124,7 +133,9 @@ def append_branch_lines(branches, branch, prefix, head_color):
     elif upload:
         upload = red("x")
 
-    branches.append((prefix + name, upload, ahead, behind, dim(branch.hash_short or "")))
+    branches.append(
+        (prefix + name, upload, ahead, behind, dim(branch.hash_short or ""))
+    )
     for _, child in sorted(branch.children.items()):
         append_branch_lines(branches, child, prefix + "  ", head_color)
 
@@ -143,23 +154,34 @@ def get_head_color():
 def overview(refs="refs/heads"):
     head_color = get_head_color()
 
-    refs = subprocess.check_output([
-        "git", "for-each-ref", "--shell", "--format=" + " ".join("%%(%s)" % field for field in [
-            "HEAD", "refname", "refname:short", "upstream", "upstream:short",
-            "upstream:track,nobracket", "objectname", "objectname:short"
-        ]), refs
-    ])
+    fmt = " ".join(
+        f"%({field})"
+        for field in [
+            "HEAD",
+            "refname",
+            "refname:short",
+            "upstream",
+            "upstream:short",
+            "upstream:track,nobracket",
+            "objectname",
+            "objectname:short",
+        ]
+    )
+    refs = subprocess.check_output(
+        ["git", "for-each-ref", "--shell", "--format=" + fmt, refs]
+    )
     branches = {}
     for ref in refs.splitlines():
         head, ref, ref_short, up, up_short, up_track, hash, hash_short = shlex.split(
-            ref.decode("utf-8"))
+            ref.decode("utf-8")
+        )
 
         if ref_short not in branches:
             branches[ref_short] = Branch(ref, ref_short)
         branch = branches[ref_short]
         branch.hash = hash
         branch.hash_short = hash_short
-        branch.is_head = (head == "*")
+        branch.is_head = head == "*"
 
         if up:
             if up_short not in branches:
@@ -168,7 +190,9 @@ def overview(refs="refs/heads"):
             up.children[ref_short] = branch
             branch.root = False
 
-            ahead_behind = re.match(r"^(?:ahead (\d*))?[, ]*(?:behind (\d*))?$", up_track)
+            ahead_behind = re.match(
+                r"^(?:ahead (\d*))?[, ]*(?:behind (\d*))?$", up_track
+            )
             if ahead_behind:
                 ahead, behind = ahead_behind.groups()
                 branch.ahead = int(ahead or 0)
@@ -201,7 +225,7 @@ def attach(branches):
         raise ornithopter.UsageError("need a branch")
     elif len(branches) > 1:
         raise ornithopter.UsageError("too many branches")
-    branch, = branches
+    (branch,) = branches
     if not is_branch(branch):
         raise CommandError("%s: branch not found" % branch)
     subprocess.check_call(["git", "freeze"])

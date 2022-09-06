@@ -112,7 +112,7 @@ class _Ornithopter(object):
             arg = self.args[self.narg]
             name = f"option -{arg[self.nch]}"
             if self.nch + 1 < len(arg):  # chars remain in arg
-                self.value = self._convert(name, arg[self.nch + 1:], conv)
+                self.value = self._convert(name, arg[self.nch + 1 :], conv)
                 self.nch += len(self.value)
             elif self.narg + 1 < len(self.args):  # args remain in args
                 self.narg += 1
