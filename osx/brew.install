@@ -48,6 +48,7 @@ if_home  brew_install brogue
          brew_install dockutil
          brew_install docker
          brew_install go
+         brew_install go-jsonnet
          brew_install hub
 if_home  brew_install librsvg
 if_home  brew_install imagemagick
