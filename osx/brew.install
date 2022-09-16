@@ -42,9 +42,11 @@ fi
 
 if_home  brew_install brogue
          brew_install cmake
+         brew_install colima
          brew_install dict
          brew_install direnv
          brew_install dockutil
+         brew_install docker
          brew_install go
          brew_install hub
 if_home  brew_install librsvg
@@ -65,7 +67,6 @@ if_home  brew_install youtube-dl
 
 if_home  brew_cask_install adobe-creative-cloud
          brew_cask_install bartender
-         brew_cask_install docker
          brew_cask_install google-chrome
 if_home  brew_cask_install google-drive
 if_home  brew_cask_install handbrake
