@@ -4,6 +4,11 @@ if_not_osx return
 
 #/usr/bin/osascript $(dirname "$0")/system.applescript
 
+if [[ ! -f ~/Library/Sounds/Sosumi.aiff ]]; then
+    @ mkdir -p ~/Library/Sounds
+    @ cp osx/sosumi.aiff ~/Library/Sounds/Sosumi.aiff
+fi
+
 pref() {
     local DOMAIN KEY NARG TYPE VALUE FILE CURR
     DOMAIN=$1; shift
@@ -49,7 +54,7 @@ pref -g AppleICUForce24HourTime -bool true
 pref -g AppleICUDateFormatStrings:1 -string "y-MM-dd"
 
 pref -g com.apple.sound.beep.flash -bool false
-pref -g com.apple.sound.beep.sound -string /System/Library/Sounds/Sosumi.aiff
+#pref -g com.apple.sound.beep.sound -string ~/Sounds/Sosumi.aiff
 
 pref -g NSAutomaticCapitalizationEnabled -bool false
 pref -g NSAutomaticDashSubstitutionEnabled -bool false
