@@ -18,6 +18,7 @@ if [[ ! -d $FONTS/.git ]]; then
     if @ $GIT pull origin master; then
         ANY_FONTS_INSTALLED=1
     fi
+    @ $GIT branch -u origin/master master
 fi
 
 if [[ -n $ANY_FONTS_INSTALLED ]]; then
