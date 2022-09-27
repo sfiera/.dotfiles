@@ -3,7 +3,11 @@
 if_not_osx return
 
 local BREW
-BREW=/usr/local
+if [[ $(uname -m) == arm64 ]]; then
+    BREW=/opt/homebrew
+else
+    BREW=/usr/local
+fi
 
 if [[ ! -f "$BREW/bin/brew" ]]; then
     echo -n "Install Homebrew? [n] "
