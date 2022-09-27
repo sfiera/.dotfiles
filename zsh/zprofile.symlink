@@ -2,5 +2,5 @@
 
 # Add common path locations
 declare -U path
-path=(~/bin ~/.local/bin $ZSH/bin /opt/local/bin /opt/local/sbin $path)
+path=(~/bin ~/.local/bin $ZSH/bin /opt/local/bin /opt/local/sbin /opt/homebrew/bin $path)
 export PATH
