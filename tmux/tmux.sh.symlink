@@ -8,20 +8,12 @@ tmux setw -g window-status-current-format  " #W "
 tmux set -g status-left                    " §#S "
 tmux set -g status-right                   " $MACHINE "
 
-tmux set -g status-fg                      colour8
-tmux set -g status-bg                      colour10
+tmux set -g status-style                   fg=colour8,bg=colour10
 
-tmux setw -g window-status-bg              colour12
-tmux setw -g window-status-current-bg      colour"${PS_COLORS[$MACHINE]-$PS_COLORS[default]}"
-tmux setw -g window-status-fg              colour8
+tmux setw -g window-status-style           fg=colour8,bg=colour12
+tmux setw -g window-status-current-style   bg=colour"${PS_COLORS[$MACHINE]-$PS_COLORS[default]}",bold,reverse
 
-tmux set -g status-left-attr               bold
-tmux set -g status-right-attr              bold
-tmux setw -g window-status-current-attr    bold,reverse
-tmux setw -g window-status-bell-attr       none
-tmux setw -g window-status-activity-attr   none
-
-case "$(tmux -V)" in
-    tmux\ 1.*) tmux setw -g mode-mouse on ;;
-    tmux\ 2.*) tmux set -g mouse on ;;
-esac
+tmux set -g status-left-style              bold
+tmux set -g status-right-style             bold
+# tmux setw -g window-status-bell-attr       none
+# tmux setw -g window-status-activity-attr   none
