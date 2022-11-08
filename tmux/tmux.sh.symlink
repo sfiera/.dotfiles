@@ -1,7 +1,9 @@
 #!/bin/zsh
 
 . ~/.dotfiles/zsh/prompt.zsh
-. ~/.zshrc.local
+if [[ -f ~/.zshrc.local ]]; then
+    source ~/.zshrc.local
+fi
 
 tmux setw -g window-status-format          " #W "
 tmux setw -g window-status-current-format  " #W "
