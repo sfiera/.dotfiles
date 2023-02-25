@@ -68,6 +68,8 @@ hi Search       ctermbg=none    ctermfg=none    cterm=underline
 hi Cursor       ctermfg=black   ctermbg=white
 hi LineNr       ctermfg=magenta
 hi MatchParen   ctermbg=0       ctermfg=15      cterm=bold
+
+hi Pmenu        ctermbg=none    ctermfg=none    cterm=none
 " }}}
 " Folds {{{
 hi Folded       ctermbg=none    ctermfg=4     
