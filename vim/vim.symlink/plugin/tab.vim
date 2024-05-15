@@ -7,6 +7,8 @@ if !(has('python') || has('python3'))
 endif
 
 inoremap <expr> <Tab> InsertTab()
+inoremap <expr><S-Tab> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 
 if has('python3')
     let s:python = "python3 << EOF"
@@ -68,7 +70,7 @@ def InsertTab():
     if ins == col:
         return width * r"\<Space>"
     else:
-        return (ins - col) * '\<Right>'
+        return (ins - col) * r"\<Right>"
 EOF
 
 function! InsertTab()
