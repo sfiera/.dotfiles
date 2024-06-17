@@ -18,10 +18,10 @@ Example:
             else:
                 raise ornithopter.InvalidOption(opt)
             continue
-        integers.append(int(value()))
+        integers.append(value(int))
 
-    args.log.write("%s\\n" % sum(integers))
-    args.log.close()
+    log.write("%s\\n" % sum(integers))
+    log.close()
 """
 
 from __future__ import absolute_import, division, print_function, unicode_literals
