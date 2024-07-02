@@ -86,5 +86,5 @@
 	path = ext/gn
 	url = https://gn.googlesource.com/gn
 [submodule "vim/vim.symlink/ext/EmmaEwert/vim-rgbds"]
-	path = vim/vim.symlink/ext/EmmaEwert/vim-rgbds
+	path = ext/EmmaEwert/vim-rgbds
 	url = https://github.com/EmmaEwert/vim-rgbds
