@@ -283,6 +283,8 @@ if filereadable(expand("~/.vim/bundle/altr/autoload/altr.vim"))
     call altr#define('%.py', 'test_%.py', '%_test.py', '%.*.py')
 
     call altr#define('%.html', '%.css', '%.js')
+
+    call altr#define('%.asm', '%.inc', '%.sym')
 endif
 
 let g:syntastic_c_compiler_options = '-fblocks'
