@@ -139,6 +139,7 @@ noremap ' J
 
 " Make <Space> useful {{{
 nmap <silent> <Space> <Plug>(RepeatDot)
+nmap <silent> <S-Space> <Plug>(RepeatDot)
 
 nnoremap . <NOP>
 " }}}
