@@ -2,11 +2,10 @@
 
 pip_install() {
     PKG=$1
-    if ! pip3 -qqq show $PKG; then
-        pip3 install $PKG
+    if ! python3 -m pip -qqq show $PKG; then
+        python3 -m pip install $PKG --user --break-system-packages
     fi
 }
 
-pip_install docutils
 pip_install see
-pip_install yapf
+pip_install black
