@@ -85,5 +85,5 @@ if_home  brew_cask_install minecraft
          brew_cask_install rectangle
 if_home  brew_cask_install steam
 
-         start_service "Bartender 4"
+         start_service "Bartender 5"
          start_service "Rectangle"
