@@ -14,7 +14,7 @@ if [[ ! -d $FONTS/.git ]]; then
     GIT=(git --git-dir=$FONTS/.git --work-tree=$FONTS)
     @ mkdir -p $FONTS
     @ $GIT init
-    @ $GIT remote add origin florence.sfiera.net:.fonts
+    @ $GIT remote add origin https://github.com/sfiera/fonts.git
     if @ $GIT pull origin master; then
         ANY_FONTS_INSTALLED=1
     fi
