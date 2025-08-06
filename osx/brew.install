@@ -51,6 +51,7 @@ if_home  brew_install brogue
          brew_install direnv
          brew_install dockutil
          brew_install docker
+         brew_install gh
          brew_install go
          brew_install go-jsonnet
          brew_install hub
