@@ -15,10 +15,10 @@ if [[ ! -d $FONTS/.git ]]; then
     @ mkdir -p $FONTS
     @ $GIT init
     @ $GIT remote add origin https://github.com/sfiera/fonts.git
-    if @ $GIT pull origin master; then
+    if @ $GIT pull origin main; then
         ANY_FONTS_INSTALLED=1
     fi
-    @ $GIT branch -u origin/master master
+    @ $GIT branch -u origin/main main
 fi
 
 if [[ -n $ANY_FONTS_INSTALLED ]]; then
