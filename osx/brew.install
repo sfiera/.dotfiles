@@ -63,7 +63,7 @@ if_home  brew_install imagemagick
          brew_install mpc
          brew_install ninja
          brew_install optipng
-         brew_install python@3.9
+         brew_install python@3.13
 if_home  brew_install sassc
          brew_install tmux
 if_home  brew_install youtube-dl
