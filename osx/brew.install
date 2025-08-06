@@ -79,7 +79,7 @@ if_home  brew_cask_install handbrake
          brew_cask_install iterm2
          brew_cask_install macfuse
          brew_cask_install macpass
-         brew_cask_install macvim
+         brew_cask_install macvim-app
 if_home  brew_cask_install makemkv
 if_home  brew_cask_install minecraft
          brew_cask_install rectangle
