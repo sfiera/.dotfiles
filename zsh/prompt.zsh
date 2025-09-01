@@ -117,7 +117,7 @@ function set_prompt {
 
     # PS1_HOST
     case $USER in
-        root|sfiera|chpickel)   local LOCATION="$MACHINE" ;;
+        root|sfiera|*pickel)    local LOCATION="$MACHINE" ;;
         *)                      local LOCATION="$USER@$MACHINE" ;;
     esac
     PS1_HOST="$(tint -b $PS_COLOR $LOCATION)"
