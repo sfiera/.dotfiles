@@ -49,9 +49,6 @@
 [submodule "ext/isobit/vim-caddyfile"]
 	path = ext/isobit/vim-caddyfile
 	url = https://github.com/isobit/vim-caddyfile
-[submodule "ext/scrooloose/syntastic"]
-	path = ext/scrooloose/syntastic
-	url = https://github.com/scrooloose/syntastic
 [submodule "ext/ConradIrwin/vim-bracketed-paste"]
 	path = ext/ConradIrwin/vim-bracketed-paste
 	url = https://github.com/ConradIrwin/vim-bracketed-paste
@@ -88,3 +85,6 @@
 [submodule "vim/vim.symlink/ext/EmmaEwert/vim-rgbds"]
 	path = ext/EmmaEwert/vim-rgbds
 	url = https://github.com/EmmaEwert/vim-rgbds
+[submodule "ext/dense-analysis/ale"]
+	path = ext/dense-analysis/ale
+	url = https://github.com/dense-analysis/ale.git
