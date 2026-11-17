@@ -78,6 +78,7 @@ pref com.apple.dock magnification -bool false
 pref com.apple.dock orientation -string left
 pref com.apple.dock tilesize -int 128
 pref com.apple.dock show-recents -bool false
+pref com.apple.dock mru-spaces -bool false
 
 pref com.apple.finder FXPreferredViewStyle -string clmv
 pref com.apple.finder NewWindowTarget -string PfHm
